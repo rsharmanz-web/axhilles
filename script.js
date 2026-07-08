@@ -17,36 +17,6 @@ nav.querySelectorAll("a").forEach((link) => {
   });
 });
 
-// ---------- hero typewriter ----------
-const COMMAND = "cat mission.txt";
-const OUTPUT = "AI fluency, by design. Not by accident.";
-
-const typedEl = document.getElementById("typed");
-const typedCursor = document.getElementById("typed-cursor");
-const outputEl = document.getElementById("typed-output");
-
-function typeText(el, text, speed, onDone) {
-  let i = 0;
-  (function step() {
-    if (i <= text.length) {
-      el.textContent = text.slice(0, i);
-      i++;
-      setTimeout(step, speed);
-    } else if (onDone) {
-      onDone();
-    }
-  })();
-}
-
-window.addEventListener("DOMContentLoaded", () => {
-  typeText(typedEl, COMMAND, 55, () => {
-    typedCursor.style.display = "none";
-    setTimeout(() => {
-      typeText(outputEl, OUTPUT, 25);
-    }, 250);
-  });
-});
-
 // ---------- scroll reveal ----------
 const revealTargets = document.querySelectorAll(".step, .who-card, .terminal-form, .direct-contact");
 
