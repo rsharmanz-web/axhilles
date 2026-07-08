@@ -197,11 +197,6 @@ main {
   text-underline-offset: 8px;
 }
 
-.prompt { color: var(--cobalt-bright); }
-.colon { color: var(--fg-dim); }
-.path { color: var(--cobalt); }
-.dollar { color: var(--fg-dim); margin-right: 4px; }
-
 .cursor-blink {
   display: inline-block;
   color: var(--cobalt-bright);
@@ -361,13 +356,13 @@ main {
 }
 
 .site-footer p {
-  font-family: var(--mono);
   margin: 0;
   color: var(--fg-dim);
   font-size: 13px;
 }
 
 .footer-cities {
+  font-family: var(--mono);
   margin-bottom: 14px !important;
   letter-spacing: 1.5px;
   font-size: 13px;
@@ -381,11 +376,6 @@ main {
 .footer-cities .city-accent {
   color: var(--cobalt);
   font-weight: 700;
-}
-
-.site-footer .prompt,
-.site-footer .path {
-  color: var(--cobalt-dim);
 }
 
 /* ---------- responsive ---------- */
