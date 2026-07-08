@@ -191,6 +191,10 @@ main {
 .hero-heading .accent {
   color: var(--cobalt);
   text-shadow: 0 0 24px rgba(61, 107, 255, 0.35);
+  text-decoration: underline;
+  text-decoration-color: var(--cobalt);
+  text-decoration-thickness: 3px;
+  text-underline-offset: 8px;
 }
 
 .prompt { color: var(--cobalt-bright); }
