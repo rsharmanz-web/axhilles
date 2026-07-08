@@ -367,6 +367,22 @@ main {
   font-size: 13px;
 }
 
+.footer-cities {
+  margin-bottom: 14px !important;
+  letter-spacing: 1.5px;
+  font-size: 13px;
+}
+
+.footer-cities .sep {
+  color: var(--border);
+  margin: 0 2px;
+}
+
+.footer-cities .city-accent {
+  color: var(--cobalt);
+  font-weight: 700;
+}
+
 .site-footer .prompt,
 .site-footer .path {
   color: var(--cobalt-dim);
