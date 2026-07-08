@@ -8,6 +8,7 @@
   --cobalt-bright: #6f8fff;
   --cobalt-dim: #1c3aa8;
   --border: #22262e;
+  --font: "Inter", ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
   --mono: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, Consolas, "Courier New", monospace;
   --max-width: 920px;
 }
@@ -24,7 +25,7 @@ body {
   margin: 0;
   background: var(--bg);
   color: var(--fg);
-  font-family: var(--mono);
+  font-family: var(--font);
   font-size: 16px;
   line-height: 1.65;
   -webkit-font-smoothing: antialiased;
@@ -76,9 +77,10 @@ a:hover {
 }
 
 .logo {
+  font-family: var(--font);
   font-weight: 800;
   font-size: 20px;
-  letter-spacing: 0.5px;
+  letter-spacing: -0.2px;
   color: var(--cobalt);
   text-shadow: 0 0 18px rgba(61, 107, 255, 0.45);
 }
@@ -105,6 +107,7 @@ a:hover {
 }
 
 .nav-index {
+  font-family: var(--mono);
   color: var(--cobalt);
   margin-right: 4px;
 }
@@ -149,11 +152,14 @@ main {
 
 .section-heading {
   font-size: 26px;
+  font-weight: 700;
+  letter-spacing: -0.3px;
   margin: 0 0 24px;
   color: var(--fg);
 }
 
 .hash {
+  font-family: var(--mono);
   color: var(--cobalt);
   margin-right: 8px;
 }
@@ -174,6 +180,7 @@ main {
 }
 
 .terminal-window {
+  font-family: var(--mono);
   background: var(--bg-raised);
   border: 1px solid var(--border);
   border-radius: 10px;
@@ -261,6 +268,7 @@ main {
 }
 
 .step-num {
+  font-family: var(--mono);
   font-size: 13px;
   color: var(--cobalt);
   margin-bottom: 10px;
@@ -270,6 +278,7 @@ main {
 .step h3 {
   margin: 0 0 10px;
   font-size: 18px;
+  font-weight: 600;
   color: var(--fg);
 }
 
@@ -291,6 +300,7 @@ main {
 }
 
 .comment {
+  font-family: var(--mono);
   color: var(--cobalt-dim);
   font-size: 13px;
   margin: 0 0 14px;
@@ -314,6 +324,7 @@ main {
   display: flex;
   flex-direction: column;
   gap: 8px;
+  font-family: var(--mono);
   font-size: 13px;
   color: var(--cobalt);
 }
@@ -325,7 +336,7 @@ main {
   border-radius: 6px;
   padding: 12px 14px;
   color: var(--fg);
-  font-family: var(--mono);
+  font-family: var(--font);
   font-size: 14.5px;
   resize: vertical;
   transition: border-color 0.15s ease, box-shadow 0.15s ease;
@@ -345,7 +356,8 @@ main {
   border: 1px solid var(--cobalt-dim);
   border-radius: 6px;
   padding: 12px 22px;
-  font-family: var(--mono);
+  font-family: var(--font);
+  font-weight: 600;
   font-size: 14.5px;
   cursor: pointer;
   transition: background 0.15s ease, color 0.15s ease;
@@ -382,6 +394,7 @@ main {
 }
 
 .site-footer p {
+  font-family: var(--mono);
   margin: 0;
   color: var(--fg-dim);
   font-size: 13px;
