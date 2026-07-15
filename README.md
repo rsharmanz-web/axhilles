@@ -1,6 +1,6 @@
-# Axhillies
+# Axhilles
 
-Simple, static one-page site for Axhillies — no build step or dependencies required.
+Simple, static one-page site for Axhilles — no build step or dependencies required.
 
 ## Structure
 
