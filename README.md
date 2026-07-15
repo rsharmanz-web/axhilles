@@ -24,6 +24,6 @@ This is a static site, so it can be deployed as-is to Netlify, Vercel, GitHub Pa
 
 ## To customize
 
-- **Contact email**: currently set to `hello@axhillies.com` in `index.html` and `script.js` — update both to your real inbox.
+- **Contact email**: currently set to `r.sharma.nz@gmail.com` in `index.html` and `script.js` — update both if you want to change the inbox.
 - **Who we are**: the section currently has placeholder copy — swap in real founder/team bios.
 - **Colors**: all theme colors (background, text, cobalt accents) are defined as CSS variables at the top of `styles.css` under `:root`.

@@ -55,7 +55,7 @@ form.addEventListener("submit", (e) => {
   const subject = encodeURIComponent(`Enquiry from ${name}`);
   const body = encodeURIComponent(`${message}\n\n— ${name} (${email})`);
 
-  window.location.href = `mailto:hello@axhillies.com?subject=${subject}&body=${body}`;
+  window.location.href = `mailto:r.sharma.nz@gmail.com?subject=${subject}&body=${body}`;
 
   formNote.textContent = "> opening your mail client...";
   formNote.classList.add("success");
