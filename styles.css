@@ -282,6 +282,10 @@ main {
   gap: 18px;
 }
 
+.botcheck {
+  display: none !important;
+}
+
 .terminal-form label {
   display: flex;
   flex-direction: column;
@@ -330,6 +334,11 @@ main {
   color: #05070d;
 }
 
+.terminal-form button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
 .form-note {
   margin: 0;
   font-size: 13px;
@@ -339,6 +348,10 @@ main {
 
 .form-note.success {
   color: #27c93f;
+}
+
+.form-note.error {
+  color: #ff5f56;
 }
 
 .direct-contact {

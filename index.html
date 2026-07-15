@@ -86,6 +86,11 @@
     <p class="lede">Ready to find your baseline? Send us a message.</p>
 
     <form class="terminal-form" id="contact-form">
+      <input type="hidden" name="access_key" value="cb501ac0-d576-4c20-b0a6-8ef3b2a5329c" />
+      <input type="hidden" name="subject" value="New enquiry from axhilles.com" />
+      <input type="hidden" name="from_name" value="Axhilles website" />
+      <input type="checkbox" name="botcheck" class="botcheck" tabindex="-1" autocomplete="off" />
+
       <label>
         <span class="form-prefix">name</span>
         <input type="text" name="name" id="field-name" required autocomplete="name" />
@@ -98,7 +103,7 @@
         <span class="form-prefix">message</span>
         <textarea name="message" id="field-message" rows="4" required></textarea>
       </label>
-      <button type="submit">[ send_message ]</button>
+      <button type="submit" id="submit-button">[ send_message ]</button>
       <p class="form-note" id="form-note"></p>
     </form>
 

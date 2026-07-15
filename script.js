@@ -44,19 +44,37 @@ revealTargets.forEach((el) => observer.observe(el));
 // ---------- contact form ----------
 const form = document.getElementById("contact-form");
 const formNote = document.getElementById("form-note");
+const submitButton = document.getElementById("submit-button");
 
-form.addEventListener("submit", (e) => {
+form.addEventListener("submit", async (e) => {
   e.preventDefault();
 
-  const name = document.getElementById("field-name").value.trim();
-  const email = document.getElementById("field-email").value.trim();
-  const message = document.getElementById("field-message").value.trim();
+  submitButton.disabled = true;
+  submitButton.textContent = "[ sending... ]";
+  formNote.classList.remove("success", "error");
+  formNote.textContent = "";
 
-  const subject = encodeURIComponent(`Enquiry from ${name}`);
-  const body = encodeURIComponent(`${message}\n\n— ${name} (${email})`);
+  try {
+    const response = await fetch("https://api.web3forms.com/submit", {
+      method: "POST",
+      headers: { "Content-Type": "application/json", Accept: "application/json" },
+      body: JSON.stringify(Object.fromEntries(new FormData(form))),
+    });
 
-  window.location.href = `mailto:r.sharma.nz@gmail.com?subject=${subject}&body=${body}`;
+    const result = await response.json();
 
-  formNote.textContent = "> opening your mail client...";
-  formNote.classList.add("success");
+    if (response.ok && result.success) {
+      formNote.textContent = "> message sent. we'll be in touch shortly.";
+      formNote.classList.add("success");
+      form.reset();
+    } else {
+      throw new Error(result.message || "submission failed");
+    }
+  } catch (err) {
+    formNote.textContent = "> something went wrong — email us directly at r.sharma.nz@gmail.com";
+    formNote.classList.add("error");
+  } finally {
+    submitButton.disabled = false;
+    submitButton.textContent = "[ send_message ]";
+  }
 });
