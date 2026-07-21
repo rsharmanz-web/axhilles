@@ -377,7 +377,7 @@ main {
 .footer-cities {
   font-family: var(--mono);
   margin-bottom: 14px !important;
-  letter-spacing: 1.5px;
+  letter-spacing: 0.5px;
   font-size: 13px;
 }
 
