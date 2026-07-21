@@ -71,7 +71,7 @@ form.addEventListener("submit", async (e) => {
       throw new Error(result.message || "submission failed");
     }
   } catch (err) {
-    formNote.textContent = "> something went wrong — email us directly at r.sharma.nz@gmail.com";
+    formNote.textContent = "> something went wrong — email us directly at hello@axhilles.com";
     formNote.classList.add("error");
   } finally {
     submitButton.disabled = false;
