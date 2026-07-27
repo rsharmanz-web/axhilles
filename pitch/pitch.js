@@ -43,7 +43,7 @@ revealTargets.forEach((el) => revealObserver.observe(el));
 
 // ---------- active chapter nav highlighting (scroll-spy) ----------
 const chapters = document.querySelectorAll(".chapter[id]");
-const navLinks = document.querySelectorAll(".nav a[href^='#']");
+const navLinks = document.querySelectorAll(".nav a[href^='#'], .rail-dot[href^='#']");
 
 const setActiveLink = (id) => {
   navLinks.forEach((link) => {

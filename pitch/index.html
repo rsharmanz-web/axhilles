@@ -15,8 +15,6 @@
 </head>
 <body>
 
-<div class="scanlines" aria-hidden="true"></div>
-
 <header class="site-header">
   <a href="/" class="logo">axhilles<span class="cursor-blink">_</span></a>
   <nav class="nav">
@@ -30,6 +28,13 @@
   </button>
 </header>
 
+<aside class="chapter-rail" aria-hidden="true">
+  <a class="rail-dot" href="#context" tabindex="-1"><span class="rail-num">01 context</span></a>
+  <a class="rail-dot" href="#maximise" tabindex="-1"><span class="rail-num">02 maximise</span></a>
+  <a class="rail-dot" href="#strategy" tabindex="-1"><span class="rail-num">03 strategy</span></a>
+  <a class="rail-dot" href="#build" tabindex="-1"><span class="rail-num">04 build</span></a>
+</aside>
+
 <main id="top">
 
   <section class="hero deck-cover">
@@ -38,9 +43,14 @@
     <p class="lede deck-cover-lede">
       Why service businesses bring us in as their AI specialist &mdash; and what that partnership actually looks like.
     </p>
+    <ul class="deck-meta">
+      <li>Enterprise AI transformation background</li>
+      <li>NZ &middot; AU &middot; UK &middot; US</li>
+      <li>Built for service businesses, not enterprises</li>
+    </ul>
   </section>
 
-  <section id="context" class="section chapter">
+  <section id="context" class="section chapter" data-chapter-num="01">
     <p class="chapter-label"><span class="hash">##</span> chapter 01</p>
     <h2 class="section-heading">Context</h2>
     <p class="lede">
@@ -76,9 +86,11 @@
       <h3>Where this comes from</h3>
       <p>
         Before Axhilles, one of the last things I worked on was how Xero should commercialise AI &mdash; a question a much larger team of consultants
-        was already modelling in parallel with us. We ran it with two people instead of five, because we kept the question simple and kept coming back to it:
-        forget the model for a second &mdash; what does the customer actually see, and where does this show up in their day-to-day work?
+        was already modelling in parallel with us. We ran it with two people instead of five, because we kept coming back to one question.
       </p>
+      <blockquote class="pull-quote">
+        Forget the model for a second &mdash; what does the customer actually see, and where does this show up in their day-to-day work?
+      </blockquote>
       <p>
         Starting from the customer's experience and working backwards, rather than starting from the technology, is still the first thing we do on every engagement.
       </p>
@@ -86,7 +98,7 @@
     </div>
   </section>
 
-  <section id="maximise" class="section chapter">
+  <section id="maximise" class="section chapter" data-chapter-num="02">
     <p class="chapter-label"><span class="hash">##</span> chapter 02</p>
     <h2 class="section-heading">Maximising AI Internally</h2>
     <p class="lede">
@@ -120,7 +132,7 @@
     </div>
   </section>
 
-  <section id="strategy" class="section chapter">
+  <section id="strategy" class="section chapter" data-chapter-num="03">
     <p class="chapter-label"><span class="hash">##</span> chapter 03</p>
     <h2 class="section-heading">AI Change Management Strategy <span class="working-title">(working title)</span></h2>
     <p class="lede">
@@ -153,7 +165,7 @@
     </div>
   </section>
 
-  <section id="build" class="section chapter">
+  <section id="build" class="section chapter" data-chapter-num="04">
     <p class="chapter-label"><span class="hash">##</span> chapter 04</p>
     <h2 class="section-heading">Build</h2>
     <p class="lede">
@@ -187,11 +199,13 @@
   </section>
 
   <section id="partner" class="section">
-    <h2 class="section-heading"><span class="hash">##</span> let's talk</h2>
-    <p class="lede">
-      Interested in partnering with Axhilles as your AI specialist? We'd love to talk through what this could look like for your business.
-    </p>
-    <p class="direct-contact">reach out at <a href="mailto:hello@axhilles.com">hello@axhilles.com</a></p>
+    <div class="cta-panel">
+      <h2 class="section-heading"><span class="hash">##</span> let's talk</h2>
+      <p class="lede">
+        Interested in partnering with Axhilles as your AI specialist? We'd love to talk through what this could look like for your business.
+      </p>
+      <p class="direct-contact">reach out at <a href="mailto:hello@axhilles.com">hello@axhilles.com</a></p>
+    </div>
   </section>
 
 </main>
