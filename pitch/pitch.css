@@ -1,0 +1,131 @@
+/* ---------- cover ---------- */
+
+.deck-cover {
+  padding-bottom: 40px;
+}
+
+.deck-kicker {
+  font-family: var(--mono);
+  color: var(--cobalt-dim);
+  font-size: 13px;
+  letter-spacing: 1px;
+  margin: 0 0 18px;
+}
+
+.deck-cover-lede {
+  margin-top: 20px;
+  font-size: 18px;
+}
+
+/* ---------- chapters ---------- */
+
+.chapter {
+  padding-top: 70px;
+}
+
+.chapter-label {
+  font-family: var(--mono);
+  color: var(--fg-dim);
+  font-size: 13px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  margin: 0 0 10px;
+}
+
+.chapter-label .hash {
+  text-transform: none;
+}
+
+.working-title {
+  color: var(--fg-dim);
+  font-size: 16px;
+  font-weight: 400;
+}
+
+.chapter-block {
+  max-width: 700px;
+  margin: 0 0 36px;
+}
+
+.chapter-block h3 {
+  font-size: 18px;
+  font-weight: 600;
+  color: var(--fg);
+  margin: 0 0 14px;
+}
+
+.chapter-block p {
+  color: var(--fg-dim);
+}
+
+.chapter-list {
+  margin: 0;
+  padding-left: 0;
+  list-style: none;
+  color: var(--fg-dim);
+}
+
+.chapter-list li {
+  position: relative;
+  padding-left: 22px;
+  margin-bottom: 14px;
+}
+
+.chapter-list li::before {
+  content: "\2192";
+  position: absolute;
+  left: 0;
+  color: var(--cobalt);
+}
+
+.chapter-list strong {
+  color: var(--fg);
+}
+
+/* ---------- placeholders ---------- */
+
+.draft-tag {
+  display: inline-block;
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.5px;
+  color: var(--cobalt-bright);
+  background: rgba(61, 107, 255, 0.1);
+  border: 1px dashed var(--cobalt-dim);
+  border-radius: 4px;
+  padding: 3px 8px;
+  margin-bottom: 10px;
+}
+
+.placeholder-text {
+  font-style: italic;
+}
+
+.chapter-block.placeholder {
+  border: 1px dashed var(--cobalt-dim);
+  border-radius: 8px;
+  padding: 20px 22px;
+}
+
+.step.placeholder {
+  border-style: dashed;
+  border-color: var(--cobalt-dim);
+}
+
+/* ---------- nav scroll-spy ---------- */
+
+.nav a.active {
+  color: var(--fg);
+}
+
+.nav a.active .nav-index {
+  color: var(--cobalt-bright);
+}
+
+/* ---------- responsive ---------- */
+
+@media (max-width: 720px) {
+  .chapter {
+    padding-top: 50px;
+  }
+}
