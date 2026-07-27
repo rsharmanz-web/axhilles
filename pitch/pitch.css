@@ -2,18 +2,21 @@
    Light "deck" theme — overrides the dark terminal palette from
    ../styles.css for this page only (pitch.css is only ever loaded
    here, so these overrides can't leak back to the main site).
+
+   Palette lifted from the cat/floral reference art: warm cream
+   canvas with a family of cornflower-to-navy blues.
    ================================================================ */
 
 :root {
-  --bg: #f5f6fa;
-  --bg-raised: #ffffff;
-  --bg-card: #ffffff;
-  --fg: #14161c;
-  --fg-dim: #585c66;
-  --cobalt: #2f56e0;
-  --cobalt-bright: #4a6bea;
+  --bg: #f1e3d5;
+  --bg-raised: #fbf5ee;
+  --bg-card: #fbf5ee;
+  --fg: #1f3fae;
+  --fg-dim: #4f5f92;
+  --cobalt: #5a80f4;
+  --cobalt-bright: #829ae7;
   --cobalt-dim: #17307a;
-  --border: #e3e6ee;
+  --border: #e8d9c5;
 }
 
 body {
@@ -30,12 +33,12 @@ a {
 }
 
 ::selection {
-  background: var(--cobalt);
-  color: #fff;
+  background: var(--cobalt-dim);
+  color: var(--bg);
 }
 
 .site-header {
-  background: rgba(245, 246, 250, 0.86);
+  background: rgba(241, 227, 213, 0.86);
 }
 
 .logo {
@@ -302,7 +305,7 @@ a {
   width: 30px;
   height: 30px;
   border-radius: 50%;
-  background: rgba(47, 86, 224, 0.08);
+  background: rgba(90, 128, 244, 0.12);
   color: var(--cobalt-dim);
   font-weight: 700;
   margin-bottom: 14px;
