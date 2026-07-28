@@ -3,22 +3,24 @@ document.getElementById("year").textContent = new Date().getFullYear();
 
 // ---------- mobile nav toggle ----------
 const navToggle = document.querySelector(".nav-toggle");
-const nav = document.querySelector(".nav");
+const nav = document.querySelector("nav.topbar .links");
 
-navToggle.addEventListener("click", () => {
-  const isOpen = nav.classList.toggle("open");
-  navToggle.setAttribute("aria-expanded", String(isOpen));
-});
-
-nav.querySelectorAll("a").forEach((link) => {
-  link.addEventListener("click", () => {
-    nav.classList.remove("open");
-    navToggle.setAttribute("aria-expanded", "false");
+if (navToggle && nav) {
+  navToggle.addEventListener("click", () => {
+    const isOpen = nav.classList.toggle("open");
+    navToggle.setAttribute("aria-expanded", String(isOpen));
   });
-});
+
+  nav.querySelectorAll("a").forEach((link) => {
+    link.addEventListener("click", () => {
+      nav.classList.remove("open");
+      navToggle.setAttribute("aria-expanded", "false");
+    });
+  });
+}
 
 // ---------- scroll reveal ----------
-const revealTargets = document.querySelectorAll(".chapter-block, .step, .direct-contact");
+const revealTargets = document.querySelectorAll(".chapter-block, .schematic-box");
 
 revealTargets.forEach((el) => {
   el.style.opacity = "0";
@@ -36,14 +38,14 @@ const revealObserver = new IntersectionObserver(
       }
     });
   },
-  { threshold: 0.15 }
+  { threshold: 0.1 }
 );
 
 revealTargets.forEach((el) => revealObserver.observe(el));
 
 // ---------- active chapter nav highlighting (scroll-spy) ----------
 const chapters = document.querySelectorAll(".chapter[id]");
-const navLinks = document.querySelectorAll(".nav a[href^='#'], .rail-dot[href^='#']");
+const navLinks = document.querySelectorAll(".nav-link[href^='#'], .rail-dot[href^='#']");
 
 const setActiveLink = (id) => {
   navLinks.forEach((link) => {
