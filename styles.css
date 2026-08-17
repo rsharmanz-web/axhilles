@@ -23,10 +23,10 @@
 /* 3. GLOBAL RESET & BASE RULES */
 * { box-sizing: border-box; margin: 0; padding: 0; }
 
-html { scroll-behavior: smooth; }
+html { scroll-behavior: smooth; background-color: var(--color-alabaster); }
 
 body {
-  background-color: var(--color-alabaster);
+  background-color: transparent;
   color: var(--color-espresso);
   font-family: var(--font-technical);
   font-size: 13px;
@@ -37,6 +37,60 @@ body {
   min-height: 100vh;
   display: flex;
   flex-direction: column;
+  position: relative;
+}
+
+/* Slow drifting hero wash */
+.hero-wash {
+  position: fixed;
+  top: -20%;
+  left: -20%;
+  width: 140%;
+  height: 140%;
+  z-index: 0;
+  pointer-events: none;
+  background:
+    radial-gradient(
+      circle at 30% 25%,
+      rgba(0, 32, 194, 0.22) 0%,
+      rgba(0, 32, 194, 0.06) 28%,
+      transparent 52%
+    ),
+    radial-gradient(
+      circle at 78% 18%,
+      rgba(214, 200, 176, 0.95) 0%,
+      transparent 45%
+    ),
+    radial-gradient(
+      circle at 55% 80%,
+      rgba(230, 223, 211, 0.7) 0%,
+      transparent 40%
+    ),
+    linear-gradient(
+      160deg,
+      #efe6d8 0%,
+      #fbf9f6 42%,
+      #f3ebe1 100%
+    );
+  animation: wash-drift 16s ease-in-out infinite alternate;
+  will-change: transform;
+}
+
+@keyframes wash-drift {
+  0%   { transform: translate3d(-2%, -1%, 0) scale(1); }
+  50%  { transform: translate3d(4%, 2%, 0) scale(1.04); }
+  100% { transform: translate3d(7%, -3%, 0) scale(1.02); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-wash {
+    animation: none;
+    transform: none;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+  }
 }
 
 ::selection {
@@ -169,6 +223,8 @@ a.nav-link.active {
   display: flex;
   flex-direction: column;
   min-height: calc(100vh - (var(--system-margin) * 2));
+  position: relative;
+  z-index: 1;
 }
 
 .wrap > main {
@@ -329,7 +385,7 @@ a.logo-mark::before {
   align-items: start;
   padding: clamp(2rem, 4vw, 3.5rem);
   border-color: var(--color-cobalt);
-  background: transparent;
+  background: var(--color-alabaster);
 }
 
 .cta-panel-simple {
@@ -347,6 +403,12 @@ a.logo-mark::before {
   text-transform: uppercase;
   color: var(--color-espresso);
   margin: 0 0 1rem;
+  opacity: 1;
+}
+
+.cta-heading .accent-word {
+  color: var(--color-cobalt);
+  opacity: 1;
 }
 
 .cta-sub {
@@ -355,21 +417,23 @@ a.logo-mark::before {
   font-size: clamp(1.15rem, 2vw, 1.4rem);
   line-height: 1.35;
   color: var(--color-espresso);
-  opacity: 0.8;
-  max-width: 32ch;
-  margin: 0 0 1.75rem;
+  opacity: 1;
+  max-width: 36ch;
+  margin: 0 0 1rem;
 }
 
 .cta-direct {
-  font-size: 12px;
+  font-size: 13px;
   letter-spacing: 0.04em;
-  opacity: 0.65;
+  color: var(--color-espresso);
+  opacity: 1;
   margin: 1.5rem 0 0;
 }
 .cta-direct a {
   color: var(--color-cobalt);
   text-decoration: underline;
   text-underline-offset: 3px;
+  opacity: 1;
 }
 
 .btn-primary {
