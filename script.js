@@ -1,3 +1,11 @@
+// ---------- booking URL ----------
+// Swap this for Calendly / Cal.com when ready, e.g. "https://cal.com/your-link"
+const BOOKING_URL = "https://calendly.com/r-sharma-nz/30min";
+
+document.querySelectorAll("[data-booking]").forEach((link) => {
+  link.setAttribute("href", BOOKING_URL);
+});
+
 // ---------- footer year ----------
 document.getElementById("year").textContent = new Date().getFullYear();
 
@@ -20,7 +28,7 @@ if (navToggle && nav) {
 }
 
 // ---------- scroll reveal ----------
-const revealTargets = document.querySelectorAll(".schematic-box, .data-table, .contact-form, .cta-panel");
+const revealTargets = document.querySelectorAll(".schematic-box, .data-table, .way-card, .cta-panel");
 
 revealTargets.forEach((el) => {
   el.style.opacity = "0";
@@ -42,6 +50,30 @@ const observer = new IntersectionObserver(
 );
 
 revealTargets.forEach((el) => observer.observe(el));
+
+// ---------- nav scroll spy ----------
+const sectionIds = ["why", "ways-in", "about", "contact"];
+const navLinks = document.querySelectorAll("nav.topbar .links a.nav-link");
+
+function setActiveNav() {
+  const scrollY = window.scrollY + 120;
+  let current = sectionIds[0];
+
+  sectionIds.forEach((id) => {
+    const section = document.getElementById(id);
+    if (section && section.offsetTop <= scrollY) {
+      current = id;
+    }
+  });
+
+  navLinks.forEach((link) => {
+    const href = link.getAttribute("href") || "";
+    link.classList.toggle("active", href === `#${current}`);
+  });
+}
+
+window.addEventListener("scroll", setActiveNav, { passive: true });
+setActiveNav();
 
 // ---------- contact form ----------
 const form = document.getElementById("contact-form");
@@ -82,3 +114,5 @@ if (form) {
     }
   });
 }
+
+
