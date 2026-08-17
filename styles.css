@@ -334,7 +334,8 @@ a.logo-mark::before {
 
 .cta-panel-simple {
   grid-template-columns: 1fr;
-  max-width: 640px;
+  max-width: none;
+  width: 100%;
 }
 
 .cta-heading {
@@ -475,7 +476,7 @@ a.logo-mark::before {
   font-size: 15px;
   line-height: 1.75;
   opacity: 0.92;
-  max-width: 68ch;
+  max-width: none;
 }
 
 #about .about-box .body-copy + .body-copy {
