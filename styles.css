@@ -625,6 +625,47 @@ a.logo-mark::before {
   color: var(--color-alabaster);
 }
 
+.advisory-panel {
+  margin-top: 0.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 2.5rem;
+  width: 100%;
+  padding: clamp(2rem, 4vw, 3rem) clamp(2rem, 5vw, 3.5rem);
+  border-color: var(--color-cobalt);
+  background: var(--color-alabaster);
+  box-shadow:
+    0 24px 64px rgba(51, 36, 28, 0.12),
+    0 0 0 1px rgba(0, 32, 194, 0.08);
+}
+
+.advisory-panel h3 {
+  font-size: clamp(1.15rem, 2vw, 1.35rem);
+  font-weight: 600;
+  margin-bottom: 0.65rem;
+}
+
+.advisory-panel .body-copy {
+  margin-top: 0;
+  max-width: 70ch;
+  opacity: 0.9;
+  font-size: 15px;
+  line-height: 1.6;
+}
+
+.advisory-panel .way-cta {
+  flex-shrink: 0;
+}
+
+@media (max-width: 720px) {
+  .advisory-panel {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 1.25rem;
+  }
+}
+
 .contact-form {
   display: flex;
   flex-direction: column;
