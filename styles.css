@@ -580,6 +580,10 @@ a.logo-mark::before {
   border-top: 1px solid var(--color-sand);
 }
 
+.way-meta:not(:has(.way-price)) {
+  justify-content: flex-end;
+}
+
 .way-price {
   font-family: var(--font-technical);
   font-size: 12px;
