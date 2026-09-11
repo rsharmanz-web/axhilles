@@ -576,12 +576,12 @@ a.logo-mark::before {
   display: flex;
   align-items: center;
   justify-content: space-between;
+  gap: 1rem;
+  border-top: 1px solid var(--color-sand);
 }
 
 .way-meta:not(:has(.way-price)) {
   justify-content: flex-end;
-  gap: 1rem;
-  border-top: 1px solid var(--color-sand);
 }
 
 .way-price {
