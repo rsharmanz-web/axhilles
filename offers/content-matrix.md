@@ -1,7 +1,7 @@
 # Axhilles offer content matrix
 
 Working draft for Baker Tilly partner one-pagers.  
-Source of truth for now: homepage Ways in + pitch working notes. Items marked **[CONFIRM]** need your call before copy is final.
+Updated with confirmed commercial and delivery detail (Sep 2026). Remaining open items are marked **[CONFIRM]**.
 
 **Audience:** Baker Tilly partners first, their clients second.  
 **Job of each page:** explain what the client gets, the steps, the outputs, and when to recommend this vs another offer.
@@ -12,17 +12,17 @@ Source of truth for now: homepage Ways in + pitch working notes. Items marked **
 
 | Offer | One-line promise (draft) | Typical entry | Typical next step | Public price |
 |---|---|---|---|---|
-| **Building a habit** | Get one person building with AI, week by week, for 30 days. | Discovery / partner intro | PoC or Baseline | $950 +GST |
-| **Proof of Concept** | Take one roadmap item from plan to shipped, with adoption support. | Baseline roadmap item, or a clear pain already scoped | Productise / next PoC / habit rollout | From $3,000 +GST |
-| **Baseline to Roadmap** | Audit jobs, tools and data; decide what to supercharge and what to protect. | Discovery / partner intro / leadership ask | PoC(s), Building a habit, Board advisory | **[CONFIRM]** priced on scope (no public price) |
+| **Building a habit** | Get people building with AI, week by week, for 30 days. | Discovery / partner intro | Alpha Prototype or Baseline | **$950 +GST per person**; **20% off** when cohort is **5–12** |
+| **Alpha Prototype** *(was Proof of Concept)* | In ~two weeks, build a testable solution to one workflow, job or task — and leave with a repeatable product-development framework. | Baseline experiment, or a clear pain already scoped | Further prototype / productise / habit rollout | From $3,000 +GST |
+| **Baseline to Roadmap** | Map the workflows that make up the business’s operating system, then use that map to sequence AI experiments. | Discovery / partner intro / leadership ask | Alpha Prototype(s), Building a habit, Board advisory | No public price (scoped) |
 
 **Out of suite for v1 one-pagers:** Discovery (mention as free entry only), Board advisory (optional later).
+
+**Site note:** Homepage still says “Proof of Concept” — rename to **Alpha Prototype** when offer copy is synced.
 
 ---
 
 ## Shared one-pager skeleton
-
-Use the same fields on every page so partners learn the pattern:
 
 1. Offer name + one-line promise  
 2. Who it’s for / who it’s not for  
@@ -38,61 +38,66 @@ Use the same fields on every page so partners learn the pattern:
 
 ## 1. Building a habit
 
-| Field | Draft content | Status |
+| Field | Content | Status |
 |---|---|---|
-| **Promise** | A 30-day programme to get you building with AI tools, not just reading about them. | From site |
-| **Who it’s for** | Individual practitioners or managers in a service business who want a real working habit with Claude Pro or Cursor Pro. Strong fit for accountants, advisors, and operators Baker Tilly already knows. | Draft |
-| **Who it’s not for** | Teams wanting firm-wide rollout, governance strategy, or a built product/workflow on day one. | Draft |
-| **Outcomes** | 1) Tool set up and used on real work. 2) A repeatable weekly building rhythm. 3) At least one useful output deployed into their workflow. | **[CONFIRM]** |
-| **Steps / included** | 1) Guided **90-minute setup** (Claude Pro or Cursor Pro). 2) **Weekly 1:1** for ~4 weeks to iterate and deploy. 3) Async nudges / homework between sessions **[CONFIRM]**. | Mostly from site |
-| **Outputs** | Setup checklist; personal “habit plan”; working prompts / project files; end-of-programme summary of what they built and what to do next. | **[CONFIRM]** name artefacts |
-| **Client effort** | ~90 min setup + ~45–60 min weekly session + practice between sessions. | **[CONFIRM]** |
-| **Timeline** | 30 days. | From site |
-| **Investment** | $950 +GST. | From site |
-| **Usually before** | Free Discovery (or partner warm intro). | Draft |
-| **Usually after** | PoC on a scoped use case; or Baseline if they need a wider map; or more people through the same habit programme. | Draft |
-| **Partner talk track** | “This is the fastest way to get one person dangerous in a good way — without a big project.” | Draft |
-| **Open questions** | Is it always 1:1 (one person), or can a small pair join? Fixed 4 sessions or flexible? Tool choice fixed to Claude/Cursor? | **[CONFIRM]** |
+| **Promise** | A 30-day programme designed to get people building with AI — not just reading about it. | Locked direction |
+| **Who it’s for** | Cohorts of **1–12 people** in a service business who want a real working habit with AI tools. Strong fit for accountants, advisors, and operators Baker Tilly already knows. | Confirmed |
+| **Who it’s not for** | Firm-wide change programmes, governance strategy, or a built product with user testing (→ Alpha Prototype / Baseline). | Draft |
+| **Group model** | **1–12 participants**. If the cohort is **more than 4** (i.e. 5–12), apply a **20% discount**. | Confirmed |
+| **Tooling** | Participants use **the tool of their choice**. A **personal Claude Pro subscription for the month** is recommended (client-funded). | Confirmed |
+| **Outcomes** | 1) Chosen tool set up and used on real work. 2) A repeatable weekly building rhythm. 3) Useful outputs deployed into day-to-day work. | Draft — refine for one-pager |
+| **Steps / included** | 1) Guided **90-minute setup**. 2) **Weekly sessions** over ~30 days to iterate and deploy. 3) Practice on live work between sessions. | From site + confirmed tooling |
+| **Outputs** | Setup guidance; working habit in their tool of choice; artefacts produced during the month; end-of-programme “what next” recommendation. | Draft — name artefacts on one-pager |
+| **Client effort** | Setup session + weekly sessions + practice between sessions; arrange own tool licence (Claude Pro recommended). | Confirmed direction |
+| **Timeline** | 30 days. | Locked |
+| **Investment** | **$950 +GST per person**. **20% discount** when cohort size is **5–12**. | Confirmed |
+| **Usually before** | Free Discovery (or partner warm intro). | Locked |
+| **Usually after** | Alpha Prototype on a scoped workflow; or Baseline if they need an operating-system map first; or more cohorts through Habit. | Updated |
+| **Partner talk track** | “Fastest way to get a small group building for real — without starting a project.” | Draft |
+| **Still open** | Exact weekly format for cohorts of 5–12 (still 1:1s vs group sessions)? Named end artefacts for the PDF? | **[CONFIRM]** optional polish |
 
 ---
 
-## 2. Proof of Concept
+## 2. Alpha Prototype *(renamed from Proof of Concept)*
 
-| Field | Draft content | Status |
+| Field | Content | Status |
 |---|---|---|
-| **Promise** | Take one roadmap item from plan to shipped, with support so people actually use it. | From site |
-| **Who it’s for** | Teams with a **specific** workflow/pain already identified (often from Baseline to Roadmap, or a partner-spotted bottleneck). | Draft + pitch “Prototype” |
-| **Who it’s not for** | “Explore AI in general,” firm-wide change programmes, or pure training with no build target. | Draft |
-| **Outcomes** | 1) A working prototype/solution for one real problem. 2) Named users able to run it. 3) A clear go / iterate / stop recommendation. | **[CONFIRM]** |
-| **Steps / included** | 1) **Scope & success criteria** workshop. 2) **Build** (small, fast, usually one team). 3) **Adoption support** (enablement with the people who will use it). 4) **Review** against success criteria + next-step recommendation. | Draft from site + pitch Build chapter |
-| **Outputs** | Working artefact (tool, workflow, assistant, automation — depends on use case); short adoption guide; success review note; recommendation for productise / scale / stop. | **[CONFIRM]** |
-| **Client effort** | Access to 1–2 subject-matter owners; feedback during build; participation in adoption sessions. Hours **[CONFIRM]**. | Draft |
-| **Timeline** | **[CONFIRM]** e.g. 2–4 weeks typical for “from $3,000” band; larger scopes quoted up. | **[CONFIRM]** |
-| **Investment** | From $3,000 +GST (scoped after Discovery / Baseline). | From site |
-| **Usually before** | Baseline to Roadmap item, or a clearly framed Discovery. | Draft |
-| **Usually after** | Another PoC; productise if durable; habit programme to spread capability; Board advisory if governance questions surface. | Draft + pitch |
-| **Partner talk track** | “Don’t boil the ocean — pick one painful job, ship something people use, then decide.” | Draft |
-| **Open questions** | What is always in / out of the “from $3k” band? Do you include hosting, licences, integrations? Who owns IP / ongoing maintenance? | **[CONFIRM]** |
+| **Promise** | Over ~two weeks, build a solution to a specific workflow, job or task that can be tested with real users — and take away a repeatable framework for product development. | Confirmed |
+| **Who it’s for** | Teams with a **specific** workflow / job / task to improve (often spotted on the Baseline map, or via partner + Discovery). | Confirmed |
+| **Who it’s not for** | Work that needs **backend integration** or a production backend; firm-wide rollout; “explore AI” with no testable target. | Confirmed |
+| **Outcomes** | 1) A front-end / workflow prototype testable with internal or external users. 2) Evidence from one round of user testing + refinement. 3) A go / no-go decision, plus a reusable product-development framework the team can run again. | Confirmed |
+| **Steps / included (framework)** | 1) **Discovery** 2) **Define scope / PRD** (template provided) 3) **Concept development** 4) **User testing** (internal or external) 5) **One round of refinement** 6) **Go / no-go decision** | Confirmed |
+| **Explicitly excluded** | Backend integration and backend build. | Confirmed |
+| **Outputs** | Testable alpha prototype; completed scope/PRD (from template); concept artefacts; user-testing notes; refined version; go/no-go recommendation; the repeatable framework itself for future products. | Confirmed |
+| **Client effort** | Access to workflow owners; users for testing (internal or external); feedback during discovery, concept, and refinement. | Draft |
+| **Timeline** | **~two weeks**. | Confirmed |
+| **Investment** | From $3,000 +GST (unless Baker Tilly pricing conversation changes this). | From site — **[CONFIRM]** if still correct under new name/scope |
+| **Usually before** | Baseline to Roadmap experiment, or a clearly framed Discovery. | Updated |
+| **Usually after** | Another Alpha on the next workflow; productise if go; Building a habit to spread capability; Board advisory if governance questions surface. | Updated |
+| **Partner talk track** | “Two weeks to a testable solution for one real job — and a playbook they can reuse.” | Draft |
+| **Still open** | Keep “from $3,000 +GST” on the one-pager? Any hosting / tool-licence assumptions to state? | **[CONFIRM]** |
 
 ---
 
 ## 3. Baseline to Roadmap
 
-| Field | Draft content | Status |
+| Field | Content | Status |
 |---|---|---|
-| **Promise** | A full audit of jobs, tools and data — and a roadmap for what to supercharge vs what to protect. | From site |
-| **Who it’s for** | Leadership / practice owners who need a shared picture before investing in tools, training, or builds. Especially useful when partners hear “we should do something with AI” with no plan. | Draft + pitch Strategy chapter |
-| **Who it’s not for** | Individuals who only want personal tool coaching (→ Building a habit), or teams that already have one scoped build (→ PoC). | Draft |
-| **Outcomes** | 1) Honest baseline of current AI/tool use. 2) Prioritised opportunities across the engagement lifecycle. 3) A roadmap partners and clients can act on together. | Draft from pitch Assess / Design / Mobilise |
-| **Steps / included** | 1) **Assess** — tools in use, what’s working, what’s noise. 2) **Jobs & data map** — where work is won, delivered, closed; where context lives. 3) **Design** — protect vs supercharge recommendations. 4) **Mobilise** — sequenced roadmap with suggested first experiments and how to measure them. | Draft from site + pitch |
-| **Outputs** | Baseline findings pack; jobs/tools/data map; protect vs supercharge matrix; prioritised roadmap; recommended next engagement(s) (Habit / PoC / Advisory). | **[CONFIRM]** artefact names |
-| **Client effort** | Stakeholder interviews / workshops; access to tool/process overview; leadership read-out session. Cadence **[CONFIRM]**. | Draft |
-| **Timeline** | **[CONFIRM]** e.g. 2–3 weeks calendar time depending on access. | **[CONFIRM]** |
-| **Investment** | No public price — quote on scope. **[CONFIRM]** whether one-pager shows a range, “from $X”, or “scoped proposal via Baker Tilly”. | **[CONFIRM]** |
-| **Usually before** | Discovery or partner-led intro with a leadership sponsor. | Draft |
-| **Usually after** | One or more PoCs; Building a habit for key people; Board advisory for governance/guardrails. | Draft |
-| **Partner talk track** | “Before we buy tools or train everyone, get a clear map of what to accelerate and what to leave alone.” | Draft |
-| **Open questions** | Fixed package vs always custom? How many interviews/workshops in the standard pack? Does Baker Tilly co-brand or co-facilitate any sessions? | **[CONFIRM]** |
+| **Promise** | Develop the strategy by mapping the workflows that make up the business’s **operating system** — then use that map to sequence AI experiments that drive efficiency, innovation, and evolution of how the business runs. | Confirmed |
+| **Who it’s for** | Leadership / practice owners who need a shared picture of how work actually runs before investing in tools, training, or builds. Especially when the ask is “we should do something with AI” with no map. | Confirmed direction |
+| **Who it’s not for** | Individuals who only want personal tool coaching (→ Building a habit), or teams that already have one scoped build ready to prototype (→ Alpha Prototype). | Updated |
+| **Core idea** | Identify and map the workflows that constitute the business OS. Examples: car dealer — acquiring stock through to closing a sale; accounting practice — audit team from client selection through to signing off the accounts. | Confirmed |
+| **What the map captures** | For each workflow/step: **goal**, **who’s doing it**, **risks**, **task outcomes**, and **tools/tech** in use. | Confirmed |
+| **Outcomes** | 1) A living operating-system map of how the business runs. 2) A sequenced set of projects/experiments for systematically applying AI. 3) A shared tool the team uses ongoing to decide where to experiment next. | Confirmed |
+| **Steps / included** | 1) Identify core operating workflows end-to-end. 2) Map each for goal / actors / risks / outcomes / tools. 3) Use the map to surface experiment opportunities. 4) Sequence a roadmap of projects/experiments to evolve the operating system. | Confirmed |
+| **Outputs** | Operating-system workflow map; experiment/opportunity view derived from the map; sequenced roadmap of projects/experiments; recommended next engagement(s) (Alpha Prototype / Building a habit / Advisory). | Confirmed direction |
+| **Client effort** | Access to people who know the workflows; working sessions to map and validate; leadership session to agree experiment sequence. | Draft |
+| **Timeline** | **1–2 weeks**. | Confirmed |
+| **Investment** | No public price on site — quote on scope. | Unchanged — **[CONFIRM]** one-pager pricing line (hide / “scoped proposal”) |
+| **Usually before** | Discovery or partner-led intro with a leadership sponsor. | Locked |
+| **Usually after** | Alpha Prototype(s) on priority workflows; Building a habit for people who will run experiments; Board advisory for guardrails. | Updated |
+| **Partner talk track** | “Map how the business actually runs — then pick experiments in sequence instead of random AI pilots.” | Draft |
+| **Still open** | Pricing posture on the PDF; any fixed workshop count; Baker Tilly co-facilitation? | **[CONFIRM]** optional |
 
 ---
 
@@ -101,39 +106,44 @@ Use the same fields on every page so partners learn the pattern:
 ```text
 Discovery (free, 30 min)
         │
-        ├─► Building a habit ──► (optional) PoC
+        ├─► Building a habit (1–12 people) ──► (optional) Alpha Prototype
         │
-        └─► Baseline to Roadmap ──► PoC(s) ──► habit rollout / productise / advisory
+        └─► Baseline to Roadmap (OS map, 1–2 weeks)
+                    │
+                    └─► Alpha Prototype(s) (~2 weeks each, no backend)
+                              │
+                              └─► productise / more experiments / habit rollout / advisory
 ```
 
-Use this diagram (or a tighter version) as a small footer strip on every one-pager so partners always know the ladder.
+Use a tighter version of this as a footer strip on every one-pager.
 
 ---
 
-## Confirmation checklist (unblock one-pager drafts)
-
-Answer these and the first drafts can be written quickly:
+## Confirmation checklist (remaining)
 
 ### Building a habit
-- [ ] Always single participant, or allow 2?
-- [ ] Exact session count and length after setup?
-- [ ] Named outputs at the end?
-- [ ] Any pre-work / tool licence responsibility (client buys Claude/Cursor)?
+- [x] Cohort size: **1–12**; **20% off** when **more than 4**
+- [x] Tooling: choice of tool; **Claude Pro for the month recommended**
+- [ ] Weekly format for larger cohorts (group vs 1:1)?
+- [ ] Final named outputs for the PDF?
 
-### Proof of Concept
-- [ ] Typical duration for the “from $3,000” band?
-- [ ] What’s included vs always extra (integrations, licences, data cleanup)?
-- [ ] Standard success-review artefact name?
-- [ ] IP / handover expectations?
+### Alpha Prototype (ex-PoC)
+- [x] Renamed; ~**two weeks**; testable with users; **no backend / backend integration**
+- [x] Includes repeatable framework: Discovery → scope/PRD → concept → user testing → 1 refinement → go/no-go
+- [ ] Keep **from $3,000 +GST** on the one-pager?
 
 ### Baseline to Roadmap
-- [ ] Pricing posture on the one-pager (hide / range / from)?
-- [ ] Standard duration and number of workshops/interviews?
-- [ ] Exact deliverable list / document names?
-- [ ] Any Baker Tilly co-delivery expectations?
+- [x] Strategy via **operating-system workflow map** (goal, who, risks, outcomes, tools)
+- [x] **1–2 weeks**; map becomes the tool for sequencing experiments
+- [ ] Pricing line on the one-pager (hide vs “scoped proposal”)?
 
 ---
 
 ## Suggested next step
 
-Once the **[CONFIRM]** rows above are filled (even roughly), draft **Baseline to Roadmap** as the first full one-pager — highest fit for an advisory partner conversation — then clone the skeleton for PoC and Building a habit.
+Matrix is strong enough to draft copy. Recommended order:
+
+1. Write full **Baseline to Roadmap** one-pager (highest partner-advisory fit)  
+2. Write **Alpha Prototype** (clear differentiation + framework)  
+3. Write **Building a habit** (commercial rules are now clear)  
+4. Optionally sync homepage: rename PoC → Alpha Prototype and refresh blurbs to match this matrix
