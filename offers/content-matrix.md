@@ -45,16 +45,17 @@ Updated with confirmed commercial and delivery detail (Sep 2026). Remaining open
 | **Who it’s not for** | Firm-wide change programmes, governance strategy, or a built product with user testing (→ Alpha Prototype / Baseline). | Draft |
 | **Group model** | **1–12 participants**. If the cohort is **more than 4** (i.e. 5–12), apply a **20% discount**. | Confirmed |
 | **Tooling** | Participants use **the tool of their choice**. A **personal Claude Pro subscription for the month** is recommended (client-funded). | Confirmed |
-| **Outcomes** | 1) Chosen tool set up and used on real work. 2) A repeatable weekly building rhythm. 3) Useful outputs deployed into day-to-day work. | Draft — refine for one-pager |
-| **Steps / included** | 1) Guided **90-minute setup**. 2) **Weekly sessions** over ~30 days to iterate and deploy. 3) Practice on live work between sessions. | From site + confirmed tooling |
-| **Outputs** | Setup guidance; working habit in their tool of choice; artefacts produced during the month; end-of-programme “what next” recommendation. | Draft — name artefacts on one-pager |
-| **Client effort** | Setup session + weekly sessions + practice between sessions; arrange own tool licence (Claude Pro recommended). | Confirmed direction |
-| **Timeline** | 30 days. | Locked |
+| **Outcomes** | 1) Tooling set up and understood. 2) A live project evolved across the month. 3) Something built and shared in the Week 4 showcase. | Confirmed direction |
+| **Programme structure** | **Week 1:** 2-hour start-up session — setup, tools that come with it / tools you can use, how to prompt, etc. **Weeks 2 & 3:** 1:1 × **30 min** each — help them evolve their project. **Week 4:** Showcase — share what you’ve built. | Confirmed |
+| **Steps / included** | Same as programme structure above; practice on live work between sessions. | Confirmed |
+| **Outputs** | Working setup; evolving project artefacts; showcase presentation/demo of what was built; “what next” recommendation. | Draft — name PDF artefacts |
+| **Client effort** | Week 1: 2 hours. Weeks 2–3: 30 min each (+ build time between). Week 4: showcase participation. Arrange own tool licence (Claude Pro recommended). | Confirmed |
+| **Timeline** | 4 weeks / ~30 days. | Locked |
 | **Investment** | **$950 +GST per person**. **20% discount** when cohort size is **5–12**. | Confirmed |
 | **Usually before** | Free Discovery (or partner warm intro). | Locked |
 | **Usually after** | Alpha Prototype on a scoped workflow; or Baseline if they need an operating-system map first; or more cohorts through Habit. | Updated |
-| **Partner talk track** | “Fastest way to get a small group building for real — without starting a project.” | Draft |
-| **Still open** | Exact weekly format for cohorts of 5–12 (still 1:1s vs group sessions)? Named end artefacts for the PDF? | **[CONFIRM]** optional polish |
+| **Partner talk track** | “Four weeks: get set up, build something real in 1:1s, then showcase it.” | Draft |
+| **Still open** | For cohorts of 5–12: is Week 1 a group start-up and Weeks 2–3 still individual 1:1s? Named end artefacts for the PDF? | **[CONFIRM]** optional polish |
 
 ---
 
@@ -124,7 +125,8 @@ Use a tighter version of this as a footer strip on every one-pager.
 ### Building a habit
 - [x] Cohort size: **1–12**; **20% off** when **more than 4**
 - [x] Tooling: choice of tool; **Claude Pro for the month recommended**
-- [ ] Weekly format for larger cohorts (group vs 1:1)?
+- [x] Cadence: Week 1 = **2hr start-up**; Weeks 2–3 = **30min 1:1s**; Week 4 = **showcase**
+- [ ] For 5–12 people: Week 1 group + Weeks 2–3 still 1:1 each?
 - [ ] Final named outputs for the PDF?
 
 ### Alpha Prototype (ex-PoC)
