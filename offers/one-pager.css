@@ -144,7 +144,8 @@
 
 .one-pager-cta .cta-note {
   font-size: 13px;
-  opacity: 0.7;
+  color: var(--color-cobalt);
+  opacity: 1;
 }
 
 @media (max-width: 720px) {
