@@ -106,7 +106,7 @@ if (form) {
         throw new Error(result.message || "submission failed");
       }
     } catch (err) {
-      formNote.textContent = "Something went wrong — email us directly at hello@axhilles.com";
+      formNote.textContent = "Something went wrong - email us directly at rahul@axhilles.com";
       formNote.classList.add("error");
     } finally {
       submitButton.disabled = false;
