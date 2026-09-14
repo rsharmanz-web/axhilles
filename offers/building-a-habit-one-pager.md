@@ -1,5 +1,7 @@
 # Building a habit: Working with AI
 
+**From access to adoption.**
+
 **Duration:** 4 weeks  
 **Investment:** $750 +GST per person (20% off for 5+)
 
@@ -7,15 +9,17 @@
 
 ## The problem to solve
 
-We've watched demos. Bookmarked prompts. But how does it translate to a better way of working? This is the four weeks where something does. Rahul Sharma works with you and your team to set up your AI operating system and use it to build and deploy a working app.
+Your business has invested in the pro version of (insert AI tool here). You've appointed 'champions'. Watched demos. Bookmarked prompts. But the habit is yet to stick and the people are still worried about being replaced.
+
+These are real challenges and more importantly, they're totally valid. So the question is how does it translate to a better way of working? This is a four week programme where something does. Rahul Sharma draws on the experience and lessons of scaling AI ways of working at Xero's 100+ person team to set up your AI operating system and use it to build and deploy a working app.
 
 The programme is anchored on Claude Pro, which is what most of the day-to-day advice, prompting patterns, and workspace setup will be built around. If your business runs on a different tool (ChatGPT, Copilot, Cursor, or Gemini) we'll adapt the specifics to it; because the interfaces vary, but the underlying thinking and mechanics don't.
-
-Before week one, each person fills in a short intake form: what they do, what they want AI for, and what they can't do with it (client data into a public tool, anything outside their firm's approved systems). Rahul reads these submissions and fine tunes the sessions around what's actually in the room, not a generic curriculum.
 
 ---
 
 ## The Format
+
+Before week one, each person fills in a short intake form: what they do, what they want AI for, and what they can't do with it (client data into a public tool, anything outside their firm's approved systems). Rahul reads these submissions and fine tunes the sessions around what's actually in the room, not a generic curriculum.
 
 - **Week one** is a two-hour start-up: get set up, learn the foundations, and get enough footing to start on something real.
 - **Weeks two and three** are thirty-minute one-to-ones, working on live tasks, unsticking what's stuck, and pushing further with the tool each time.
