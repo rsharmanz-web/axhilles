@@ -2,8 +2,6 @@
 
 **From access to adoption.**
 
-**Duration:** 4 weeks  
-**Investment:** $750 +GST per person (20% off for 5+)
 
 ---
 

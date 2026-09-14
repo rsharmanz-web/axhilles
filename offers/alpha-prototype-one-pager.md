@@ -2,8 +2,6 @@
 
 **From discussed idea to something real in two weeks.**
 
-**Duration:** 2 weeks  
-**Investment:** From $3,000 +GST
 
 ---
 
