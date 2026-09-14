@@ -184,9 +184,14 @@
   margin-top: 0;
 }
 
-.one-pager-citation sup {
+.one-pager-citation a {
   color: var(--color-cobalt);
-  margin-right: 0.25rem;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+.one-pager-citation a:hover {
+  opacity: 1;
 }
 
 @media (max-width: 720px) {

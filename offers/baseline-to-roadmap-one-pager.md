@@ -33,5 +33,6 @@ Scoped after an initial conversation, based on the number of workflows and the s
 
 ---
 
-[1] Harvard Business Review, 2026 research on AI transformation  
-[2] Gartner research on AI operating fit and ROI
+[1] "The 'Last Mile' Problem Slowing AI Transformation." Harvard Business Review, March 2026. https://hbr.org/2026/03/the-last-mile-problem-slowing-ai-transformation
+
+[2] Gartner press release, April 7, 2026. https://www.gartner.com/en/newsroom/press-releases/2026-04-07-gartner-says-artificial-intelligence-projects-in-infrastructure-and-operations-stall-ahead-of-meaningful-roi-returns
