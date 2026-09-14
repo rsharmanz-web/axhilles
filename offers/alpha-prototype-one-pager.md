@@ -52,9 +52,3 @@ An Alpha Prototype converts an opportunity into a working solution in two weeks.
 - Productise - on a "go"
 - Run another Alpha - on the next workflow in the sequence
 - Building a habit - for the people carrying it forward
-
----
-
-## Partner talk track
-
-"Two weeks to a testable solution for one real job, and a playbook they can reuse."
