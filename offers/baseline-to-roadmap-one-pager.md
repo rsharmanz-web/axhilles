@@ -8,82 +8,54 @@
 
 ## The promise
 
-Map the workflows that make up your business’s operating system. Then use that map to sequence AI experiments that drive efficiency, innovation, and the evolution of how the business actually runs.
-
-This is strategy work. Not a tool rollout.
+Most AI spend right now buys tools nobody asked for, solving problems nobody mapped. We start somewhere less exciting: how the business actually runs, end to end, before anyone opens a laptop. Once that's on the wall, the AI roadmap picks itself, and it lands in an order where each move builds on the last instead of tripping over it.
 
 ---
 
-## Who it’s for
+## Who it's for
 
-Leadership teams and practice owners who need a shared picture of how work runs today before they invest in tools, training, or builds.
+Leadership teams that have already spent money on AI tools and can't point to what changed. Teams asking "we should do something with AI" with no map to hang it on.
 
-Especially useful when the ask is “we should do something with AI” and there is no map yet.
-
-**Not the right fit if:** someone only wants personal tool coaching (see Building a habit), or the team already has one scoped build ready to prototype (see Alpha Prototype).
-
----
-
-## What you get
-
-1. A living **operating-system map** of how the business runs end to end.
-2. A **sequenced set of projects and experiments** for systematically applying AI.
-3. A shared tool the team keeps using to decide where to experiment next.
-
----
-
-## What we map
-
-We identify the workflows that constitute the business operating system and map them end to end.
-
-**Examples**
-- Car dealer: acquiring stock through to closing a sale
-- Accounting practice: how the audit team delivers an audit, from client selection through to signing off the accounts
-
-**For each workflow and step, the map captures**
-- Goal
-- Who’s doing it
-- Risks
-- Task outcomes
-- Tools and tech in use
-
-Once the map exists, it becomes the instrument the team uses to spot where to experiment.
+Not for you if you want personal tool coaching, or you've already got one build scoped and ready to prototype.
 
 ---
 
 ## How it works (1-2 weeks)
 
-1. **Identify** the core operating workflows end to end.
-2. **Map** each for goal, people, risks, outcomes, and tools.
-3. **Surface** experiment opportunities from the map.
-4. **Sequence** a roadmap of projects and experiments that evolve the operating system over time.
+We map the workflows the business actually runs on. For a car dealer, that's stock through to sale. For a construction firm, tender through to completion. Every step gets the same treatment: the goal, who owns it, what could go wrong, what it's supposed to produce, and what tools or systems it depends on.
 
-Client involvement is focused: access to people who know the workflows, working sessions to map and validate, and a leadership session to agree the experiment sequence.
+1. Identify the core operating workflows, end to end
+2. Map each one: goal, people, risks, outcomes, tools
+3. Workshop it with your team: where to streamline, where to innovate
+4. Pull the experiment opportunities straight off the map
+5. Sequence them into a roadmap that builds rather than collides
+
+**Required input**
+- Access to the people who know how the work actually happens, to work through the mapping sessions
+- Leadership workshop to review priorities and align on sequencing
+
+That's it.
 
 ---
 
 ## Outputs
 
-- Operating-system workflow map
-- Opportunity view derived from the map (where AI can drive efficiency or innovation)
-- Sequenced roadmap of projects and experiments
-- Recommended next steps (typically Alpha Prototype, Building a habit, and/or Board advisory)
+- The operating-system map
+- Where AI helps drive efficiency, innovation, or both
+- The sequenced roadmap
+- A working tool your team uses to track what's next
 
 ---
 
 ## What happens next
 
-The roadmap is designed to be used, not filed away. Typical next moves:
-
-- **Alpha Prototype** on a priority workflow (~2 weeks to a testable solution)
-- **Building a habit** for the people who will run experiments
-- **Board advisory** where governance and guardrails need attention
+A roadmap that sits in a drive is a roadmap that failed. From here, most teams go one of three ways: an Alpha Prototype on the highest-priority workflow (testable in two weeks), and in parallel start building capability in the relevant team to bring AI ways of working into your DNA.
 
 ---
 
 ## Partner talk track
 
-“Before random AI pilots, map how the business actually runs. Then pick experiments in sequence.”
+"Before random AI pilots, map how the business actually runs. Then pick experiments in sequence."
 
 ---
 
