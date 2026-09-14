@@ -1,48 +1,51 @@
-# Building a Habit
-
-*"Four weeks: Get set up, Build something, Showcase it."*
+# Building a habit: Working with AI
 
 **Duration:** 4 weeks  
-**Investment:** $950 +GST per person (20% off for cohorts of 5-12)
+**Investment:** $750 +GST per person (20% off for 5+)
 
 ---
 
-## The promise
+## The problem to solve
 
-Over four weeks we shift your team from skeptics to builders and get them into the habit of problem solving with these tools. This programme gets people set up, building on a real project, and finishing with something they can show. Not a certificate. Not a slide deck. A working habit and a piece of work that exists because they made it.
+We've watched demos. Bookmarked prompts. But how does it translate to a better way of working? This is the four weeks where something does. Rahul Sharma works with you and your team to set up your AI operating system and use it to build and deploy a working app.
 
----
+The programme is anchored on Claude Pro, which is what most of the day-to-day advice, prompting patterns, and workspace setup will be built around. If your business runs on a different tool (ChatGPT, Copilot, Cursor, or Gemini) we'll adapt the specifics to it; because the interfaces vary, but the underlying thinking and mechanics don't.
 
-## Who it's for
-
-- Groups of up to 12 people in a service business who want AI in their actual week
-- Strong fit for accountants, advisors, and operators Baker Tilly already knows
-- Not for: firm-wide change programmes, governance strategy, or a tested product build
+Before week one, each person fills in a short intake form: what they do, what they want AI for, and what they can't do with it (client data into a public tool, anything outside their firm's approved systems). Rahul reads these submissions and fine tunes the sessions around what's actually in the room, not a generic curriculum.
 
 ---
 
-## How it works (4 weeks)
+## The Format
 
-- **Week 1 - Start-up (2 hrs):** get set up, learn the tools, learn how to prompt
-- **Weeks 2 & 3 - 1:1 sessions (30 min each):** evolve the project, unstick what's stuck
-- **Week 4 - Showcase:** share what you built, decide what's next
-
-**Tool:** participant's choice; Claude Pro recommended, client-funded.
-
-**Required from you:** people to do the work, their own tool licence, time to build between sessions.
+- **Week one** is a two-hour start-up: get set up, learn the foundations, and get enough footing to start on something real.
+- **Weeks two and three** are thirty-minute one-to-ones, working on live tasks, unsticking what's stuck, and pushing further with the tool each time.
+- **Week four** is a showcase: share what got built, and decide what's next.
 
 ---
 
-## Outputs
+## The Outcome
 
-- Working setup in their chosen tool
-- A live project evolved across the month
-- Showcase demo
-- A clear "what next" recommendation
+By the end, each person will be able to:
+
+- Set up their chosen tool properly for real work
+- Apply AI fundamentals, including guidance on operating principles, safety and ethics, and token optimisation
+- Write prompts that get them a usable answer the first time, not the fifth
+- Know what to hand off to AI and what to check by hand before it goes anywhere
+- Turn a task they do every week into something they don't have to rebuild from scratch each time
+- Point to one real thing they built, and explain how they'd do the next one faster
+
+---
+
+## Pre-reqs
+
+- 6 hours of session time across the four weeks
+- 2-4 hours to experiment and progress your project
+- An idea of a project (we recommend a personal one you're interested in - think fitness application, cook book, travel planner)
+- A laptop and a pro subscription
 
 ---
 
 ## Investment
 
-- $950 +GST per person
-- 20% off for cohorts of 5-12
+- $750 plus GST per person
+- 20% discount for 5+
