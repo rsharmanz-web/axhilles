@@ -1,6 +1,6 @@
 # Baseline to Roadmap
 
-*A pragmatic way to bring AI into your business - starting with how it actually runs.*
+*A blueprint for bringing AI into your business pragmatically.*
 
 **Duration:** 1-2 weeks  
 **Investment:** Scoped proposal
