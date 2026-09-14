@@ -1,6 +1,6 @@
 # Building a Habit
 
-*"Four weeks: get set up, build something and showcase it."*
+*"Four weeks: Get set up, Build something, Showcase it."*
 
 **Duration:** 4 weeks  
 **Investment:** $950 +GST per person (20% off for cohorts of 5-12)
