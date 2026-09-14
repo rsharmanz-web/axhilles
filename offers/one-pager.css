@@ -184,6 +184,11 @@
   margin-top: 0;
 }
 
+.one-pager-citation sup {
+  color: var(--color-cobalt);
+  margin-right: 0.25rem;
+}
+
 .one-pager-citation a {
   color: var(--color-cobalt);
   text-decoration: underline;
