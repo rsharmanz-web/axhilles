@@ -168,6 +168,22 @@
   opacity: 0.65;
 }
 
+.one-pager-citations {
+  margin-top: 2.5rem;
+  padding-top: 1rem;
+  border-top: 1px solid var(--color-sand);
+}
+
+.one-pager-citations .one-pager-citation {
+  margin-top: 0.35rem;
+  padding-top: 0;
+  border-top: none;
+}
+
+.one-pager-citations .one-pager-citation:first-child {
+  margin-top: 0;
+}
+
 .one-pager-citation sup {
   color: var(--color-cobalt);
   margin-right: 0.25rem;
