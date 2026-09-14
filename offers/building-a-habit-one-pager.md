@@ -9,7 +9,7 @@
 
 ## The problem to solve
 
-Your business has invested in the pro version of (insert AI tool here). You've appointed 'champions'. Watched demos. Bookmarked prompts. But nothing's changed. It's not access that's missing, most people have the tool already, it's knowing where to start with it. IBM's 2026 CEO Study found 85% of employees have AI access, but only a quarter use it regularly.[1]
+Your business has invested in the pro version of (insert AI tool here). You've appointed 'champions'. Watched demos. Bookmarked prompts. But nothing's changed. It's not access that's missing, most people have the tool already, it's knowing where to start with it. IBM's 2026 CEO Study found 86% of employees have AI access, but only a quarter use it regularly.[1]
 
 This is a four week programme where something does. Rahul Sharma draws on the experience and lessons of scaling AI ways of working at Xero's 100+ person team to set up your AI operating system and use it to build and deploy a working app.
 
