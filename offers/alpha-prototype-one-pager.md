@@ -1,54 +1,48 @@
 # Alpha Prototype
 
-*Two weeks to build a working solution, plus a playbook you can reuse.*
+**From discussed idea to something real in two weeks.**
 
-**Duration:** ~2 weeks  
+**Duration:** 2 weeks  
 **Investment:** From $3,000 +GST
 
 ---
 
-## The promise
+## The problem to solve
 
-An Alpha Prototype converts an opportunity into a working solution in two weeks. We take one real workflow, job, or task and build something you can put in front of users. Alongside the thing itself, you receive a framework for product development, so the next project doesn't start from scratch.
-
----
-
-## Who it's for
-
-- Teams with a painful job already identified - often straight off a Baseline to Roadmap map, or scoped clean by a partner in Discovery
-- Not for: production backend work, firm-wide rollout, or exploring AI with nothing concrete to test
+Ideas get discussed. Workshops get run. But how does any of it become something real? RAND found more than 80% of AI projects never reach meaningful deployment, most often because leadership and the team never agreed on the specific problem being solved.[1] These two weeks are built so that doesn't happen here.
 
 ---
 
-## How it works
+## The format
 
-1. Discovery - understand the workflow and who it serves
-2. Define scope - lock what "good" looks like (template provided)
-3. Concept development - shape and build the alpha
-4. User testing - real users, internal or external
-5. One round of refinement - fix what testing showed
-6. Go / no-go decision - keep, iterate, or stop with eyes open
+The alpha prototype is grounded in the formats we used to ship AI features at Xero.
 
-**Out of scope:** backend build, backend integration.
-
-**Required from you:** access to the workflow owners, users for testing, feedback throughout. That's it.
+It starts with Discovery: understanding the workflow, the jobs to be done, who it serves, and a baseline of the underlying tech. From there we lock scope and define "success," before moving into concept development and building the alpha itself. Once it's working, we put it in the hands of real users, then run one round of refinement addressing what testing showed. We close with a go or no-go decision: keep it, iterate, or stop with your eyes open.
 
 ---
 
-## Outputs
+## The outcome
 
-- Testable alpha prototype
-- Completed scope / PRD
-- Concept artefacts
-- User-testing notes
-- One refined version
-- Go / no-go recommendation
-- The reusable framework
+You're left with a functioning, interactive artefact and feedback from real users, enough to make a real go or no-go decision, not a vague "let's keep exploring." Just as crucial: a repeatable process framework, ready to evolve the current prototype or apply to the next problem.
+
+Past alphas: a project management tool for residential builds, a cashflow forecasting tool, and a rostering solution for a tech consultancy.
+
+Backend build and backend integration are out of scope for the alpha sprint.
 
 ---
 
-## Next moves
+## Prerequisite
 
-- Productise - on a "go"
-- Run another Alpha - on the next workflow in the sequence
-- Building a habit - for the people carrying it forward
+Access to the workflow owners, users for testing, and feedback throughout. That's it.
+
+This can run as a facilitated sprint your team picks up afterward, or independently once your team has the framework.
+
+---
+
+## Investment
+
+From $3,000 plus GST for a two-week sprint.
+
+---
+
+[1] RAND Corporation, "The Root Causes of Failure for Artificial Intelligence Projects and How They Can Succeed" (2024)
