@@ -619,7 +619,12 @@ a.logo-mark::before {
   justify-content: center;
   text-decoration: none;
   border-radius: var(--radius);
-  transition: background 0.2s ease, border-color 0.2s ease, color 0.2s ease;
+  transition:
+    background-color 0.25s ease,
+    border-color 0.25s ease,
+    color 0.25s ease,
+    transform 0.25s ease,
+    box-shadow 0.25s ease;
 }
 .way-cta:hover {
   background: var(--color-espresso);
@@ -637,6 +642,9 @@ a.logo-mark::before {
   background: var(--color-cobalt);
   border-color: var(--color-cobalt);
   color: var(--color-alabaster);
+  transform: translateY(-1px);
+  box-shadow: 0 6px 16px rgba(0, 32, 194, 0.22);
+  text-decoration: none;
 }
 
 .advisory-panel {
