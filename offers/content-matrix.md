@@ -12,7 +12,7 @@ Updated with confirmed commercial and delivery detail (Sep 2026). Remaining open
 
 | Offer | One-line promise (draft) | Typical entry | Typical next step | Public price |
 |---|---|---|---|---|
-| **Building a habit** | Get people building with AI, week by week, for 30 days. | Discovery / partner intro | Alpha Prototype or Baseline | **$950 +GST per person**; **20% off** when cohort is **5–12** |
+| **Building a habit** | Get people building with AI, week by week, for 30 days. | Discovery / partner intro | Alpha Prototype or Baseline | **$750 +GST per person**; **20% off** when cohort is **5+** |
 | **Alpha Prototype** *(was Proof of Concept)* | In ~two weeks, build a testable solution to one workflow, job or task — and leave with a repeatable product-development framework. | Baseline experiment, or a clear pain already scoped | Further prototype / productise / habit rollout | From $3,000 +GST |
 | **Baseline to Roadmap** | Map the workflows that make up the business’s operating system, then use that map to sequence AI experiments. | Discovery / partner intro / leadership ask | Alpha Prototype(s), Building a habit, Board advisory | No public price (scoped) |
 
@@ -43,7 +43,7 @@ Updated with confirmed commercial and delivery detail (Sep 2026). Remaining open
 | **Promise** | A 30-day programme designed to get people building with AI — not just reading about it. | Locked direction |
 | **Who it’s for** | Cohorts of **1–12 people** in a service business who want a real working habit with AI tools. Strong fit for accountants, advisors, and operators Baker Tilly already knows. | Confirmed |
 | **Who it’s not for** | Firm-wide change programmes, governance strategy, or a built product with user testing (→ Alpha Prototype / Baseline). | Draft |
-| **Group model** | **1–12 participants**. If the cohort is **more than 4** (i.e. 5–12), apply a **20% discount**. | Confirmed |
+| **Group model** | **1–12 participants**. If the cohort is **5+**, apply a **20% discount**. | Confirmed |
 | **Tooling** | Participants use **the tool of their choice**. A **personal Claude Pro subscription for the month** is recommended (client-funded). | Confirmed |
 | **Outcomes** | 1) Tooling set up and understood. 2) A live project evolved across the month. 3) Something built and shared in the Week 4 showcase. | Confirmed direction |
 | **Programme structure** | **Week 1:** 2-hour start-up session — setup, tools that come with it / tools you can use, how to prompt, etc. **Weeks 2 & 3:** 1:1 × **30 min** each — help them evolve their project. **Week 4:** Showcase — share what you’ve built. | Confirmed |
@@ -51,7 +51,7 @@ Updated with confirmed commercial and delivery detail (Sep 2026). Remaining open
 | **Outputs** | Working setup; evolving project artefacts; showcase presentation/demo of what was built; “what next” recommendation. | Draft — name PDF artefacts |
 | **Client effort** | Week 1: 2 hours. Weeks 2–3: 30 min each (+ build time between). Week 4: showcase participation. Arrange own tool licence (Claude Pro recommended). | Confirmed |
 | **Timeline** | 4 weeks / ~30 days. | Locked |
-| **Investment** | **$950 +GST per person**. **20% discount** when cohort size is **5–12**. | Confirmed |
+| **Investment** | **$750 +GST per person**. **20% discount** when cohort size is **5+**. | Confirmed |
 | **Usually before** | Free Discovery (or partner warm intro). | Locked |
 | **Usually after** | Alpha Prototype on a scoped workflow; or Baseline if they need an operating-system map first; or more cohorts through Habit. | Updated |
 | **Partner talk track** | “Four weeks: get set up, build something real in 1:1s, then showcase it.” | Draft |
@@ -123,7 +123,8 @@ Use a tighter version of this as a footer strip on every one-pager.
 ## Confirmation checklist (remaining)
 
 ### Building a habit
-- [x] Cohort size: **1–12**; **20% off** when **more than 4**
+- [x] Cohort size: **1–12**; **20% off** when **5+**
+- [x] Investment: **$750 +GST per person**
 - [x] Tooling: choice of tool; **Claude Pro for the month recommended**
 - [x] Cadence: Week 1 = **2hr start-up**; Weeks 2–3 = **30min 1:1s**; Week 4 = **showcase**
 - [ ] For 5–12 people: Week 1 group + Weeks 2–3 still 1:1 each?
