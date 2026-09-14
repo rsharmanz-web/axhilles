@@ -2,9 +2,6 @@
 
 **A pragmatic strategy to bring AI into your business.**
 
-**Duration:** 1-2 weeks  
-**Investment:** Scoped after an initial conversation
-
 ---
 
 ## The problem to solve
