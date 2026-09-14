@@ -51,9 +51,3 @@ That's it.
 ## What happens next
 
 A roadmap that sits in a drive is a roadmap that failed. From here, most teams go one of three ways: an Alpha Prototype on the highest-priority workflow (testable in two weeks) and in parallel start building capability in the relevant team to bring AI ways of working into your DNA.
-
----
-
-## Partner talk track
-
-"Before random AI pilots, map how the business actually runs. Then pick experiments in sequence."
