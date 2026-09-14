@@ -9,9 +9,9 @@
 
 ## The problem to solve
 
-Your business has invested in the pro version of (insert AI tool here). You've appointed 'champions'. Watched demos. Bookmarked prompts. But the habit is yet to stick and the people are still worried about being replaced.
+Your business has invested in the pro version of (insert AI tool here). You've appointed 'champions'. Watched demos. Bookmarked prompts. But nothing's changed. It's not access that's missing, most people have the tool already, it's knowing where to start with it. IBM's 2026 research found 85% of employees have AI access, but only a quarter use it regularly.
 
-These are real challenges and more importantly, they're totally valid. So the question is how does it translate to a better way of working? This is a four week programme where something does. Rahul Sharma draws on the experience and lessons of scaling AI ways of working at Xero's 100+ person team to set up your AI operating system and use it to build and deploy a working app.
+This is a four week programme where something does. Rahul Sharma draws on the experience and lessons of scaling AI ways of working at Xero's 100+ person team to set up your AI operating system and use it to build and deploy a working app.
 
 The programme is anchored on Claude Pro, which is what most of the day-to-day advice, prompting patterns, and workspace setup will be built around. If your business runs on a different tool (ChatGPT, Copilot, Cursor, or Gemini) we'll adapt the specifics to it; because the interfaces vary, but the underlying thinking and mechanics don't.
 
