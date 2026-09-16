@@ -142,11 +142,6 @@
   border-top: 1px solid var(--color-sand);
 }
 
-.one-pager-cta .cta-note {
-  font-size: 13px;
-  color: var(--color-cobalt);
-  opacity: 1;
-}
 
 .one-pager-ref {
   font-size: 0.7em;
