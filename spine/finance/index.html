@@ -1,0 +1,572 @@
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Finance department — jobs-to-be-done spine</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=EB+Garamond:ital,wght@0,400;1,400&display=swap" rel="stylesheet">
+
+<style>
+:root{
+  --bg:#FBF9F6;
+  --panel:#F5F0E7;
+  --panel-2:#EFE7D8;
+  --rule:#E6DFD3;
+  --rule-soft:#EDE6D9;
+  --ink:#33241C;
+  --ink-2:rgba(51,36,28,.68);
+  --ink-3:rgba(51,36,28,.48);
+  --accent:#0020C2;
+  --live:#3E7D32;
+  --building:#D99A2B;
+  --open:#7A88B8;
+  --locked:#C23B2E;
+  --unmapped:#C9BFAE;
+  --feas-simple:#3E7D32;
+  --feas-medium:#D99A2B;
+  --feas-complex:#C23B2E;
+  --mono:"Space Grotesk",ui-monospace,"SF Mono",Menlo,Consolas,monospace;
+  --sans:"Space Grotesk",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --cond:"Space Grotesk",system-ui,sans-serif;
+  --editorial:"EB Garamond",ui-serif,Georgia,serif;
+  --radius:10px;
+}
+*{box-sizing:border-box}
+html,body{margin:0;padding:0}
+body{
+  background:var(--bg);color:var(--ink);font-family:var(--sans);
+  font-size:15px;line-height:1.5;letter-spacing:-.01em;
+  -webkit-font-smoothing:antialiased;
+}
+.masthead{
+  border-bottom:1px solid var(--rule);padding:22px 28px 16px;
+  display:flex;flex-wrap:wrap;gap:20px;align-items:flex-end;justify-content:space-between;
+}
+.masthead h1{
+  font-family:var(--cond);font-weight:700;font-size:27px;letter-spacing:.03em;
+  text-transform:uppercase;margin:0;line-height:1.1;
+}
+.masthead h1::before{content:">> ";color:var(--accent);font-weight:700}
+.masthead .sub{
+  font-family:var(--mono);font-size:11.5px;letter-spacing:.11em;
+  text-transform:uppercase;color:var(--ink-3);margin-top:7px;
+}
+.nav-link{
+  font-family:var(--mono);font-size:11px;font-weight:600;letter-spacing:.08em;
+  text-transform:uppercase;color:var(--ink-2);text-decoration:none;
+  border:1px solid var(--rule);padding:8px 14px;border-radius:var(--radius);white-space:nowrap;
+}
+.nav-link:hover{border-color:var(--accent);color:var(--accent)}
+.legend{display:flex;flex-wrap:wrap;gap:16px;align-items:center}
+.legend-item{
+  display:flex;align-items:center;gap:7px;font-family:var(--mono);font-size:10.5px;
+  letter-spacing:.1em;text-transform:uppercase;color:var(--ink-2);
+}
+.lamp{width:11px;height:11px;border-radius:3px;background:var(--unmapped);flex:0 0 auto}
+.lamp.live{background:var(--live);box-shadow:0 0 9px -1px var(--live)}
+.lamp.building{background:var(--building);box-shadow:0 0 9px -1px var(--building)}
+.lamp.open{background:transparent;border:1.5px solid var(--open)}
+.lamp.locked{
+  background:repeating-linear-gradient(-45deg,var(--locked) 0 2px,transparent 2px 4.5px);
+  border:1px solid var(--locked);
+}
+.lamp.unmapped{background:transparent;border:1px solid var(--unmapped)}
+.legend-div{width:1px;align-self:stretch;background:var(--rule);margin:0 2px}
+.feas-dot{width:7px;height:7px;border-radius:50%;flex:0 0 auto}
+.controls{
+  display:flex;flex-wrap:wrap;gap:18px 26px;align-items:center;
+  padding:13px 28px;border-bottom:1px solid var(--rule);background:var(--panel);
+}
+.ctl-group{display:flex;align-items:center;gap:9px;flex-wrap:wrap}
+.ctl-label{
+  font-family:var(--mono);font-size:10px;letter-spacing:.13em;
+  text-transform:uppercase;color:var(--ink-3);
+}
+.chip{
+  font-family:var(--mono);font-size:11px;letter-spacing:.05em;font-weight:500;
+  background:transparent;color:var(--ink-2);border:1px solid var(--rule);
+  padding:4px 10px;border-radius:var(--radius);cursor:pointer;
+}
+.chip:hover{border-color:var(--accent);color:var(--ink)}
+.chip[aria-pressed="true"]{background:var(--accent);border-color:var(--accent);color:var(--bg)}
+.chip:focus-visible,button:focus-visible,[tabindex]:focus-visible{
+  outline:2px solid var(--accent);outline-offset:2px;
+}
+.spacer{flex:1}
+.action{
+  font-family:var(--mono);font-size:11px;letter-spacing:.07em;font-weight:500;
+  background:transparent;color:var(--ink-2);border:1px solid var(--rule);
+  padding:5px 12px;border-radius:var(--radius);cursor:pointer;
+}
+.action:hover{border-color:var(--accent);color:var(--accent);background:var(--panel)}
+.board{display:grid;grid-template-columns:minmax(0,1fr) 420px;min-height:calc(100vh - 188px)}
+.spine{border-right:1px solid var(--rule);padding:0 0 60px}
+.phase{border-bottom:1px solid var(--rule-soft)}
+.phase-head{
+  display:grid;grid-template-columns:44px minmax(0,1fr) auto;gap:16px;align-items:center;
+  padding:13px 28px;cursor:pointer;background:none;border:0;width:100%;text-align:left;color:inherit;
+}
+.phase-head:hover{background:var(--panel)}
+.phase-num{font-family:var(--mono);font-size:11px;color:var(--ink-3);letter-spacing:.06em}
+.phase-name{font-family:var(--cond);font-weight:600;font-size:16px;letter-spacing:.045em;text-transform:uppercase}
+.phase-when{font-family:var(--mono);font-size:10px;color:var(--ink-3);letter-spacing:.1em;text-transform:uppercase;margin-top:2px}
+.gutter{display:flex;gap:3px;align-items:center}
+.gutter .lamp{width:9px;height:16px;border-radius:1px}
+.tasks{display:none;padding:2px 28px 16px 88px}
+.phase.open-row .tasks{display:block}
+.task{
+  display:grid;grid-template-columns:14px minmax(0,1fr) 14px 52px 88px 72px;
+  gap:12px;align-items:center;padding:7px 10px 7px 0;border:0;background:none;
+  width:100%;text-align:left;color:inherit;cursor:pointer;border-bottom:1px solid var(--rule-soft);
+}
+.task:hover{background:var(--panel)}
+.task[aria-selected="true"]{background:var(--panel-2)}
+.task.dimmed{opacity:.24}
+.task-name{font-size:14px}
+.meta{font-family:var(--mono);font-size:9.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-3)}
+.detail{padding:24px 26px 60px;position:sticky;top:0;align-self:start;max-height:100vh;overflow:auto}
+.detail .eyebrow{font-family:var(--mono);font-size:10px;letter-spacing:.13em;text-transform:uppercase;color:var(--ink-3)}
+.detail h2{
+  font-family:var(--cond);font-weight:700;font-size:21px;letter-spacing:.01em;
+  margin:9px 0 14px;line-height:1.2;text-transform:uppercase;
+}
+.tags{display:flex;flex-wrap:wrap;gap:7px;margin-bottom:20px}
+.tag{
+  font-family:var(--mono);font-size:10px;letter-spacing:.08em;text-transform:uppercase;
+  border:1px solid var(--rule);padding:3px 8px;border-radius:var(--radius);color:var(--ink-2);
+}
+.tag.lens-judgement{border-color:var(--locked);color:var(--locked)}
+.tag.lens-evidence{border-color:var(--building);color:var(--building)}
+.tag.lens-coordination{border-color:var(--accent);color:var(--accent)}
+.tag.feas-simple{border-color:var(--feas-simple);color:var(--feas-simple)}
+.tag.feas-medium{border-color:var(--feas-medium);color:var(--feas-medium)}
+.tag.feas-complex{border-color:var(--feas-complex);color:var(--feas-complex)}
+.field{margin-bottom:17px}
+.field .k{font-family:var(--mono);font-size:9.5px;letter-spacing:.13em;text-transform:uppercase;color:var(--ink-3);margin-bottom:5px}
+.field .v{font-size:14px;color:var(--ink);line-height:1.55}
+.field.lead .v{
+  font-family:var(--editorial);font-style:italic;font-size:17px;line-height:1.45;
+  color:var(--ink);border-left:3px solid var(--accent);padding-left:14px;
+}
+.setter{border-top:1px solid var(--rule);margin-top:24px;padding-top:16px}
+.setter .k{font-family:var(--mono);font-size:9.5px;letter-spacing:.13em;text-transform:uppercase;color:var(--ink-3);margin-bottom:10px}
+.status-btns,.score-btns{display:flex;flex-wrap:wrap;gap:6px}
+.sbtn{
+  display:flex;align-items:center;gap:7px;font-family:var(--mono);font-size:10.5px;
+  letter-spacing:.08em;text-transform:uppercase;font-weight:500;background:transparent;
+  border:1px solid var(--rule);color:var(--ink-2);padding:6px 11px;border-radius:var(--radius);cursor:pointer;
+}
+.sbtn:hover{border-color:var(--accent);color:var(--ink)}
+.sbtn[aria-pressed="true"]{background:var(--panel-2);border-color:var(--ink);color:var(--ink)}
+.empty{
+  color:var(--ink);font-family:var(--editorial);font-style:italic;font-size:17px;
+  line-height:1.5;max-width:34ch;border-left:3px solid var(--accent);padding-left:14px;
+}
+.tally{
+  position:fixed;left:0;right:420px;bottom:0;display:flex;gap:22px;align-items:center;flex-wrap:wrap;
+  padding:9px 28px;border-top:1px solid var(--rule);background:rgba(251,249,246,.96);
+  backdrop-filter:blur(6px);font-family:var(--mono);font-size:10.5px;letter-spacing:.09em;
+  text-transform:uppercase;color:var(--ink-3);
+}
+.tally b{color:var(--ink);font-weight:600}
+.toast{
+  position:fixed;bottom:52px;left:28px;font-family:var(--mono);font-size:11px;
+  letter-spacing:.06em;font-weight:600;color:var(--accent);opacity:0;transition:opacity .2s;pointer-events:none;
+}
+.toast.show{opacity:1}
+input[type=file]{display:none}
+@media (max-width:1100px){
+  .board{grid-template-columns:1fr}
+  .spine{border-right:0;border-bottom:1px solid var(--rule)}
+  .detail{position:static;max-height:none}
+  .tally{right:0;position:static;background:none}
+  .tasks{padding-left:28px}
+  .task{grid-template-columns:14px minmax(0,1fr) 14px 52px}
+  .task .meta.tier,.task .meta.lens{display:none}
+}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+
+<header class="masthead">
+  <div>
+    <h1>Finance department &mdash; jobs to be done</h1>
+    <div class="sub" id="sub">Loading the sheet&hellip;</div>
+  </div>
+  <div class="legend">
+    <span class="legend-item"><span class="lamp live"></span>Live</span>
+    <span class="legend-item"><span class="lamp building"></span>Building</span>
+    <span class="legend-item"><span class="lamp open"></span>Open</span>
+    <span class="legend-item"><span class="lamp locked"></span>Locked</span>
+    <span class="legend-item"><span class="lamp unmapped"></span>Unmapped</span>
+    <span class="legend-div"></span>
+    <span class="legend-item"><span class="feas-dot" style="background:var(--feas-simple)"></span>Simple</span>
+    <span class="legend-item"><span class="feas-dot" style="background:var(--feas-medium)"></span>Medium</span>
+    <span class="legend-item"><span class="feas-dot" style="background:var(--feas-complex)"></span>Complex</span>
+  </div>
+  <a class="nav-link" href="/spine/finance/workshop.html">How to run the workshop &rarr;</a>
+</header>
+
+<div class="controls">
+  <div class="ctl-group" id="lensFilters">
+    <span class="ctl-label">Lens</span>
+  </div>
+  <div class="ctl-group" id="ownerFilters">
+    <span class="ctl-label">Owner</span>
+  </div>
+  <div class="ctl-group" id="feasFilters">
+    <span class="ctl-label">Feasibility</span>
+  </div>
+  <div class="spacer"></div>
+  <button class="action" id="expandAll">Expand all</button>
+  <button class="action" id="collapseAll">Collapse all</button>
+  <button class="action" id="loadBtn">Load sheet</button>
+  <button class="action" id="saveBtn">Download sheet</button>
+  <button class="action" id="copyBtn">Copy summary</button>
+  <input id="fileInput" type="file" accept=".csv,text/csv">
+</div>
+
+<main class="board">
+  <section class="spine" id="spine"></section>
+  <aside class="detail" id="detail"></aside>
+</main>
+
+<div class="tally" id="tally"></div>
+<div class="toast" id="toast"></div>
+
+<script>
+const STATUSES = ["unmapped","live","building","open","locked"];
+const STATUS_LABEL = {unmapped:"Unmapped", live:"Live", building:"Building", open:"Open", locked:"Locked"};
+const FIELDS = ["phase_n","phase","cycle","task","lens","owner","load","feasibility","current","ceiling","description","examples","status"];
+const CSV_PATH = "/spine/finance/tasks.csv";
+
+let DATA = [];
+let selected = null;
+const filters = {lens:"all", owner:"all", feas:"all"};
+
+function parseCSV(text){
+  const rows = [];
+  let row = [], cell = "", q = false;
+  for (let i = 0; i < text.length; i++){
+    const c = text[i], n = text[i+1];
+    if (q){
+      if (c === '"' && n === '"'){ cell += '"'; i++; }
+      else if (c === '"') q = false;
+      else cell += c;
+    } else {
+      if (c === '"') q = true;
+      else if (c === ","){ row.push(cell); cell = ""; }
+      else if (c === "\n"){ row.push(cell); cell = ""; if (row.some(x => x !== "")) rows.push(row); row = []; }
+      else if (c !== "\r") cell += c;
+    }
+  }
+  if (cell.length || row.length){ row.push(cell); rows.push(row); }
+  return rows;
+}
+function csvEscape(v){
+  const s = v == null ? "" : String(v);
+  if (/[",\n\r]/.test(s)) return '"' + s.replace(/"/g, '""') + '"';
+  return s;
+}
+function toast(msg){
+  const t = document.getElementById("toast");
+  t.textContent = msg;
+  t.classList.add("show");
+  setTimeout(() => t.classList.remove("show"), 1800);
+}
+
+function loadFromRows(rows){
+  if (!rows.length) throw new Error("Empty sheet");
+  const header = rows[0].map(h => h.trim());
+  const idx = Object.fromEntries(header.map((h,i) => [h, i]));
+  FIELDS.forEach(f => { if (idx[f] == null) throw new Error("Missing column: " + f); });
+  const phases = [];
+  const byN = {};
+  rows.slice(1).forEach(r => {
+    if (!r.length || r.every(c => !c)) return;
+    const n = r[idx.phase_n];
+    if (!byN[n]){
+      byN[n] = {n: n, name: r[idx.phase], when: r[idx.cycle], tasks: [], _open: false};
+      phases.push(byN[n]);
+    }
+    const tk = {
+      t: r[idx.task],
+      l: r[idx.lens],
+      o: r[idx.owner],
+      load: ({H:"Weeks",M:"Days",L:"Hours",Hours:"Hours",Days:"Days",Weeks:"Weeks"}[r[idx.load]] || r[idx.load]),
+      f: ({High:"Simple",Low:"Complex",Medium:"Medium",Simple:"Simple",Complex:"Complex"}[r[idx.feasibility]] || r[idx.feasibility]),
+      cur: Number(r[idx.current]) || 1,
+      ceil: Number(r[idx.ceiling]) || 1,
+      d: r[idx.description] != null ? r[idx.description] : r[idx.what_it_is],
+      ex: r[idx.examples],
+      status: (r[idx.status] || "unmapped").toLowerCase()
+    };
+    if (!STATUSES.includes(tk.status)) tk.status = "unmapped";
+    tk.id = n + ":" + byN[n].tasks.length;
+    byN[n].tasks.push(tk);
+  });
+  DATA = phases;
+  selected = null;
+  buildFilterBar();
+  const openProve = DATA.find(p => /prove the cash/i.test(p.name));
+  const start = openProve || DATA[0];
+  if (start){
+    start._open = true;
+    if (start.tasks[0]) selected = start.tasks[0].id;
+  }
+  const nTasks = DATA.reduce((a,p) => a + p.tasks.length, 0);
+  document.getElementById("sub").textContent =
+    DATA.length + " jobs  ·  " + nTasks + " tasks  ·  the sheet is the source of truth  ·  scores are current · ceiling";
+  render();
+  if (start && start.tasks[0]) renderDetail(start, start.tasks[0]);
+}
+
+function owners(){
+  return Array.from(new Set(DATA.flatMap(p => p.tasks.map(t => t.o))));
+}
+function chipBar(el, filter, allLabel, values, labels){
+  el.innerHTML = '<span class="ctl-label"></span>';
+  el.querySelector(".ctl-label").textContent = allLabel;
+  [{val:"all", label:"All"}].concat(values.map((v,i) => ({val:v, label:(labels && labels[i]) || v}))).forEach(item => {
+    const b = document.createElement("button");
+    b.className = "chip";
+    b.dataset.filter = filter;
+    b.dataset.val = item.val;
+    b.setAttribute("aria-pressed", filters[filter] === item.val ? "true" : "false");
+    b.textContent = item.label;
+    b.addEventListener("click", () => {
+      filters[filter] = item.val;
+      el.querySelectorAll(".chip").forEach(c => c.setAttribute("aria-pressed", c === b ? "true" : "false"));
+      render();
+    });
+    el.appendChild(b);
+  });
+}
+function buildFilterBar(){
+  chipBar(document.getElementById("lensFilters"), "lens", "Lens",
+    ["coordination","evidence","judgement"], ["Coordination","Evidence","Judgement"]);
+  chipBar(document.getElementById("ownerFilters"), "owner", "Owner", owners());
+  chipBar(document.getElementById("feasFilters"), "feas", "Feasibility",
+    ["Simple","Medium","Complex"], ["Simple","Medium","Complex"]);
+}
+
+function matches(tk){
+  return (filters.lens === "all" || tk.l === filters.lens) &&
+         (filters.owner === "all" || tk.o === filters.owner) &&
+         (filters.feas === "all" || tk.f === filters.feas);
+}
+
+const spineEl = document.getElementById("spine");
+const detailEl = document.getElementById("detail");
+const tallyEl = document.getElementById("tally");
+
+function render(){
+  spineEl.innerHTML = "";
+  DATA.forEach(ph => {
+    const wrap = document.createElement("div");
+    wrap.className = "phase" + (ph._open ? " open-row" : "");
+    const head = document.createElement("button");
+    head.className = "phase-head";
+    head.setAttribute("aria-expanded", ph._open ? "true" : "false");
+    head.innerHTML = '<span class="phase-num"></span><span><span class="phase-name"></span><span class="phase-when"></span></span><span class="gutter"></span>';
+    head.querySelector(".phase-num").textContent = ph.n;
+    head.querySelector(".phase-name").textContent = ph.name;
+    head.querySelector(".phase-when").textContent = ph.when;
+    const gutter = head.querySelector(".gutter");
+    ph.tasks.forEach(tk => {
+      const lamp = document.createElement("span");
+      lamp.className = "lamp " + tk.status;
+      lamp.title = tk.t + " — " + STATUS_LABEL[tk.status];
+      if (!matches(tk)) lamp.style.opacity = ".2";
+      gutter.appendChild(lamp);
+    });
+    head.addEventListener("click", () => { ph._open = !ph._open; render(); });
+    wrap.appendChild(head);
+
+    const list = document.createElement("div");
+    list.className = "tasks";
+    ph.tasks.forEach(tk => {
+      const row = document.createElement("button");
+      row.className = "task" + (matches(tk) ? "" : " dimmed");
+      row.setAttribute("aria-selected", selected === tk.id ? "true" : "false");
+      row.innerHTML =
+        '<span class="lamp ' + tk.status + '"></span>' +
+        '<span class="task-name"></span>' +
+        '<span class="feas-dot"></span>' +
+        '<span class="meta scores"></span>' +
+        '<span class="meta lens"></span>' +
+        '<span class="meta tier"></span>';
+      row.querySelector(".task-name").textContent = tk.t;
+      const fdot = row.querySelector(".feas-dot");
+      fdot.style.background = "var(--feas-" + tk.f.toLowerCase() + ")";
+      fdot.title = tk.f;
+      row.querySelector(".scores").textContent = tk.cur + "→" + tk.ceil;
+      row.querySelector(".lens").textContent = tk.l.slice(0,5);
+      row.querySelector(".tier").textContent = tk.o;
+      row.addEventListener("click", () => { selected = tk.id; render(); renderDetail(ph, tk); });
+      list.appendChild(row);
+    });
+    wrap.appendChild(list);
+    spineEl.appendChild(wrap);
+  });
+  renderTally();
+}
+
+function scoreRow(label, key, tk, ph){
+  const wrap = document.createElement("div");
+  wrap.className = "setter";
+  wrap.style.borderTop = "0";
+  wrap.style.marginTop = "0";
+  wrap.style.paddingTop = "0";
+  const k = document.createElement("div"); k.className = "k"; k.textContent = label;
+  const btns = document.createElement("div"); btns.className = "score-btns";
+  ;[1,2,3].forEach(n => {
+    const b = document.createElement("button");
+    b.className = "sbtn";
+    b.setAttribute("aria-pressed", tk[key] === n ? "true" : "false");
+    b.textContent = String(n);
+    b.addEventListener("click", () => { tk[key] = n; render(); renderDetail(ph, tk); });
+    btns.appendChild(b);
+  });
+  wrap.append(k, btns);
+  return wrap;
+}
+
+function renderDetail(ph, tk){
+  detailEl.innerHTML = "";
+  const eyebrow = document.createElement("div");
+  eyebrow.className = "eyebrow";
+  eyebrow.textContent = ph.n + "  ·  " + ph.name;
+  const h = document.createElement("h2");
+  h.textContent = tk.t;
+  const tags = document.createElement("div");
+  tags.className = "tags";
+  [["tag lens-" + tk.l, tk.l], ["tag", tk.o + " owned"], ["tag", tk.load],
+   ["tag feas-" + tk.f.toLowerCase(), tk.f],
+   ["tag", "Now " + tk.cur + "  ·  Ceiling " + tk.ceil]]
+    .forEach(([cls,txt]) => {
+      const s = document.createElement("span"); s.className = cls; s.textContent = txt; tags.appendChild(s);
+    });
+  detailEl.append(eyebrow, h, tags);
+  [["Description", tk.d, true], ["Examples", tk.ex]]
+    .forEach(([k,v,lead]) => {
+      const f = document.createElement("div"); f.className = "field" + (lead ? " lead" : "");
+      const kk = document.createElement("div"); kk.className = "k"; kk.textContent = k;
+      const vv = document.createElement("div"); vv.className = "v"; vv.textContent = v;
+      f.append(kk,vv); detailEl.appendChild(f);
+    });
+
+  const scores = document.createElement("div");
+  scores.className = "setter";
+  const sk = document.createElement("div"); sk.className = "k";
+  sk.textContent = "Workshop scores — 1 is low, 3 is high. Ceiling can be 2.";
+  scores.appendChild(sk);
+  scores.appendChild(scoreRow("Current state of automation", "cur", tk, ph));
+  scores.appendChild(scoreRow("Ceiling — as high as this can ever get", "ceil", tk, ph));
+  detailEl.appendChild(scores);
+
+  const setter = document.createElement("div");
+  setter.className = "setter";
+  const lk = document.createElement("div"); lk.className = "k"; lk.textContent = "Set status";
+  const btns = document.createElement("div"); btns.className = "status-btns";
+  STATUSES.forEach(s => {
+    const b = document.createElement("button");
+    b.className = "sbtn";
+    b.setAttribute("aria-pressed", tk.status === s ? "true" : "false");
+    b.innerHTML = '<span class="lamp ' + s + '"></span>';
+    b.append(document.createTextNode(STATUS_LABEL[s]));
+    b.addEventListener("click", () => { tk.status = s; render(); renderDetail(ph, tk); });
+    btns.appendChild(b);
+  });
+  setter.append(lk, btns);
+  detailEl.appendChild(setter);
+}
+
+function renderTally(){
+  const c = {live:0, building:0, open:0, locked:0, unmapped:0};
+  DATA.forEach(p => p.tasks.forEach(t => c[t.status]++));
+  tallyEl.innerHTML = "";
+  [["live","Live"],["building","Building"],["open","Open"],["locked","Locked"],["unmapped","Unmapped"]]
+    .forEach(([k,label]) => {
+      const el = document.createElement("span");
+      el.innerHTML = '<span class="lamp ' + k + '" style="display:inline-block;vertical-align:-1px;margin-right:6px"></span>';
+      const b = document.createElement("b"); b.textContent = c[k];
+      el.append(b, document.createTextNode(" " + label));
+      tallyEl.appendChild(el);
+    });
+}
+
+function toCSV(){
+  const lines = [FIELDS.join(",")];
+  DATA.forEach(ph => {
+    ph.tasks.forEach(tk => {
+      const rec = {
+        phase_n: ph.n, phase: ph.name, cycle: ph.when, task: tk.t, lens: tk.l, owner: tk.o,
+        load: tk.load, feasibility: tk.f, current: tk.cur,
+        ceiling: tk.ceil, description: tk.d, examples: tk.ex, status: tk.status
+      };
+      lines.push(FIELDS.map(f => csvEscape(rec[f])).join(","));
+    });
+  });
+  return lines.join("\n") + "\n";
+}
+
+document.getElementById("expandAll").addEventListener("click", () => { DATA.forEach(p => p._open = true); render(); });
+document.getElementById("collapseAll").addEventListener("click", () => { DATA.forEach(p => p._open = false); render(); });
+document.getElementById("loadBtn").addEventListener("click", () => document.getElementById("fileInput").click());
+document.getElementById("fileInput").addEventListener("change", e => {
+  const file = e.target.files && e.target.files[0];
+  if (!file) return;
+  file.text().then(t => { loadFromRows(parseCSV(t)); toast("Loaded " + file.name); })
+    .catch(err => toast(err.message));
+  e.target.value = "";
+});
+document.getElementById("saveBtn").addEventListener("click", () => {
+  const blob = new Blob([toCSV()], {type:"text/csv"});
+  const a = document.createElement("a");
+  a.href = URL.createObjectURL(blob);
+  a.download = "tasks.csv";
+  a.click();
+  URL.revokeObjectURL(a.href);
+  toast("Sheet downloaded — scores and status included");
+});
+document.getElementById("copyBtn").addEventListener("click", () => {
+  const lines = ["FINANCE DEPARTMENT — JOBS TO BE DONE", new Date().toLocaleDateString("en-NZ"), ""];
+  DATA.forEach(ph => {
+    lines.push(ph.n + "  " + ph.name.toUpperCase() + "  (" + ph.when + ")");
+    ph.tasks.forEach(tk => {
+      lines.push("    [" + STATUS_LABEL[tk.status].toUpperCase().padEnd(9) + "] " +
+        tk.t + "  — " + tk.l + " / " + tk.o + " / " + tk.cur + "→" + tk.ceil + " / " + tk.f);
+    });
+    lines.push("");
+  });
+  const text = lines.join("\n");
+  const done = () => toast("Summary copied");
+  if (navigator.clipboard && navigator.clipboard.writeText){
+    navigator.clipboard.writeText(text).then(done).catch(() => fallback(text, done));
+  } else fallback(text, done);
+});
+function fallback(text, done){
+  const ta = document.createElement("textarea");
+  ta.value = text; ta.style.position = "fixed"; ta.style.opacity = "0";
+  document.body.appendChild(ta); ta.select();
+  try { document.execCommand("copy"); done(); } catch(e){}
+  document.body.removeChild(ta);
+}
+
+document.addEventListener("dragover", e => { e.preventDefault(); });
+document.addEventListener("drop", e => {
+  e.preventDefault();
+  const file = e.dataTransfer && e.dataTransfer.files && e.dataTransfer.files[0];
+  if (!file) return;
+  file.text().then(t => { loadFromRows(parseCSV(t)); toast("Loaded " + file.name); })
+    .catch(err => toast(err.message));
+});
+
+fetch(CSV_PATH).then(r => {
+  if (!r.ok) throw new Error("Could not read " + CSV_PATH);
+  return r.text();
+}).then(t => loadFromRows(parseCSV(t))).catch(err => {
+  document.getElementById("sub").textContent = "Drop tasks.csv onto this page, or click Load sheet";
+  document.getElementById("detail").innerHTML = "";
+  toast(err.message);
+});
+</script>

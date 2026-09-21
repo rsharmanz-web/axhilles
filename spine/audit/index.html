@@ -1,0 +1,867 @@
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Audit delivery — automation status board</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=EB+Garamond:ital,wght@0,400;1,400&display=swap" rel="stylesheet">
+
+<style>
+:root{
+  --bg:#FBF9F6;
+  --panel:#F5F0E7;
+  --panel-2:#EFE7D8;
+  --rule:#E6DFD3;
+  --rule-soft:#EDE6D9;
+  --ink:#33241C;
+  --ink-2:rgba(51,36,28,.68);
+  --ink-3:rgba(51,36,28,.48);
+
+  --accent:#0020C2;
+
+  --live:#3E7D32;
+  --building:#D99A2B;
+  --open:#7A88B8;
+  --locked:#C23B2E;
+  --unmapped:#C9BFAE;
+
+  --feas-high:#3E7D32;
+  --feas-medium:#D99A2B;
+  --feas-low:#C23B2E;
+
+  --mono:"Space Grotesk",ui-monospace,"SF Mono",Menlo,Consolas,monospace;
+  --sans:"Space Grotesk",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --cond:"Space Grotesk",system-ui,sans-serif;
+  --editorial:"EB Garamond",ui-serif,Georgia,serif;
+  --radius:10px;
+}
+
+*{box-sizing:border-box}
+html,body{margin:0;padding:0}
+body{
+  background:var(--bg);
+  color:var(--ink);
+  font-family:var(--sans);
+  font-size:15px;
+  line-height:1.5;
+  letter-spacing:-.01em;
+  -webkit-font-smoothing:antialiased;
+}
+
+/* ---------- header ---------- */
+.masthead{
+  border-bottom:1px solid var(--rule);
+  padding:22px 28px 16px;
+  display:flex;
+  flex-wrap:wrap;
+  gap:20px;
+  align-items:flex-end;
+  justify-content:space-between;
+}
+.masthead h1{
+  font-family:var(--cond);
+  font-weight:700;
+  font-size:27px;
+  letter-spacing:.03em;
+  text-transform:uppercase;
+  margin:0;
+  line-height:1.1;
+}
+.masthead h1::before{content:">> ";color:var(--accent);font-weight:700}
+.masthead .sub{
+  font-family:var(--mono);
+  font-size:11.5px;
+  letter-spacing:.11em;
+  text-transform:uppercase;
+  color:var(--ink-3);
+  margin-top:7px;
+}
+.nav-link{
+  font-family:var(--mono);font-size:11px;font-weight:600;letter-spacing:.08em;
+  text-transform:uppercase;color:var(--ink-2);text-decoration:none;
+  border:1px solid var(--rule);padding:8px 14px;border-radius:var(--radius);
+  white-space:nowrap;
+}
+.nav-link:hover{border-color:var(--accent);color:var(--accent)}
+
+.legend{display:flex;flex-wrap:wrap;gap:16px;align-items:center}
+.legend-item{
+  display:flex;align-items:center;gap:7px;
+  font-family:var(--mono);font-size:10.5px;
+  letter-spacing:.1em;text-transform:uppercase;color:var(--ink-2);
+}
+.lamp{
+  width:11px;height:11px;border-radius:3px;
+  background:var(--unmapped);
+  flex:0 0 auto;
+}
+.lamp.live{background:var(--live);box-shadow:0 0 9px -1px var(--live)}
+.lamp.building{background:var(--building);box-shadow:0 0 9px -1px var(--building)}
+.lamp.open{background:transparent;border:1.5px solid var(--open)}
+.lamp.locked{
+  background:repeating-linear-gradient(-45deg,var(--locked) 0 2px,transparent 2px 4.5px);
+  border:1px solid var(--locked);
+}
+.lamp.unmapped{background:transparent;border:1px solid var(--unmapped)}
+
+.legend-div{width:1px;align-self:stretch;background:var(--rule);margin:0 2px}
+.feas-dot{width:7px;height:7px;border-radius:50%;flex:0 0 auto}
+
+/* ---------- controls ---------- */
+.controls{
+  display:flex;flex-wrap:wrap;gap:26px;align-items:center;
+  padding:13px 28px;
+  border-bottom:1px solid var(--rule);
+  background:var(--panel);
+}
+.ctl-group{display:flex;align-items:center;gap:9px}
+.ctl-label{
+  font-family:var(--mono);font-size:10px;letter-spacing:.13em;
+  text-transform:uppercase;color:var(--ink-3);
+}
+.chip{
+  font-family:var(--mono);font-size:11px;letter-spacing:.05em;font-weight:500;
+  background:transparent;color:var(--ink-2);
+  border:1px solid var(--rule);
+  padding:4px 10px;border-radius:var(--radius);cursor:pointer;
+  transition:border-color .12s,color .12s,background .12s;
+}
+.chip:hover{border-color:var(--accent);color:var(--ink)}
+.chip[aria-pressed="true"]{background:var(--accent);border-color:var(--accent);color:var(--bg)}
+.chip:focus-visible,button:focus-visible,[tabindex]:focus-visible{
+  outline:2px solid var(--accent);outline-offset:2px;
+}
+.spacer{flex:1}
+.action{
+  font-family:var(--mono);font-size:11px;letter-spacing:.07em;font-weight:500;
+  background:transparent;color:var(--ink-2);
+  border:1px solid var(--rule);padding:5px 12px;border-radius:var(--radius);cursor:pointer;
+}
+.action:hover{border-color:var(--accent);color:var(--accent);background:var(--panel)}
+
+/* ---------- layout ---------- */
+.board{display:grid;grid-template-columns:minmax(0,1fr) 400px;min-height:calc(100vh - 168px)}
+.spine{border-right:1px solid var(--rule);padding:0 0 60px}
+
+/* ---------- phase rows ---------- */
+.phase{border-bottom:1px solid var(--rule-soft)}
+.phase-head{
+  display:grid;
+  grid-template-columns:44px minmax(0,1fr) auto;
+  gap:16px;align-items:center;
+  padding:13px 28px;
+  cursor:pointer;background:none;border:0;width:100%;text-align:left;color:inherit;
+}
+.phase-head:hover{background:var(--panel)}
+.phase-num{
+  font-family:var(--mono);font-size:11px;color:var(--ink-3);letter-spacing:.06em;
+}
+.phase-name{
+  font-family:var(--cond);font-weight:600;font-size:16px;
+  letter-spacing:.045em;text-transform:uppercase;
+}
+.phase-when{
+  font-family:var(--mono);font-size:10px;color:var(--ink-3);
+  letter-spacing:.1em;text-transform:uppercase;margin-top:2px;
+}
+.gutter{display:flex;gap:3px;align-items:center}
+.gutter .lamp{width:9px;height:16px;border-radius:1px}
+
+/* ---------- task list ---------- */
+.tasks{display:none;padding:2px 28px 16px 88px}
+.phase.open-row .tasks{display:block}
+.task{
+  display:grid;
+  grid-template-columns:14px minmax(0,1fr) 14px 88px 62px;
+  gap:14px;align-items:center;
+  padding:7px 10px 7px 0;
+  border:0;background:none;width:100%;text-align:left;color:inherit;cursor:pointer;
+  border-bottom:1px solid var(--rule-soft);
+}
+.task:hover{background:var(--panel)}
+.task[aria-selected="true"]{background:var(--panel-2)}
+.task.dimmed{opacity:.24}
+.task-name{font-size:14px}
+.meta{
+  font-family:var(--mono);font-size:9.5px;letter-spacing:.1em;
+  text-transform:uppercase;color:var(--ink-3);
+}
+.meta.load-H{color:var(--ink-2)}
+
+/* ---------- detail panel ---------- */
+.detail{padding:24px 26px 60px;position:sticky;top:0;align-self:start;max-height:100vh;overflow:auto}
+.detail .eyebrow{
+  font-family:var(--mono);font-size:10px;letter-spacing:.13em;
+  text-transform:uppercase;color:var(--ink-3);
+}
+.detail h2{
+  font-family:var(--cond);font-weight:700;font-size:21px;
+  letter-spacing:.01em;margin:9px 0 14px;line-height:1.2;text-transform:uppercase;
+}
+.tags{display:flex;flex-wrap:wrap;gap:7px;margin-bottom:20px}
+.tag{
+  font-family:var(--mono);font-size:10px;letter-spacing:.08em;text-transform:uppercase;
+  border:1px solid var(--rule);padding:3px 8px;border-radius:var(--radius);color:var(--ink-2);
+}
+.tag.lens-judgement{border-color:var(--locked);color:var(--locked)}
+.tag.lens-evidence{border-color:var(--building);color:var(--building)}
+.tag.lens-coordination{border-color:var(--accent);color:var(--accent)}
+.tag.feas-high{border-color:var(--feas-high);color:var(--feas-high)}
+.tag.feas-medium{border-color:var(--feas-medium);color:var(--feas-medium)}
+.tag.feas-low{border-color:var(--feas-low);color:var(--feas-low)}
+
+.field{margin-bottom:17px}
+.field .k{
+  font-family:var(--mono);font-size:9.5px;letter-spacing:.13em;
+  text-transform:uppercase;color:var(--ink-3);margin-bottom:5px;
+}
+.field .v{font-size:14px;color:var(--ink);line-height:1.55}
+.field.lead .v{
+  font-family:var(--editorial);font-style:italic;font-size:17px;line-height:1.45;
+  color:var(--ink);border-left:3px solid var(--accent);padding-left:14px;
+}
+
+.setter{border-top:1px solid var(--rule);margin-top:24px;padding-top:16px}
+.setter .k{
+  font-family:var(--mono);font-size:9.5px;letter-spacing:.13em;
+  text-transform:uppercase;color:var(--ink-3);margin-bottom:10px;
+}
+.status-btns{display:flex;flex-wrap:wrap;gap:6px}
+.sbtn{
+  display:flex;align-items:center;gap:7px;
+  font-family:var(--mono);font-size:10.5px;letter-spacing:.08em;text-transform:uppercase;font-weight:500;
+  background:transparent;border:1px solid var(--rule);color:var(--ink-2);
+  padding:6px 11px;border-radius:var(--radius);cursor:pointer;
+}
+.sbtn:hover{border-color:var(--accent);color:var(--ink)}
+.sbtn[aria-pressed="true"]{background:var(--panel-2);border-color:var(--ink);color:var(--ink)}
+
+.empty{
+  color:var(--ink);font-family:var(--editorial);font-style:italic;font-size:17px;
+  line-height:1.5;max-width:32ch;border-left:3px solid var(--accent);padding-left:14px;
+}
+
+/* ---------- tally ---------- */
+.tally{
+  position:fixed;left:0;right:400px;bottom:0;
+  display:flex;gap:22px;align-items:center;flex-wrap:wrap;
+  padding:9px 28px;border-top:1px solid var(--rule);
+  background:rgba(251,249,246,.96);backdrop-filter:blur(6px);
+  font-family:var(--mono);font-size:10.5px;letter-spacing:.09em;
+  text-transform:uppercase;color:var(--ink-3);
+}
+.tally b{color:var(--ink);font-weight:600}
+.toast{
+  position:fixed;bottom:52px;left:28px;
+  font-family:var(--mono);font-size:11px;letter-spacing:.06em;font-weight:600;
+  color:var(--accent);opacity:0;transition:opacity .2s;pointer-events:none;
+}
+.toast.show{opacity:1}
+
+@media (max-width:1000px){
+  .board{grid-template-columns:1fr}
+  .spine{border-right:0;border-bottom:1px solid var(--rule)}
+  .detail{position:static;max-height:none}
+  .tally{right:0;position:static;background:none}
+  .tasks{padding-left:28px}
+  .task{grid-template-columns:14px minmax(0,1fr) 14px 56px}
+  .task .meta.tier{display:none}
+}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+
+<header class="masthead">
+  <div>
+    <h1>Audit delivery &mdash; automation status board</h1>
+    <div class="sub">14 phases &middot; 62 tasks &middot; click a cell to light it up</div>
+  </div>
+  <div class="legend">
+    <span class="legend-item"><span class="lamp live"></span>Live</span>
+    <span class="legend-item"><span class="lamp building"></span>Building</span>
+    <span class="legend-item"><span class="lamp open"></span>Open</span>
+    <span class="legend-item"><span class="lamp locked"></span>Locked</span>
+    <span class="legend-item"><span class="lamp unmapped"></span>Unmapped</span>
+    <span class="legend-div"></span>
+    <span class="legend-item"><span class="feas-dot" style="background:var(--feas-high)"></span>Feasible now</span>
+    <span class="legend-item"><span class="feas-dot" style="background:var(--feas-medium)"></span>Real build</span>
+    <span class="legend-item"><span class="feas-dot" style="background:var(--feas-low)"></span>Hard / locked</span>
+  </div>
+  <a class="nav-link" href="/spine/audit/governance-framework.html">Governance framework &rarr;</a>
+</header>
+
+<div class="controls">
+  <div class="ctl-group">
+    <span class="ctl-label">Lens</span>
+    <button class="chip" data-filter="lens" data-val="all" aria-pressed="true">All</button>
+    <button class="chip" data-filter="lens" data-val="coordination" aria-pressed="false">Coordination</button>
+    <button class="chip" data-filter="lens" data-val="evidence" aria-pressed="false">Evidence</button>
+    <button class="chip" data-filter="lens" data-val="judgement" aria-pressed="false">Judgement</button>
+  </div>
+  <div class="ctl-group">
+    <span class="ctl-label">Owner</span>
+    <button class="chip" data-filter="tier" data-val="all" aria-pressed="true">All</button>
+    <button class="chip" data-filter="tier" data-val="IC" aria-pressed="false">IC</button>
+    <button class="chip" data-filter="tier" data-val="Partner" aria-pressed="false">Partner</button>
+  </div>
+  <div class="ctl-group">
+    <span class="ctl-label">Feasibility</span>
+    <button class="chip" data-filter="feas" data-val="all" aria-pressed="true">All</button>
+    <button class="chip" data-filter="feas" data-val="High" aria-pressed="false">Feasible now</button>
+    <button class="chip" data-filter="feas" data-val="Medium" aria-pressed="false">Real build</button>
+    <button class="chip" data-filter="feas" data-val="Low" aria-pressed="false">Hard / locked</button>
+  </div>
+  <div class="spacer"></div>
+  <button class="action" id="expandAll">Expand all</button>
+  <button class="action" id="collapseAll">Collapse all</button>
+  <button class="action" id="copyBtn">Copy summary</button>
+</div>
+
+<main class="board">
+  <section class="spine" id="spine"></section>
+  <aside class="detail" id="detail">
+    <div class="empty">
+      Pick a task from the spine.<br><br>
+      The lens tag tells you which bar it has to clear: coordination work has none beyond documentation, evidence work has to be reproducible and defensible under file review, judgement work runs into the standards directly.<br><br>
+      The dot next to each task is feasibility \u2014 how hard the proposed build actually is, independent of lens. A locked judgement task can still be feasible to support; a coordination task can still be a hard build if its output has no fixed home.
+    </div>
+  </aside>
+</main>
+
+<div class="tally" id="tally"></div>
+<div class="toast" id="toast">Summary copied to clipboard</div>
+
+<script>
+const STATUSES = ["unmapped","live","building","open","locked"];
+const STATUS_LABEL = {
+  unmapped:"Unmapped", live:"Live", building:"Building", open:"Open", locked:"Locked"
+};
+
+const DATA = [
+ {n:"01", name:"Continuance & independence", when:"November", tasks:[
+  {t:"Independence declarations & threat assessment", l:"coordination", o:"Partner", load:"M",
+   f:"High", fr:"Structured register, rules-based, documentation only",
+   d:"Annual sweep across every partner and staff member, per client. Almost entirely administrative, but a gap here is a reportable failure.",
+   b:"Documentation only. No evidence-generation bar.",
+   p:"Register + templated declarations + automated chase. Low technical risk, high nuisance value removed."},
+  {t:"Client risk re-rating", l:"judgement", o:"Partner", load:"L",
+   f:"Low", fr:"Conclusion is locked; only the input pack is buildable",
+   d:"Should we still act, at what risk grade, with what EQR requirement.",
+   b:"Professional judgement. Standards require the partner to own the conclusion.",
+   p:"Assist only: surface prior-year overruns, adjustment history, late payments, deficiency counts as an input pack. Never a rating."},
+  {t:"Fee & scope re-estimate", l:"coordination", o:"Partner", load:"M",
+   f:"Medium", fr:"Needs clean time-by-phase data that mostly doesn't exist yet",
+   d:"Typically last year's fee plus a percentage, with no reference to where hours actually went.",
+   b:"None.",
+   p:"Needs clean time data by phase. This is the sleeper: fee accuracy is a partner-hours problem disguised as a pricing problem."},
+  {t:"Engagement letter issue & tracking", l:"coordination", o:"IC", load:"M",
+   f:"High", fr:"Template merge and e-sign, well-trodden ground",
+   d:"Generate, send, chase, countersign, file.",
+   b:"None.",
+   p:"Template merge + e-sign + status dashboard. Well-trodden ground, buy rather than build."}
+ ]},
+ {n:"02", name:"Planning conversation", when:"Nov \u2013 Dec", tasks:[
+  {t:"Meeting scheduling & agenda prep", l:"coordination", o:"Partner", load:"M",
+   f:"High", fr:"Auto-draft from last year's file, low complexity",
+   d:"The single highest-retention touchpoint in the year, and the one most often skipped for capacity.",
+   b:"None.",
+   p:"Agenda auto-drafted from prior-year file: last year's adjustments, deficiencies, overrun causes, timetable slippage."},
+  {t:"Capture business & system changes", l:"coordination", o:"Partner", load:"M",
+   f:"Medium", fr:"Build is simple; getting people to actually log it isn't",
+   d:"What changed in their world. Usually captured as free text in a partner's notebook and lost.",
+   b:"Feeds risk assessment, so the capture has to land in the file.",
+   p:"Structured intake form + transcription of the meeting. Cheap, and it fixes a real knowledge-loss problem."},
+  {t:"Timetable & milestone agreement", l:"coordination", o:"Partner", load:"M",
+   f:"High", fr:"One shared data object driving everything downstream",
+   d:"Dates for PBC, interim, anchor procedure, fieldwork, clearance, sign-off.",
+   b:"None.",
+   p:"Shared timetable object that drives everything downstream \u2014 PBC deadlines, resourcing, client reminders."},
+  {t:"Client-side readiness assessment", l:"coordination", o:"IC", load:"M",
+   f:"Medium", fr:"Feasible to build, but scoring needs calibrating against real overrun data first",
+   d:"Are their reconciliations current, is the close clean, do they have the people. Rarely done formally.",
+   b:"None.",
+   p:"Structured questionnaire scored against overrun history. Genuinely unexplored territory in most firms."}
+ ]},
+ {n:"03", name:"Understand the entity", when:"December", tasks:[
+  {t:"Prior-year file carry-forward", l:"coordination", o:"IC", load:"H",
+   f:"Medium", fr:"Large surface area, real risk of silently rolling forward errors",
+   d:"Rolling forward narratives, schedules and understanding. Large, dull, error-prone, and where repeat queries are born.",
+   b:"Rolled-forward content must be re-validated, not just re-dated.",
+   p:"Roll-forward with mandatory confirm-or-update flags. High hours saved, moderate build."},
+  {t:"Process walkthroughs & narratives", l:"evidence", o:"IC", load:"H",
+   f:"Medium", fr:"Transcription is easy; structured, confirmable narrative drafting is not",
+   d:"Sit with the client, trace a transaction, write it up.",
+   b:"Evidence. Needs to show who did it, when, and against what.",
+   p:"Transcription plus structured narrative drafting, with the auditor confirming each control point. Draft-assist, not autopilot."},
+  {t:"IT environment & system understanding", l:"evidence", o:"IC", load:"M",
+   f:"High", fr:"Standing library of common NZ systems, templated",
+   d:"What systems, what interfaces, what user access.",
+   b:"Evidence.",
+   p:"Standing library of common NZ systems (Xero, MYOB, sector-specific DMS) with pre-built control narratives to tailor."},
+  {t:"Related-party identification", l:"evidence", o:"IC", load:"M",
+   f:"Medium", fr:"Register scraping is straightforward; false-positive handling isn't",
+   d:"Especially material in owner-managed clients.",
+   b:"Evidence. Completeness is the hard part.",
+   p:"Companies Register scraping + name matching against the ledger. Feasible, but flag false-positive handling early."}
+ ]},
+ {n:"04", name:"Risk assessment & materiality", when:"December", tasks:[
+  {t:"Preliminary analytical review", l:"evidence", o:"IC", load:"H",
+   f:"Medium", fr:"Adjacent to the live variance engine but a new domain",
+   d:"Year-on-year movements, ratio analysis, expectation setting.",
+   b:"Evidence. Needs a documented expectation and explanation of variance.",
+   p:"Closest adjacency to the reconciliation tool already built. Extending that engine backwards into planning may be the cheapest real win on this board."},
+  {t:"Materiality calculation", l:"judgement", o:"Partner", load:"L",
+   f:"High", fr:"Simple calculator; the judgement is benchmark choice, not arithmetic",
+   d:"Benchmark selection is a judgement with a direct fee consequence \u2014 profit-based materiality on a thin-margin client makes the audit unaffordable.",
+   b:"Judgement. The arithmetic is trivial; the benchmark choice is not.",
+   p:"Calculator with benchmark options and prior-year comparison. Partner selects, system computes and documents."},
+  {t:"Significant risk identification", l:"judgement", o:"Partner", load:"M",
+   f:"Medium", fr:"A prompt list is easy; keeping it from being rubber-stamped isn't",
+   d:"Where could this be materially wrong.",
+   b:"Judgement, and the spine of the whole file.",
+   p:"Industry risk library as a prompt list. Assist only \u2014 a suggested risk that nobody challenges is worse than no suggestion."},
+  {t:"ISA 240 fraud discussion & documentation", l:"judgement", o:"Partner", load:"M",
+   f:"High", fr:"Structured capture of a real discussion, straightforward build",
+   d:"Team discussion, documented, with management override presumed.",
+   b:"Judgement, and a favourite of file reviewers.",
+   p:"Structured capture of a real discussion. Do not let the tool generate the content \u2014 that is exactly the finding a reviewer writes up."}
+ ]},
+ {n:"05", name:"Strategy & PBC", when:"December", tasks:[
+  {t:"PBC list tailoring", l:"coordination", o:"IC", load:"H",
+   f:"High", fr:"Generated directly from risk assessment and prior-year actuals",
+   d:"A generic template sent to a client is the first thing that tells them they are a low-priority engagement.",
+   b:"None.",
+   p:"Generated from risk assessment + prior-year actuals, with non-applicable items stripped. High client-experience payoff for modest build."},
+  {t:"Audit programme selection & scoping", l:"judgement", o:"Partner", load:"M",
+   f:"Medium", fr:"Rules-based suggestion feasible; still needs partner confirmation loop",
+   d:"Controls reliance or fully substantive, and which programmes apply.",
+   b:"Judgement.",
+   p:"Rules-based suggestion off risk grade and industry, partner confirms."},
+  {t:"Resourcing & scheduling across jobs", l:"coordination", o:"Partner", load:"H",
+   f:"Low", fr:"Genuine constraint-solving problem — nobody in mid-market audit has solved this well",
+   d:"The binding constraint made visible \u2014 three partners against every clearance meeting and every file review in the same six weeks.",
+   b:"None.",
+   p:"Constraint-solver over the timetable objects. Technically the most interesting problem on this board and nobody in mid-market audit has solved it well."},
+  {t:"Budget build & phasing", l:"coordination", o:"IC", load:"M",
+   f:"Medium", fr:"Depends entirely on having reliable time-by-phase data",
+   d:"Hours by grade by phase.",
+   b:"None.",
+   p:"Derived from actual prior-year time analysis rather than last year's budget."}
+ ]},
+ {n:"06", name:"Interim", when:"Jan \u2013 Feb", tasks:[
+  {t:"Controls walkthrough & testing", l:"evidence", o:"IC", load:"H",
+   f:"Medium", fr:"Sample generation and scaffolding are easy; control-design judgement stays human",
+   d:"Sample-based testing of control operation.",
+   b:"Evidence. Sampling method must be defensible.",
+   p:"Sample generation + workpaper scaffolding. The judgement about control design stays human."},
+  {t:"Journal entry testing scope & extraction", l:"evidence", o:"IC", load:"M",
+   f:"High", fr:"Rules well defined, population machine-readable, completeness provable",
+   d:"ISA 240 mandated. Pull the full journal population and filter for risk characteristics.",
+   b:"Evidence. Population completeness must be provable.",
+   p:"Strong candidate \u2014 rules are well defined, population is machine-readable, and completeness can be reconciled to the trial balance."},
+  {t:"Early substantive P&L work", l:"evidence", o:"IC", load:"M",
+   f:"Medium", fr:"The win is scheduling and capacity, not automation",
+   d:"Getting hours out of the March\u2013May crunch and into February.",
+   b:"Evidence, plus roll-forward procedures to balance date.",
+   p:"Scheduling and scoping support more than automation. The win here is capacity smoothing, not tooling."}
+ ]},
+ {n:"07", name:"Evidence anchor", when:"Balance date", tasks:[
+  {t:"Anchor procedure planning", l:"coordination", o:"IC", load:"M",
+   f:"High", fr:"Industry-keyed checklist off the overlay, simple",
+   d:"Stocktake, confirmations, or whatever the irreducible balance-date procedure is for that industry.",
+   b:"None for the planning itself.",
+   p:"Industry-keyed checklist off the overlay. Straightforward."},
+  {t:"Physical attendance & count sheets", l:"evidence", o:"IC", load:"H",
+   f:"Medium", fr:"High value but a real mobile-capture build with exception handling",
+   d:"The most disruptive client-facing day of the year, owned by your most junior people.",
+   b:"Evidence. Contemporaneous records, exception handling.",
+   p:"Mobile capture \u2014 scan identifiers, photo evidence, live variance flagging against the client's schedule. Highest client-experience leverage of anything here."},
+  {t:"Cut-off testing", l:"evidence", o:"IC", load:"M",
+   f:"High", fr:"Rules-based selection straight from the ledger",
+   d:"Transactions either side of the anchor date.",
+   b:"Evidence.",
+   p:"Rules-based selection from the ledger. Good candidate."},
+  {t:"Third-party confirmations", l:"evidence", o:"IC", load:"H",
+   f:"Low", fr:"Auditor must retain custody of the channel — that's the whole point of a confirmation",
+   d:"Banks, debtors, financiers, solicitors. Dispatch, chase, receive, reconcile, follow up non-responses.",
+   b:"Evidence, and the auditor must control the process end to end \u2014 that is the whole point of a confirmation.",
+   p:"Workflow automation is fine and valuable. Custody of the channel is the constraint: if the client can touch it, the evidence is worthless."}
+ ]},
+ {n:"08", name:"Substantive fieldwork", when:"Apr \u2013 May", tasks:[
+  {t:"PBC chasing & status tracking", l:"coordination", o:"IC", load:"H",
+   f:"High", fr:"Portal plus reminders, well-trodden ground",
+   d:"Enormous hours, zero technical content, and the friction the client feels most acutely.",
+   b:"None.",
+   p:"Portal with status, deadlines, automated nudges. Unglamorous and probably the best hours-per-dollar on the board."},
+  {t:"Query log management", l:"coordination", o:"IC", load:"H",
+   f:"Medium", fr:"Persistent, searchable log with duplicate detection is a real but bounded build",
+   d:"Repeat queries are the number one push force behind a tender. Nobody wants to explain their own business twice.",
+   b:"None.",
+   p:"Persistent, searchable, carried across years, with duplicate detection against prior-year answers. Directly attacks retention risk."},
+  {t:"Sample selection", l:"evidence", o:"IC", load:"M",
+   f:"High", fr:"Deterministic and seeded — technically easy, the discipline is in the audit trail",
+   d:"Statistical or judgemental sampling from a defined population.",
+   b:"Evidence. Method, seed and population must be reproducible on demand.",
+   p:"Deterministic, seeded, logged. Technically easy; the discipline is in the audit trail."},
+  {t:"Transaction testing & vouching", l:"evidence", o:"IC", load:"H",
+   f:"Low", fr:"Document extraction needs a measured error rate before it's near a live file",
+   d:"Agreeing samples to supporting documentation.",
+   b:"Evidence. Document extraction accuracy becomes an audit quality issue.",
+   p:"Document extraction and matching is now viable but needs a measured error rate before it goes near a live file. Assurance case required."},
+  {t:"Recalculation & reperformance", l:"evidence", o:"IC", load:"M",
+   f:"High", fr:"Deterministic rules, checkable outputs, clean automation candidate",
+   d:"Depreciation, accruals, interest, provisions.",
+   b:"Evidence, but deterministic.",
+   p:"Clean automation candidate. Rules are explicit and outputs are checkable."},
+  {t:"Year-on-year variance analytics", l:"evidence", o:"IC", load:"H",
+   f:"High", fr:"Already live",
+   d:"Duplicating the transaction data and reconciling inconsistencies against prior years.",
+   b:"Evidence. Needs versioning, population completeness, and a named reviewer.",
+   p:"Already live. The question for tomorrow is whether the same engine extends into planning analytics and going-concern ratio work."},
+  {t:"Working paper preparation", l:"evidence", o:"IC", load:"H",
+   f:"Medium", fr:"Big and boring, but the scaffolding itself is straightforward",
+   d:"Formatting, cross-referencing, tickmarks, indexing.",
+   b:"Evidence presentation.",
+   p:"Scaffolding and auto-referencing. Boring, big, and the thing juniors actually complain about."}
+ ]},
+ {n:"09", name:"Estimates & judgements", when:"May", tasks:[
+  {t:"Estimate data gathering", l:"evidence", o:"IC", load:"M",
+   f:"Medium", fr:"Mechanical, but inputs are scattered across several sources",
+   d:"Assembling the inputs \u2014 ageing profiles, post-balance-date realisations, historical accuracy of management's estimates.",
+   b:"Evidence.",
+   p:"Good candidate. Gathering is mechanical even when the conclusion is not."},
+  {t:"Assumption challenge", l:"judgement", o:"Partner", load:"M",
+   f:"Low", fr:"The challenge itself is exactly what the standards protect — only the ammunition is buildable",
+   d:"Professional scepticism applied to management's numbers.",
+   b:"Judgement. This is the thing the standards exist to protect.",
+   p:"Do not automate the challenge. Automate the ammunition: prior-year estimate accuracy, peer benchmarks, outlier flags."},
+  {t:"Management bias assessment", l:"judgement", o:"Partner", load:"L",
+   f:"Medium", fr:"Directional analysis across years is legitimate and underused, moderate build",
+   d:"Retrospective review of whether estimates consistently land one way.",
+   b:"Judgement.",
+   p:"Directional analysis over multiple years is a legitimate and underused input. The conclusion stays with the partner."},
+  {t:"Specialist engagement & review", l:"judgement", o:"Partner", load:"L",
+   f:"High", fr:"Coordination and scoping only, simple",
+   d:"Valuers, actuaries, credit modellers.",
+   b:"Judgement, plus ISA 620 evaluation of the specialist.",
+   p:"Coordination and scoping only."}
+ ]},
+ {n:"10", name:"Going concern", when:"May", tasks:[
+  {t:"Forecast data extraction & modelling", l:"evidence", o:"IC", load:"M",
+   f:"Medium", fr:"Structured import plus integrity checks, moderate build",
+   d:"Taking the client's cash flow forecast into a testable form.",
+   b:"Evidence.",
+   p:"Structured import + arithmetic integrity checks. Straightforward and useful."},
+  {t:"Covenant & ratio recalculation", l:"evidence", o:"IC", load:"M",
+   f:"High", fr:"Clean candidate once covenant terms are captured as structured data at planning",
+   d:"Headroom against facility terms.",
+   b:"Evidence, deterministic.",
+   p:"Clean candidate once covenant terms are captured as structured data at planning."},
+  {t:"Sensitivity & stress testing", l:"evidence", o:"IC", load:"M",
+   f:"Medium", fr:"A real scenario engine, more build than it first looks",
+   d:"What has to go wrong before this breaks.",
+   b:"Evidence.",
+   p:"Scenario engine. Good candidate, and it improves the quality of the conversation with the client, not just the speed."},
+  {t:"Going concern conclusion", l:"judgement", o:"Partner", load:"L",
+   f:"Low", fr:"Locked — present the analysis, never the conclusion",
+   d:"Material uncertainty or not.",
+   b:"Judgement, with direct consequences for the opinion.",
+   p:"Locked. Present the analysis, never the conclusion."}
+ ]},
+ {n:"11", name:"Completion & review", when:"May", tasks:[
+  {t:"Subsequent events review", l:"evidence", o:"IC", load:"M",
+   f:"Medium", fr:"Checklist plus external prompts, modest build",
+   d:"Events between balance date and sign-off.",
+   b:"Evidence.",
+   p:"Checklist plus prompts from external sources. Modest."},
+  {t:"Unadjusted differences schedule", l:"coordination", o:"IC", load:"M",
+   f:"High", fr:"Mechanical aggregation as differences are raised",
+   d:"Accumulating and aggregating misstatements found.",
+   b:"Mechanical aggregation; the evaluation is judgement.",
+   p:"Auto-accumulated from the file as differences are raised, rather than assembled at the end."},
+  {t:"Disclosure checklist", l:"evidence", o:"IC", load:"H",
+   f:"High", fr:"Well-defined rules, low judgement, strong candidate",
+   d:"Hundreds of line items against NZ IFRS or RDR, most irrelevant to any given client.",
+   b:"Evidence of completeness.",
+   p:"Tier-aware, pre-filtered, with prior-year answers carried forward. Large hours, well-defined rules, low judgement. Strong candidate."},
+  {t:"Financial statement tie-out & casting", l:"evidence", o:"IC", load:"H",
+   f:"High", fr:"Highly automatable and highly reliable",
+   d:"Agreeing every number in the statements to the file, and checking every total adds.",
+   b:"Evidence.",
+   p:"Highly automatable and highly reliable. The kind of thing that should already be a solved problem and usually isn't."},
+  {t:"Representation letter drafting", l:"coordination", o:"IC", load:"L",
+   f:"Medium", fr:"Generation is easy; content still needs a careful review pass",
+   d:"Tailored to the specific matters on the file.",
+   b:"Content must reflect actual file matters.",
+   p:"Generated from the file's risks and estimates rather than a static template."},
+  {t:"Review note generation & clearing", l:"coordination", o:"IC", load:"H",
+   f:"Medium", fr:"Workflow and threading is a moderate build, but the data it generates is valuable",
+   d:"The loop that eats the last two weeks of every job.",
+   b:"None for the mechanics; the notes themselves are judgement.",
+   p:"Workflow and threading. Also the richest data source you have about where juniors consistently go wrong \u2014 nobody mines it."},
+  {t:"Partner / EQR review", l:"judgement", o:"Partner", load:"H",
+   f:"Low", fr:"The review itself is locked — only pre-checks before the partner opens the file are buildable",
+   d:"Five of eight retention-critical moments need a partner and you have three. This is one of them.",
+   b:"Judgement, and the reviewer is personally accountable.",
+   p:"Locked as an activity. But completeness checks, cross-reference validation and prior-year consistency flags can be done before the partner opens the file \u2014 that is real partner-hours relief."}
+ ]},
+ {n:"12", name:"Clearance", when:"May \u2013 Jun", tasks:[
+  {t:"Clearance pack preparation", l:"coordination", o:"IC", load:"M",
+   f:"High", fr:"Assembled automatically from material already in the file",
+   d:"Assembling adjustments, deficiencies, going concern position and key judgements into something a CFO can read.",
+   b:"None.",
+   p:"Assembled from the file automatically. The CFO's job is no surprises \u2014 and surprises usually come from things that were in the file but never made the pack."},
+  {t:"Adjustment & deficiency summary", l:"coordination", o:"Partner", load:"M",
+   f:"Medium", fr:"Assembly is easy; an April early-warning version needs a process change too",
+   d:"What moved, what didn't, and what it means.",
+   b:"None for assembly.",
+   p:"Good candidate, with an early-warning version issued in April rather than at clearance."},
+  {t:"AC / board presentation", l:"judgement", o:"Partner", load:"M",
+   f:"Low", fr:"This is the relationship itself — not a build problem",
+   d:"The social job \u2014 confidence in the numbers.",
+   b:"Judgement and relationship.",
+   p:"Locked. This is what the client is actually buying."}
+ ]},
+ {n:"13", name:"Report & sign-off", when:"June", tasks:[
+  {t:"Audit report drafting", l:"evidence", o:"IC", load:"L",
+   f:"High", fr:"Template assembly with modification logic, low risk",
+   d:"Standardised wording with client-specific KAMs and modifications.",
+   b:"Evidence and format compliance.",
+   p:"Template assembly with modification logic. Low risk, low effort, small payoff."},
+  {t:"Opinion determination", l:"judgement", o:"Partner", load:"L",
+   f:"Low", fr:"Locked permanently",
+   d:"The one irreducible act.",
+   b:"Judgement, personally and legally.",
+   p:"Locked, permanently."},
+  {t:"Sign-off, assembly & archive", l:"coordination", o:"IC", load:"M",
+   f:"High", fr:"Automated assembly and deadline tracking, straightforward",
+   d:"Final assembly within the archiving deadline.",
+   b:"Documentation compliance.",
+   p:"Automated assembly and deadline tracking. Boring, mandatory, easy."}
+ ]},
+ {n:"14", name:"Communication & debrief", when:"Jun \u2013 Jul", tasks:[
+  {t:"Management letter drafting", l:"coordination", o:"IC", load:"M",
+   f:"Medium", fr:"Drafting from deficiencies is feasible; content still needs partner review",
+   d:"Control deficiencies communicated to those charged with governance.",
+   b:"Content is judgement; assembly is not.",
+   p:"Drafted from deficiencies raised during the job, tracked against prior-year recommendations. Repeating last year's unactioned point is embarrassing and common."},
+  {t:"Post-engagement retro \u2014 manager view", l:"coordination", o:"Partner", load:"L",
+   f:"High", fr:"Already live",
+   d:"Structured reflection on how the job ran.",
+   b:"None.",
+   p:"Already live. The open question is whether anything downstream consumes the output \u2014 a retro that doesn't change next year's budget or PBC list is a data collection exercise."},
+  {t:"Post-engagement retro \u2014 team on the ground", l:"coordination", o:"IC", load:"L",
+   f:"High", fr:"Already live",
+   d:"The IC view, which is usually the more honest one.",
+   b:"None.",
+   p:"Already live. Worth asking tomorrow how the two views are reconciled when they disagree \u2014 that gap is the most valuable signal in the whole dataset."},
+  {t:"Carry-forward notes for next year", l:"coordination", o:"IC", load:"M",
+   f:"High", fr:"Nearly free — just closing the loop from the retros into next year's PBC and budget",
+   d:"What we learned, what to do differently, what nearly went wrong.",
+   b:"None.",
+   p:"Should be the output of the retros feeding directly into next year's planning. Closing that loop is nearly free and probably not done."},
+  {t:"WIP write-on/off & billing", l:"coordination", o:"Partner", load:"M",
+   f:"Medium", fr:"Analysis is feasible but depends on clean, comparable time and billing data",
+   d:"Where recoverability actually gets decided.",
+   b:"None.",
+   p:"Analysis of write-offs by phase, by client, by industry. Tells you which clients are subsidised by the rest."},
+  {t:"Client debrief with the FC", l:"coordination", o:"Partner", load:"L",
+   f:"Low", fr:"Not a technology problem at all — that's exactly why it doesn't get built",
+   d:"Not the CFO. The Financial Controller is the one who lived through it and the one who suggests tendering.",
+   b:"None.",
+   p:"Almost never done. Costs an hour, and it is the single best retention instrument available. No technology required, which is why it will not get built."},
+  {t:"Referral & cross-sell capture", l:"coordination", o:"IC", load:"M",
+   f:"Medium", fr:"The routing step is buildable; getting people to actually log the observation is the harder part",
+   d:"An IC notices something mid-engagement — messy systems, a structuring gap, an advisory need — that's a lead for another service line. Today it depends entirely on whether that person thinks to mention it to a partner. No capture mechanism exists.",
+   b:"None. Pure coordination, but it feeds the practice's Win arc, not this one.",
+   p:"A one-field prompt at completion/debrief — 'anything worth flagging to another partner?' — routed to whoever owns BD. Cheap to build; the harder problem is habit, not technology."}
+ ]}
+];
+
+// pre-set only what is already known to be shipped
+const PRESET = {
+  "08:5":"live",   // year-on-year variance analytics
+  "14:1":"live",   // retro - manager
+  "14:2":"live"    // retro - team
+};
+
+const state = {};
+DATA.forEach(ph => ph.tasks.forEach((tk,i) => {
+  const id = ph.n + ":" + i;
+  tk.id = id;
+  state[id] = PRESET[id] || "unmapped";
+}));
+
+const filters = {lens:"all", tier:"all", feas:"all"};
+let selected = null;
+
+const spineEl = document.getElementById("spine");
+const detailEl = document.getElementById("detail");
+const tallyEl = document.getElementById("tally");
+
+function matches(tk){
+  return (filters.lens === "all" || tk.l === filters.lens) &&
+         (filters.tier === "all" || tk.o === filters.tier) &&
+         (filters.feas === "all" || tk.f === filters.feas);
+}
+
+function render(){
+  spineEl.innerHTML = "";
+  DATA.forEach(ph => {
+    const wrap = document.createElement("div");
+    wrap.className = "phase";
+    if (ph._open) wrap.classList.add("open-row");
+
+    const head = document.createElement("button");
+    head.className = "phase-head";
+    head.setAttribute("aria-expanded", ph._open ? "true" : "false");
+    head.innerHTML =
+      '<span class="phase-num">' + ph.n + '</span>' +
+      '<span><span class="phase-name"></span><span class="phase-when"></span></span>' +
+      '<span class="gutter"></span>';
+    head.querySelector(".phase-name").textContent = ph.name;
+    head.querySelector(".phase-when").textContent = ph.when;
+
+    const gutter = head.querySelector(".gutter");
+    ph.tasks.forEach(tk => {
+      const lamp = document.createElement("span");
+      lamp.className = "lamp " + state[tk.id];
+      lamp.title = tk.t + " \u2014 " + STATUS_LABEL[state[tk.id]];
+      if (!matches(tk)) lamp.style.opacity = ".2";
+      gutter.appendChild(lamp);
+    });
+
+    head.addEventListener("click", () => { ph._open = !ph._open; render(); });
+    wrap.appendChild(head);
+
+    const list = document.createElement("div");
+    list.className = "tasks";
+    ph.tasks.forEach(tk => {
+      const row = document.createElement("button");
+      row.className = "task" + (matches(tk) ? "" : " dimmed");
+      row.setAttribute("aria-selected", selected === tk.id ? "true" : "false");
+      row.innerHTML =
+        '<span class="lamp ' + state[tk.id] + '"></span>' +
+        '<span class="task-name"></span>' +
+        '<span class="feas-dot"></span>' +
+        '<span class="meta lens"></span>' +
+        '<span class="meta tier"></span>';
+      row.querySelector(".task-name").textContent = tk.t;
+      const fdot = row.querySelector(".feas-dot");
+      fdot.style.background = "var(--feas-" + tk.f.toLowerCase() + ")";
+      fdot.title = "Feasibility: " + tk.f + " \u2014 " + tk.fr;
+      row.querySelector(".lens").textContent = tk.l.slice(0,5);
+      row.querySelector(".tier").textContent = tk.o;
+      row.addEventListener("click", () => { selected = tk.id; render(); renderDetail(ph, tk); });
+      list.appendChild(row);
+    });
+    wrap.appendChild(list);
+    spineEl.appendChild(wrap);
+  });
+  renderTally();
+}
+
+function renderDetail(ph, tk){
+  detailEl.innerHTML = "";
+  const eyebrow = document.createElement("div");
+  eyebrow.className = "eyebrow";
+  eyebrow.textContent = ph.n + " \u00b7 " + ph.name;
+
+  const h = document.createElement("h2");
+  h.textContent = tk.t;
+
+  const tags = document.createElement("div");
+  tags.className = "tags";
+  [["tag lens-" + tk.l, tk.l], ["tag", tk.o + " owned"], ["tag", "Load " + tk.load],
+   ["tag feas-" + tk.f.toLowerCase(), "Feasibility: " + tk.f]]
+    .forEach(([cls,txt]) => {
+      const s = document.createElement("span"); s.className = cls; s.textContent = txt; tags.appendChild(s);
+    });
+
+  detailEl.append(eyebrow, h, tags);
+
+  [["What it is", tk.d, true], ["Assurance bar", tk.b], ["Why that feasibility rating", tk.fr],
+   ["Path to a prototype", tk.p]].forEach(([k,v,lead]) => {
+    const f = document.createElement("div"); f.className = "field" + (lead ? " lead" : "");
+    const kk = document.createElement("div"); kk.className = "k"; kk.textContent = k;
+    const vv = document.createElement("div"); vv.className = "v"; vv.textContent = v;
+    f.append(kk,vv); detailEl.appendChild(f);
+  });
+
+  const setter = document.createElement("div");
+  setter.className = "setter";
+  const sk = document.createElement("div"); sk.className = "k"; sk.textContent = "Set status";
+  const btns = document.createElement("div"); btns.className = "status-btns";
+  STATUSES.forEach(s => {
+    const b = document.createElement("button");
+    b.className = "sbtn";
+    b.setAttribute("aria-pressed", state[tk.id] === s ? "true" : "false");
+    b.innerHTML = '<span class="lamp ' + s + '"></span>';
+    b.append(document.createTextNode(STATUS_LABEL[s]));
+    b.addEventListener("click", () => { state[tk.id] = s; render(); renderDetail(ph, tk); });
+    btns.appendChild(b);
+  });
+  setter.append(sk, btns);
+  detailEl.appendChild(setter);
+}
+
+function renderTally(){
+  const c = {live:0, building:0, open:0, locked:0, unmapped:0};
+  Object.values(state).forEach(s => c[s]++);
+  tallyEl.innerHTML = "";
+  [["live","Live"],["building","Building"],["open","Open"],["locked","Locked"],["unmapped","Unmapped"]]
+    .forEach(([k,label]) => {
+      const el = document.createElement("span");
+      el.innerHTML = '<span class="lamp ' + k + '" style="display:inline-block;vertical-align:-1px;margin-right:6px"></span>';
+      const b = document.createElement("b"); b.textContent = c[k];
+      el.append(b, document.createTextNode(" " + label));
+      tallyEl.appendChild(el);
+    });
+}
+
+document.querySelectorAll(".chip").forEach(chip => {
+  chip.addEventListener("click", () => {
+    const f = chip.dataset.filter;
+    filters[f] = chip.dataset.val;
+    document.querySelectorAll('.chip[data-filter="' + f + '"]').forEach(c =>
+      c.setAttribute("aria-pressed", c === chip ? "true" : "false"));
+    render();
+  });
+});
+
+document.getElementById("expandAll").addEventListener("click", () => {
+  DATA.forEach(p => p._open = true); render();
+});
+document.getElementById("collapseAll").addEventListener("click", () => {
+  DATA.forEach(p => p._open = false); render();
+});
+
+document.getElementById("copyBtn").addEventListener("click", () => {
+  const lines = ["AUDIT AUTOMATION STATUS BOARD", new Date().toLocaleDateString("en-NZ"), ""];
+  DATA.forEach(ph => {
+    lines.push(ph.n + "  " + ph.name.toUpperCase() + "  (" + ph.when + ")");
+    ph.tasks.forEach(tk => {
+      lines.push("    [" + STATUS_LABEL[state[tk.id]].toUpperCase().padEnd(9) + "] " +
+                 tk.t + "  \u2014 " + tk.l + " / " + tk.o + " / feasibility: " + tk.f);
+    });
+    lines.push("");
+  });
+  const text = lines.join("\n");
+  const done = () => {
+    const t = document.getElementById("toast");
+    t.classList.add("show"); setTimeout(() => t.classList.remove("show"), 1800);
+  };
+  if (navigator.clipboard && navigator.clipboard.writeText){
+    navigator.clipboard.writeText(text).then(done).catch(() => fallback(text, done));
+  } else { fallback(text, done); }
+});
+
+function fallback(text, done){
+  const ta = document.createElement("textarea");
+  ta.value = text; ta.style.position = "fixed"; ta.style.opacity = "0";
+  document.body.appendChild(ta); ta.select();
+  try { document.execCommand("copy"); done(); } catch(e){}
+  document.body.removeChild(ta);
+}
+
+DATA[7]._open = true;
+render();
+</script>
