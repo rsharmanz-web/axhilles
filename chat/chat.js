@@ -3,14 +3,67 @@
   const input = document.getElementById("input");
   const send = document.getElementById("send");
   const composer = document.getElementById("composer");
-  const starters = document.getElementById("starters");
+  const chipsEl = document.getElementById("chips");
   const sidebar = document.getElementById("sidebar");
   const overlay = document.getElementById("overlay");
   const navToggle = document.getElementById("nav-toggle");
   const cursor = document.querySelector(".chat-cursor-block");
+  const privacyLink = document.getElementById("privacy-link");
+
+  const OPENER_VARIANTS = [
+    {
+      id: "boring-week-v1",
+      text: "Kia ora. What's the most boring thing you did at work this week? I'll tell you honestly if AI can help, or if you just need to stop doing it.",
+      chips: ["Admin & emails", "Reports", "Chasing clients", "Just curious about AI"],
+    },
+  ];
+
+  const BOOKING_LINK = "https://calendly.com/r-sharma-nz/30min";
+  const PRIVACY_URL = "{{PRIVACY_URL}}";
+  const MAX_MESSAGES = 30;
+  const VARIANT_KEY = "ax-opener-variant";
+  const X_EGG =
+    "Cos X gon' deliver to ya (Uh) Knock-knock, open up the door, it's real";
+
+  function isNameXEgg(text) {
+    const t = String(text || "")
+      .toLowerCase()
+      .replace(/['’]/g, "");
+    const hasName = /\baxhilles\b|\bachilles\b/.test(t);
+    if (!hasName) return false;
+    const why =
+      /\bwhy\b|\bhow come\b|\bwhats with\b|\bwhat is with\b|\bspel|\btypo\b|\bextra [hx]\b/.test(
+        t
+      );
+    const withX =
+      /\bwith an x\b|\bwith a x\b|\ban x\b|\bthe x\b|\bx in\b|\bletter x\b/.test(t);
+    const bothNames = /\bachilles\b/.test(t) && /\baxhilles\b/.test(t);
+    return (why && (withX || bothNames)) || withX;
+  }
 
   const messages = [];
   let busy = false;
+  let capped = false;
+  let leadShown = false;
+  let leadSent = false;
+  let openerVariant = pickOpener();
+
+  if (privacyLink) privacyLink.setAttribute("href", PRIVACY_URL);
+
+  function pickOpener() {
+    let id = null;
+    try {
+      id = sessionStorage.getItem(VARIANT_KEY);
+    } catch (_) {}
+    let variant = OPENER_VARIANTS.find((v) => v.id === id);
+    if (!variant) {
+      variant = OPENER_VARIANTS[Math.floor(Math.random() * OPENER_VARIANTS.length)];
+      try {
+        sessionStorage.setItem(VARIANT_KEY, variant.id);
+      } catch (_) {}
+    }
+    return variant;
+  }
 
   function closeSidebar() {
     sidebar.classList.remove("open");
@@ -36,7 +89,7 @@
   }
   function syncSend() {
     const empty = !input.value.trim();
-    send.disabled = empty || busy;
+    send.disabled = empty || busy || capped;
     cursor.classList.toggle("is-empty", empty);
   }
   input.addEventListener("input", () => {
@@ -102,6 +155,14 @@
     thread.scrollTop = thread.scrollHeight;
     return el;
   }
+  function addAssistantStatic(text) {
+    const el = document.createElement("div");
+    el.className = "assistant-message";
+    el.innerHTML = renderMarkdown(text);
+    thread.appendChild(el);
+    thread.scrollTop = thread.scrollHeight;
+    return el;
+  }
 
   function typeInto(el, full) {
     return new Promise((resolve) => {
@@ -119,11 +180,126 @@
     });
   }
 
+  function looksLikeBooking(text) {
+    const t = String(text || "").toLowerCase();
+    if (BOOKING_LINK && t.includes(BOOKING_LINK.toLowerCase())) return true;
+    if (t.includes("calendly.com")) return true;
+    if (t.includes("{{booking_link}}")) return true;
+    return false;
+  }
+
+  function setChips(items) {
+    chipsEl.innerHTML = "";
+    if (!items || !items.length) {
+      chipsEl.classList.add("is-hidden");
+      return;
+    }
+    chipsEl.classList.remove("is-hidden");
+    items.forEach((chip) => {
+      const btn = document.createElement("button");
+      btn.className = "starter-prompt-btn";
+      btn.type = "button";
+      btn.textContent = chip.label;
+      btn.addEventListener("click", () => {
+        if (chip.id === "book") showLeadForm();
+        else sendPrompt(chip.label);
+      });
+      chipsEl.appendChild(btn);
+    });
+  }
+
+  function apiMessages() {
+    return messages
+      .filter((m) => m.role === "user" || m.role === "assistant")
+      .filter((m) => !m.uiOnly);
+  }
+
+  function hitCap() {
+    if (capped) return;
+    capped = true;
+    composer.classList.add("is-capped");
+    input.disabled = true;
+    syncSend();
+    addAssistantStatic("That's a decent run. If you want to keep going, book a chat with Rahul.");
+    if (!leadShown && !leadSent) {
+      setChips([{ id: "book", label: "Book a chat" }]);
+    }
+  }
+
+  function showLeadForm() {
+    if (leadShown || leadSent) return;
+    leadShown = true;
+    setChips([]);
+
+    const wrap = document.createElement("form");
+    wrap.className = "lead-form";
+    wrap.innerHTML =
+      '<p class="lead-form-intro">Leave your details and Rahul will get back to you. No slides, no hype.</p>' +
+      '<label>Name<input name="name" type="text" autocomplete="name" required></label>' +
+      '<label>Email<input name="email" type="email" autocomplete="email" required></label>' +
+      '<label>Business name <span class="optional">(optional)</span><input name="business" type="text" autocomplete="organization"></label>' +
+      '<label class="lead-consent"><input name="consent" type="checkbox" required> I\'m happy for Axhilles to contact me about this chat.</label>' +
+      '<button class="lead-submit" type="submit">Send</button>' +
+      '<p class="lead-error" hidden></p>';
+    thread.appendChild(wrap);
+    thread.scrollTop = thread.scrollHeight;
+
+    wrap.addEventListener("submit", async (e) => {
+      e.preventDefault();
+      const fd = new FormData(wrap);
+      const errorEl = wrap.querySelector(".lead-error");
+      const btn = wrap.querySelector(".lead-submit");
+      const name = String(fd.get("name") || "").trim();
+      const email = String(fd.get("email") || "").trim();
+      const business = String(fd.get("business") || "").trim();
+      const consent = fd.get("consent") === "on";
+      errorEl.hidden = true;
+      if (!name || !email || !consent) {
+        errorEl.textContent = "Name, email, and consent are required.";
+        errorEl.hidden = false;
+        return;
+      }
+      btn.disabled = true;
+      try {
+        const res = await fetch("/api/lead", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            name,
+            email,
+            business,
+            consent,
+            openerVariant: openerVariant.id,
+            transcript: [{ role: "assistant", content: openerVariant.text }].concat(apiMessages()),
+          }),
+        });
+        if (!res.ok) {
+          const data = await res.json().catch(() => ({}));
+          throw new Error(data.error || "Could not send.");
+        }
+        leadSent = true;
+        const thanks = document.createElement("div");
+        thanks.className = "assistant-message";
+        thanks.innerHTML = renderMarkdown("Sweet, Rahul will be in touch, usually within a day.");
+        wrap.replaceWith(thanks);
+        thread.scrollTop = thread.scrollHeight;
+      } catch (err) {
+        btn.disabled = false;
+        errorEl.textContent = err instanceof Error ? err.message : "Could not send.";
+        errorEl.hidden = false;
+      }
+    });
+  }
+
   async function sendPrompt(text) {
     const content = text.trim();
-    if (!content || busy) return;
+    if (!content || busy || capped) return;
+    if (apiMessages().length >= MAX_MESSAGES) {
+      hitCap();
+      return;
+    }
     busy = true;
-    starters.classList.add("is-hidden");
+    setChips([]);
     syncSend();
     addUser(content);
     messages.push({ role: "user", content });
@@ -132,12 +308,22 @@
     const bubble = addAssistantShell();
     closeSidebar();
 
+    if (isNameXEgg(content)) {
+      messages.push({ role: "assistant", content: X_EGG });
+      await typeInto(bubble, X_EGG);
+      busy = false;
+      syncSend();
+      input.focus();
+      if (apiMessages().length >= MAX_MESSAGES) hitCap();
+      return;
+    }
+
     let assembled = "";
     try {
       const res = await fetch("/api/chat", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ messages }),
+        body: JSON.stringify({ messages: apiMessages() }),
       });
       if (!res.ok || !res.body) {
         const err = await res.text();
@@ -153,6 +339,12 @@
       if (!assembled.trim()) throw new Error("Empty reply.");
       messages.push({ role: "assistant", content: assembled });
       await typeInto(bubble, assembled);
+      if (looksLikeBooking(assembled) && !leadSent) {
+        showLeadForm();
+      } else if (!leadSent) {
+        setChips([{ id: "book", label: "Book a chat" }]);
+      }
+      if (apiMessages().length >= MAX_MESSAGES) hitCap();
     } catch (err) {
       const msg =
         err instanceof Error ? err.message : "Something went wrong. Please try again.";
@@ -165,17 +357,26 @@
     }
   }
 
+  thread.addEventListener("click", (e) => {
+    const a = e.target.closest("a");
+    if (!a) return;
+    const href = a.getAttribute("href") || "";
+    if (looksLikeBooking(href) || looksLikeBooking(a.textContent)) {
+      e.preventDefault();
+      showLeadForm();
+    }
+  });
+
   composer.addEventListener("submit", (e) => {
     e.preventDefault();
     sendPrompt(input.value);
-  });
-  document.querySelectorAll("[data-prompt]").forEach((btn) => {
-    btn.addEventListener("click", () => sendPrompt(btn.dataset.prompt));
   });
   document.querySelector('[data-action="home"]').addEventListener("click", () => {
     thread.scrollTop = 0;
     closeSidebar();
   });
 
+  addAssistantStatic(openerVariant.text);
+  setChips(openerVariant.chips.map((label) => ({ id: "opener", label })));
   syncSend();
 })();

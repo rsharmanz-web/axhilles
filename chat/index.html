@@ -4,7 +4,7 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>Axhilles — Chat</title>
-<meta name="description" content="Ask about Axhilles — how we work, the ways in, and how to start." />
+<meta name="description" content="Ask Axhilles whether AI can help with the boring parts of the work week." />
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' fill='%23FBF9F6'/%3E%3Ccircle cx='50' cy='50' r='18' fill='%230020C2'/%3E%3C/svg%3E" />
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -24,13 +24,6 @@
     <aside class="sidebar" aria-label="Site navigation">
       <nav>
         <button class="nav-item nav-item-home" data-action="home" type="button"># AXHILLES.CHAT</button>
-        <button class="nav-item" type="button" data-prompt="What is Axhilles, and why do you start with the work instead of the tool?">## Introduction</button>
-        <button class="nav-item" type="button" data-prompt="What are the ways in, and who is each for?">## Ways in</button>
-        <button class="nav-item" type="button" data-prompt="How do you actually work with a client?">## How we work</button>
-        <button class="nav-item" type="button" data-prompt="Who is Rahul, and who else is in the network?">## Experience</button>
-        <button class="nav-item" type="button" data-prompt="What does “super, human” mean for how you think about AI?">## Thoughts on AI</button>
-        <button class="nav-item" type="button" data-prompt="Tell me something most people miss about the name Axhilles.">## Surprise me</button>
-        <button class="nav-item" type="button" data-prompt="How do I start a Discovery session?">## Contact</button>
       </nav>
       <div class="sidebar-footer">
         <a class="nav-item" href="/">axhilles.com</a>
@@ -43,19 +36,15 @@
     <div class="chat-page">
       <div class="chat-thread" id="thread" aria-live="polite" aria-atomic="false">
         <pre class="ascii-greeting" aria-hidden="true"> &gt;&gt; axhilles</pre>
-        <p class="greeting-sub">Ask about Axhilles</p>
       </div>
       <div class="chat-input-wrapper">
-        <div class="starter-prompts" id="starters">
-          <button class="starter-prompt-btn" type="button" data-prompt="I'm just poking around. What's actually going on here?">Help me get started</button>
-          <button class="starter-prompt-btn" type="button" data-prompt="Where are SME's at when it comes to adopting AI">Where are SME's at when it comes to adopting AI</button>
-          <button class="starter-prompt-btn" type="button" data-prompt="Anything I should read?">Anything I should read?</button>
-        </div>
+        <div class="starter-prompts" id="chips"></div>
         <form class="chat-input-row" id="composer">
           <div class="chat-cursor-block" aria-hidden="true"></div>
-          <textarea class="chat-input" id="input" rows="1" aria-label="Message input" placeholder="Ask about Axhilles"></textarea>
+          <textarea class="chat-input" id="input" rows="1" aria-label="Message input" placeholder="The boring bit from this week"></textarea>
           <button class="chat-submit-btn" id="send" type="submit" disabled aria-label="Send message">→</button>
         </form>
+        <p class="privacy-line">Chats may be reviewed to improve the service, so don't share anything sensitive. <a id="privacy-link" href="{{PRIVACY_URL}}">Privacy</a></p>
       </div>
     </div>
   </div>
