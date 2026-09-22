@@ -1,29 +1,38 @@
 # Axhilles
 
-Simple, static one-page site for Axhilles — no build step or dependencies required.
+Static site for Axhilles, plus a chat at `/chat` that talks about the firm.
 
 ## Structure
 
-- `index.html` — page content and structure
-- `styles.css` — terminal-inspired theme (black background, white text, cobalt accents)
-- `script.js` — typewriter hero effect, mobile nav, scroll reveal, contact form (opens a pre-filled email)
+- `index.html` — marketing page
+- `styles.css` — alabaster / espresso / cobalt
+- `script.js` — booking links, mobile nav
+- `chat/` — “Ask about Axhilles” UI (`axhilles.com/chat`)
+- `api/chat.js` — Vercel function; streams Claude Haiku 4.5
+- `spine/` — audit and finance workshop boards
 
 ## Running locally
 
-Just open `index.html` in a browser, or serve it locally:
+The homepage is static:
 
 ```bash
 python3 -m http.server 8000
 ```
 
-Then visit `http://localhost:8000`.
+Chat needs the API, so use Vercel:
+
+```bash
+npx vercel dev
+```
+
+Set `ANTHROPIC_API_KEY` in `.env.local` (gitignored) or `vercel env add ANTHROPIC_API_KEY`.
 
 ## Deploying
 
-This is a static site, so it can be deployed as-is to Netlify, Vercel, GitHub Pages, Cloudflare Pages, or any static host — just upload the three files.
+Push to `main`. Production is the Axhilles Vercel project (axhilles.com).
 
-## To customize
+In the Vercel project, add environment variable **`ANTHROPIC_API_KEY`** (Production + Preview). Without it, `/api/chat` returns “Chat is not configured yet.”
 
-- **Contact email**: currently set to `rahul@axhilles.com` in `index.html` and `script.js` — update both if you want to change the inbox. Make sure `rahul@axhilles.com` has email routing/forwarding set up (e.g. via Cloudflare Email Routing) so it actually reaches an inbox you check.
-- **Who we are**: the section currently has placeholder copy — swap in real founder/team bios.
-- **Colors**: all theme colors (background, text, cobalt accents) are defined as CSS variables at the top of `styles.css` under `:root`.
+## Chat
+
+Firm voice, not Rahul. Knowledge is the live site: Ways in, About, Discovery booking. Ten messages per IP per ten minutes. No transcript store.

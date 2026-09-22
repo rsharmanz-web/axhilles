@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Axhilles — Chat</title>
+<meta name="description" content="Ask about Axhilles — how we work, the ways in, and how to start." />
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' fill='%23FBF9F6'/%3E%3Ccircle cx='50' cy='50' r='18' fill='%230020C2'/%3E%3C/svg%3E" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=EB+Garamond:ital,wght@0,400;1,400&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="/chat/chat.css" />
+</head>
+<body>
+  <div class="top-fade" aria-hidden="true"></div>
+  <button class="icon-btn" id="nav-toggle" aria-label="Toggle navigation" aria-expanded="false">
+    <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+      <rect x="1.75" y="1.75" width="16.5" height="16.5" rx="1.25" stroke="currentColor" stroke-width="1.75"/>
+      <line x1="7" y1="2" x2="7" y2="18" stroke="currentColor" stroke-width="1.75"/>
+    </svg>
+  </button>
+
+  <div class="sidebar-container" id="sidebar">
+    <aside class="sidebar" aria-label="Site navigation">
+      <nav>
+        <button class="nav-item nav-item-home" data-action="home" type="button"># AXHILLES.CHAT</button>
+        <button class="nav-item" type="button" data-prompt="What is Axhilles, and why do you start with the work instead of the tool?">## Introduction</button>
+        <button class="nav-item" type="button" data-prompt="What are the ways in, and who is each for?">## Ways in</button>
+        <button class="nav-item" type="button" data-prompt="How do you actually work with a client?">## How we work</button>
+        <button class="nav-item" type="button" data-prompt="Who is Rahul, and who else is in the network?">## Experience</button>
+        <button class="nav-item" type="button" data-prompt="What does “super, human” mean for how you think about AI?">## Thoughts on AI</button>
+        <button class="nav-item" type="button" data-prompt="Tell me something most people miss about the name Axhilles.">## Surprise me</button>
+        <button class="nav-item" type="button" data-prompt="How do I start a Discovery session?">## Contact</button>
+      </nav>
+      <div class="sidebar-footer">
+        <a class="nav-item" href="/">axhilles.com</a>
+      </div>
+    </aside>
+  </div>
+  <div class="overlay" id="overlay" aria-hidden="true"></div>
+
+  <div class="page-wrapper">
+    <div class="chat-page">
+      <div class="chat-thread" id="thread" aria-live="polite" aria-atomic="false">
+        <pre class="ascii-greeting" aria-hidden="true"> &gt;&gt; axhilles</pre>
+        <p class="greeting-sub">Ask about Axhilles</p>
+      </div>
+      <div class="chat-input-wrapper">
+        <div class="starter-prompts" id="starters">
+          <button class="starter-prompt-btn" type="button" data-prompt="Help me get started with Axhilles.">Help me get started</button>
+        </div>
+        <form class="chat-input-row" id="composer">
+          <div class="chat-cursor-block" aria-hidden="true"></div>
+          <textarea class="chat-input" id="input" rows="1" aria-label="Message input" placeholder="Ask about Axhilles"></textarea>
+          <button class="chat-submit-btn" id="send" type="submit" disabled aria-label="Send message">→</button>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <script src="/chat/chat.js"></script>
+</body>
+</html>
