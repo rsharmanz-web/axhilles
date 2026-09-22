@@ -13,7 +13,7 @@
   const OPENER_VARIANTS = [
     {
       id: "boring-week-v1",
-      text: "Kia ora. What's the most boring thing you did at work this week? I'll tell you honestly if AI can help, or if you just need to stop doing it.",
+      text: "Hey there. Welcome to Chax (Chat with Axhilles).\nAsk a question or if you need a jump start, tell me about a task you dread every week? We'll see if theres a super, human way to tackle it.",
       chips: ["Admin & emails", "Reports", "Chasing clients", "Just curious about AI"],
     },
   ];
