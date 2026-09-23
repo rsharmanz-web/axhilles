@@ -447,6 +447,13 @@ a.logo-mark::before {
   text-underline-offset: 3px;
   opacity: 1;
 }
+.cta-sep {
+  margin: 0 0.45em;
+  opacity: 0.45;
+}
+.vcard-link {
+  white-space: nowrap;
+}
 
 .btn-primary {
   display: inline-flex;
