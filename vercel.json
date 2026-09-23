@@ -2,7 +2,8 @@
   "redirects": [
     { "source": "/spine/audit", "destination": "/spine/audit/", "permanent": false },
     { "source": "/spine/finance", "destination": "/spine/finance/", "permanent": false },
-    { "source": "/chat", "destination": "/chat/", "permanent": false }
+    { "source": "/chat", "destination": "/chat/", "permanent": false },
+    { "source": "/readings", "destination": "/readings/", "permanent": false }
   ],
   "headers": [
     {

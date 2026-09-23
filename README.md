@@ -5,6 +5,7 @@ Static site for Axhilles, plus a mascot chat at `/chat`.
 ## Structure
 
 - `index.html` — marketing page
+- `readings/` — curated readings & articles
 - `styles.css` — alabaster / espresso / cobalt
 - `script.js` — booking links, mobile nav
 - `chat/` — mascot chat UI (`axhilles.com/chat`)
@@ -49,10 +50,10 @@ Edit `lib/placeholders.js` (and the matching constants at the top of `chat/chat.
 
 - `{{MASCOT_NAME}}`
 - `{{BOOKING_LINK}}`
-- `{{READING_LIST_LINK}}`
+- `{{READING_LIST_LINK}}` — filled with `https://axhilles.com/readings/`
 - `{{PRIVACY_URL}}` — also in `chat/index.html`
 
-`BOOKING_LINK` is filled with the live Calendly URL so the handoff form can detect it. The others are still tokens.
+`BOOKING_LINK` and `READING_LIST_LINK` are live URLs so the mascot handoff can point at them. `PRIVACY_URL` is still a token.
 
 ## Verdict tests
 

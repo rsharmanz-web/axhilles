@@ -1,0 +1,143 @@
+/* Readings & articles */
+
+.readings-page {
+  max-width: 720px;
+  padding-bottom: 4rem;
+}
+
+.readings-hero {
+  margin-bottom: 3.5rem;
+}
+
+.readings-hero .display-technical {
+  margin-bottom: 1.5rem;
+}
+
+.readings-hero .editorial-lead {
+  max-width: 38ch;
+}
+
+.readings-section {
+  margin-bottom: 3.25rem;
+}
+
+.readings-section .section-title {
+  margin-bottom: 1.25rem;
+}
+
+.readings-intro {
+  font-family: var(--font-editorial);
+  font-style: italic;
+  font-size: clamp(1.05rem, 2vw, 1.25rem);
+  line-height: 1.4;
+  color: var(--color-espresso);
+  opacity: 0.85;
+  max-width: 42ch;
+  margin: -0.25rem 0 1.5rem;
+}
+
+.reading-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  border-top: 1px solid var(--color-sand);
+}
+
+.reading-list > li {
+  border-bottom: 1px solid var(--color-sand);
+}
+
+.reading-item {
+  display: grid;
+  grid-template-columns: 2.75rem 1fr;
+  gap: 1rem;
+  align-items: start;
+  padding: 1.35rem 0.15rem 1.35rem 0;
+  text-decoration: none;
+  color: inherit;
+  transition: color 0.2s ease;
+}
+
+.reading-list-plain .reading-item {
+  grid-template-columns: 1fr;
+}
+
+.reading-item:hover {
+  text-decoration: none;
+}
+
+.reading-item:hover .reading-title {
+  color: var(--color-cobalt);
+}
+
+.reading-item:focus-visible {
+  outline: 2px solid var(--color-cobalt);
+  outline-offset: 4px;
+}
+
+.reading-index {
+  font-family: var(--font-technical);
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  color: var(--color-cobalt);
+  padding-top: 0.2rem;
+}
+
+.reading-body {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  min-width: 0;
+}
+
+.reading-title {
+  font-family: var(--font-technical);
+  font-size: clamp(1rem, 2vw, 1.15rem);
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  line-height: 1.3;
+  color: var(--color-espresso);
+  transition: color 0.2s ease;
+}
+
+.reading-meta {
+  font-family: var(--font-technical);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--color-cobalt);
+}
+
+.reading-note {
+  font-family: var(--font-editorial);
+  font-style: italic;
+  font-size: 1.05rem;
+  line-height: 1.4;
+  color: var(--color-espresso);
+  opacity: 0.75;
+  max-width: 46ch;
+}
+
+.readings-cta {
+  margin-top: 1rem;
+  padding-top: 2rem;
+  border-top: 1px solid var(--color-sand);
+}
+
+.readings-cta .cta-sub {
+  margin-bottom: 1.25rem;
+}
+
+@media (max-width: 720px) {
+  .reading-item {
+    grid-template-columns: 2.25rem 1fr;
+    gap: 0.75rem;
+    padding: 1.15rem 0;
+  }
+
+  .readings-cta .btn-primary {
+    width: 100%;
+  }
+}
