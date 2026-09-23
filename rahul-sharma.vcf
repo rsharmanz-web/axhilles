@@ -1,0 +1,11 @@
+BEGIN:VCARD
+VERSION:3.0
+N:Sharma;Rahul;;;
+FN:Rahul Sharma
+ORG:Axhilles
+TITLE:Founder
+EMAIL;TYPE=INTERNET,WORK:rahul@axhilles.com
+URL;TYPE=WORK:https://axhilles.com
+ADR;TYPE=WORK:;;Auckland;;;;New Zealand
+NOTE:Axhilles — design and technology consultancy
+END:VCARD
