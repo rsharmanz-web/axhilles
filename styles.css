@@ -212,6 +212,7 @@ a.nav-link.active {
 a.nav-link:focus-visible,
 a.logo-mark:focus-visible,
 .btn-primary:focus-visible,
+.btn-secondary:focus-visible,
 .way-cta:focus-visible,
 .nav-toggle:focus-visible {
   outline: 2px solid var(--color-cobalt);
@@ -447,22 +448,19 @@ a.logo-mark::before {
   text-underline-offset: 3px;
   opacity: 1;
 }
-.cta-sep {
-  margin: 0 0.45em;
-  opacity: 0.45;
-}
-.vcard-link {
-  white-space: nowrap;
+.cta-actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.75rem;
 }
 
-.btn-primary {
+.btn-primary,
+.btn-secondary {
   display: inline-flex;
   align-items: center;
   justify-content: center;
   min-height: 44px;
-  background: var(--color-cobalt);
-  border: 1px solid var(--color-cobalt);
-  color: var(--color-alabaster);
   font-family: var(--font-technical);
   font-size: 11px;
   font-weight: 600;
@@ -473,9 +471,25 @@ a.logo-mark::before {
   border-radius: var(--radius);
   transition: background 0.2s ease, color 0.2s ease, border-color 0.2s ease;
 }
+.btn-primary {
+  background: var(--color-cobalt);
+  border: 1px solid var(--color-cobalt);
+  color: var(--color-alabaster);
+}
 .btn-primary:hover {
   background: var(--color-espresso);
   border-color: var(--color-espresso);
+  color: var(--color-alabaster);
+  text-decoration: none;
+}
+.btn-secondary {
+  background: transparent;
+  border: 1px solid var(--color-cobalt);
+  color: var(--color-cobalt);
+}
+.btn-secondary:hover {
+  background: var(--color-cobalt);
+  border-color: var(--color-cobalt);
   color: var(--color-alabaster);
   text-decoration: none;
 }
@@ -871,9 +885,14 @@ a.logo-mark::before {
     min-height: 0;
   }
   .btn-primary,
+  .btn-secondary,
   .way-cta {
     width: 100%;
     text-align: center;
+  }
+  .cta-actions {
+    flex-direction: column;
+    align-items: stretch;
   }
   .way-meta {
     flex-wrap: wrap;
