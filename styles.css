@@ -506,7 +506,7 @@ a.logo-mark::before {
   margin: 0 0 1.5rem;
 }
 
-/* Ways in — 2×2: Discovery TL, Habit TR, Baseline BL, PoC BR */
+/* Services — 2×2: Discovery TL, Habit TR, Baseline BL, PoC BR */
 .ways-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
