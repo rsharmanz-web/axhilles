@@ -13,6 +13,14 @@
       ]
     }
   ],
+  "headers": [
+    {
+      "source": "/(.*)\\.vcf",
+      "headers": [
+        { "key": "Content-Type", "value": "text/vcard; charset=utf-8" }
+      ]
+    }
+  ],
   "functions": {
     "api/chat.js": { "maxDuration": 30 },
     "api/lead.js": { "maxDuration": 30 }
