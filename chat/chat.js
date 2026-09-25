@@ -26,11 +26,15 @@
   const VARIANT_KEY = "ax-opener-variant";
   const X_EGG =
     "Cos X gon' deliver to ya (Uh) Knock-knock, open up the door, it's real";
+  const NAME_STORY =
+    "In the myth, Thetis dipped infant Achilles in the Styx and held him by the heel. Every telling since has treated that heel as his flaw. Oddly enough, the heel isn't in the original story. Writers added it centuries later because they understood that a warrior who can't be hurt isn't much of a hero. The human part is what makes him interesting.\n\nAxhilles is built on that idea. AI transformation generally defaults to efficiency. We're more interested in the jobs to be done, and creating space for humans to thrive.\n\n" +
+    X_EGG;
 
   function isNameXEgg(text) {
     const t = String(text || "")
       .toLowerCase()
       .replace(/['’]/g, "");
+    if (/\bisnt it achilles\b/.test(t)) return true;
     const hasName = /\baxhilles\b|\bachilles\b/.test(t);
     if (!hasName) return false;
     const why =
@@ -309,8 +313,8 @@
     closeSidebar();
 
     if (isNameXEgg(content)) {
-      messages.push({ role: "assistant", content: X_EGG });
-      await typeInto(bubble, X_EGG);
+      messages.push({ role: "assistant", content: NAME_STORY });
+      await typeInto(bubble, NAME_STORY);
       busy = false;
       syncSend();
       input.focus();
