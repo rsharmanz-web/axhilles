@@ -261,6 +261,7 @@
       btn.type = "button";
       btn.textContent = chip.label;
       btn.addEventListener("click", () => {
+        setChips([]);
         if (chip.id === "book") showLeadForm();
         else sendPrompt(chip.label);
       });
