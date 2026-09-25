@@ -40,10 +40,13 @@ Set secrets in `.env.local` (gitignored) or `vercel env add …`.
 | `EMAIL_API_KEY` | Resend API key |
 | `LEAD_EMAIL_TO` | `rahul@axhilles.com` |
 | `LEAD_EMAIL_FROM` | `hello@axhilles.com` (must be a verified Resend domain) |
+| `CHAT_LOG_EMAIL_TO` | Optional. Defaults to `LEAD_EMAIL_TO`. Inbox for Chax questions |
 
 Without `ANTHROPIC_API_KEY`, `/api/chat` returns “Chat is not configured yet.”
 
 Leads are emailed with [Resend](https://resend.com). If the email fails, the lead is logged server-side (`LEAD_KEEP`) and the visitor still sees the confirmation.
+
+Every Chax user message is also emailed to you as `Chax question: …` (same Resend setup). If email fails, it is logged server-side as `CHAT_QUESTION_KEEP` and still appears in Vercel logs as `CHAT_QUESTION`.
 
 ## Placeholders
 
