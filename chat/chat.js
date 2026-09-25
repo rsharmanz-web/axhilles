@@ -11,12 +11,13 @@
 
   const OPENER_VARIANTS = [
     {
-      id: "chax-intro-v3",
+      id: "chax-intro-v4",
       text: "Let's Chax. Pick one of the options below or enter your own question.",
       chips: [
-        "Why aren't we seeing value",
+        "Why aren't I seeing value?",
         "Will AI eat the world?",
         "Isn't it Achilles?!",
+        "What was your favourite part of the Odyssey?",
       ],
     },
   ];
@@ -29,11 +30,24 @@
   const NAME_STORY =
     "In the myth, Thetis dipped infant Achilles in the Styx and held him by the heel. Every telling since has treated that heel as his flaw. Oddly enough, the heel isn't in the original story. Writers added it centuries later because they understood that a warrior who can't be hurt isn't much of a hero. The human part is what makes him interesting.\n\nAxhilles is built on that idea. AI transformation generally defaults to efficiency. We're more interested in the jobs to be done, and creating space for humans to thrive.\n\n" +
     X_EGG;
+  const VALUE_REPLY =
+    "That will probably take some diagnosing. But a good place to start is have you thought about the workflow and where AI could, should and shouldn't be applied? We find that is usually a good place to start.";
+  const EAT_WORLD_REPLY =
+    "Good question. Honestly, No. But if you want a hype-free independent opinion, then I think Ben Evans' presentation is a great place to start. The link is in the [reading section](/readings/) along with a few other good pieces we've come across recently.";
+  const ODYSSEY_REPLY =
+    "It's gotta be the dog wagging his tail when Odysseus returns.";
+  const TOTTENHAM_REPLY = "S#it! What do you think of s#hit?!";
+
+  function normalizePrompt(text) {
+    return String(text || "")
+      .toLowerCase()
+      .replace(/['’]/g, "")
+      .replace(/[?!.,]+$/g, "")
+      .trim();
+  }
 
   function isNameXEgg(text) {
-    const t = String(text || "")
-      .toLowerCase()
-      .replace(/['’]/g, "");
+    const t = normalizePrompt(text);
     if (/\bisnt it achilles\b/.test(t)) return true;
     const hasName = /\baxhilles\b|\bachilles\b/.test(t);
     if (!hasName) return false;
@@ -47,12 +61,50 @@
     return (why && (withX || bothNames)) || withX;
   }
 
+  function getLockedReply(text) {
+    const t = normalizePrompt(text);
+
+    if (awaitingTottenhamThanks) {
+      awaitingTottenhamThanks = false;
+      if (/^tottenham$/.test(t)) return { reply: "Thank you.", offerBook: false };
+    }
+
+    if (
+      /\bwhat do you think of tottenham\b/.test(t) ||
+      /\bthoughts on tottenham\b/.test(t)
+    ) {
+      awaitingTottenhamThanks = true;
+      return { reply: TOTTENHAM_REPLY, offerBook: false };
+    }
+
+    if (
+      /\bwhy arent (i|we) seeing value\b/.test(t) ||
+      /\bwhy am i not seeing value\b/.test(t)
+    ) {
+      return { reply: VALUE_REPLY, offerBook: true };
+    }
+
+    if (/\bwill ai eat the world\b/.test(t) || /\bai eat the world\b/.test(t)) {
+      return { reply: EAT_WORLD_REPLY, offerBook: true };
+    }
+
+    if (
+      /\bfavour?ite part of the odyssey\b/.test(t) ||
+      /\bodyssey\b/.test(t) && /\bfavour?ite\b/.test(t)
+    ) {
+      return { reply: ODYSSEY_REPLY, offerBook: false };
+    }
+
+    return null;
+  }
+
   const messages = [];
   let busy = false;
   let capped = false;
   let leadShown = false;
   let leadSent = false;
   let sessionLogged = false;
+  let awaitingTottenhamThanks = false;
   let idleTimer = null;
   const IDLE_MS = 5 * 60 * 1000;
   let openerVariant = pickOpener();
@@ -368,7 +420,23 @@
     const bubble = addAssistantShell();
     closeSidebar();
 
+    const locked = getLockedReply(content);
+    if (locked) {
+      messages.push({ role: "assistant", content: locked.reply });
+      await typeInto(bubble, locked.reply);
+      busy = false;
+      syncSend();
+      bumpIdle();
+      input.focus();
+      if (locked.offerBook && !leadSent) {
+        setChips([{ id: "book", label: "Book a chat" }]);
+      }
+      if (apiMessages().length >= MAX_MESSAGES) hitCap();
+      return;
+    }
+
     if (isNameXEgg(content)) {
+      awaitingTottenhamThanks = false;
       messages.push({ role: "assistant", content: NAME_STORY });
       await typeInto(bubble, NAME_STORY);
       busy = false;
@@ -378,6 +446,8 @@
       if (apiMessages().length >= MAX_MESSAGES) hitCap();
       return;
     }
+
+    awaitingTottenhamThanks = false;
 
     let assembled = "";
     try {
@@ -441,4 +511,17 @@
   addAssistantStatic(openerVariant.text);
   setChips(openerVariant.chips.map((label) => ({ id: "opener", label })));
   syncSend();
+
+  const contactToggle = document.getElementById("contact-toggle");
+  const contactEmail = document.getElementById("contact-email");
+  if (contactToggle && contactEmail) {
+    contactToggle.addEventListener("click", () => {
+      const open = contactEmail.classList.toggle("is-hidden") === false;
+      contactToggle.setAttribute("aria-expanded", String(open));
+    });
+  }
+
+  document.querySelectorAll("[data-booking]").forEach((link) => {
+    link.setAttribute("href", BOOKING_LINK);
+  });
 })();
