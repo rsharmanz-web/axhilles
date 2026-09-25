@@ -5,7 +5,7 @@ Static site for Axhilles, plus a mascot chat at `/chat`.
 ## Structure
 
 - `index.html` — marketing page
-- `readings/` — curated readings & articles
+- `readings/` — curated articles
 - `styles.css` — alabaster / espresso / cobalt
 - `script.js` — booking links, mobile nav
 - `chat/` — mascot chat UI (`axhilles.com/chat`)

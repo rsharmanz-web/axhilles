@@ -29,7 +29,7 @@
   const VALUE_REPLY =
     "That will probably take some diagnosing. But a good place to start is have you thought about the workflow and where AI could, should and shouldn't be applied? We find that is usually a good place to start.";
   const EAT_WORLD_REPLY =
-    "Good question. Honestly, No. But if you want a hype-free independent opinion, then I think Ben Evans' presentation is a great place to start. The link is in the [reading section](/readings/) along with a few other good pieces we've come across recently.";
+    "Good question. Honestly, No. But if you want a hype-free independent opinion, then I think Ben Evans' presentation is a great place to start. The link is in the [articles section](/readings/) along with a few other good pieces we've come across recently.";
   const ODYSSEY_REPLY =
     "It's gotta be the dog wagging his tail when Odysseus returns.";
   const TOTTENHAM_REPLY = "S#it! What do you think of s#hit?!";
