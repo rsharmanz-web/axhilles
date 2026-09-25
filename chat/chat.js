@@ -313,16 +313,19 @@
     closeSidebar();
 
     const userTurn = messages.filter((m) => m.role === "user").length;
-    fetch("/api/chat-log", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        question: content,
-        turn: userTurn,
-        source: isNameXEgg(content) ? "name-egg" : "chat",
-      }),
-      keepalive: true,
-    }).catch(() => {});
+    // Only email the first question in a chat so the inbox stays quiet.
+    if (userTurn === 1) {
+      fetch("/api/chat-log", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          question: content,
+          turn: userTurn,
+          source: isNameXEgg(content) ? "name-egg" : "chat",
+        }),
+        keepalive: true,
+      }).catch(() => {});
+    }
 
     if (isNameXEgg(content)) {
       messages.push({ role: "assistant", content: NAME_STORY });

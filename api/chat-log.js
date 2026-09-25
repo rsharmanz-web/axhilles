@@ -34,6 +34,11 @@ module.exports = async function handler(req, res) {
   const turn = Number.isFinite(body.turn) ? body.turn : null;
   const source = typeof body.source === "string" ? body.source.slice(0, 40) : "chat";
 
+  // Only the opening question is emailed; follow-ups stay out of the inbox.
+  if (turn != null && turn > 1) {
+    return res.status(204).end();
+  }
+
   // Fire-and-forget style: still await so Resend finishes in this invocation,
   // but never fail the visitor experience.
   await logChatQuestion({ question, turn, source });
