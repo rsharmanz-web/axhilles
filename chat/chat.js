@@ -11,8 +11,8 @@
 
   const OPENER_VARIANTS = [
     {
-      id: "chax-intro-v2",
-      text: "Hey there, I'm Chax (Chat with Axhilles). Here to get the ball rolling on redesigning your business for an AI world. Ask me about something you're struggling with or try one of the buttons to get started.",
+      id: "chax-intro-v3",
+      text: "Let's Chax. Pick one of the options below or enter your own question.",
       chips: [
         "Why aren't we seeing value",
         "Will AI eat the world?",
