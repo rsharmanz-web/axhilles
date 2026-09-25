@@ -129,6 +129,7 @@ h1, .display-technical {
   color: var(--color-espresso);
   font-style: italic;
   max-width: 42ch;
+  text-wrap: pretty;
 }
 
 .editorial-lead p {
