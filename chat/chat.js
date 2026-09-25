@@ -441,9 +441,4 @@
   addAssistantStatic(openerVariant.text);
   setChips(openerVariant.chips.map((label) => ({ id: "opener", label })));
   syncSend();
-
-  window.addEventListener("pagehide", () => flushSessionLog("session-end"));
-  document.addEventListener("visibilitychange", () => {
-    if (document.visibilityState === "hidden") flushSessionLog("session-end");
-  });
 })();
