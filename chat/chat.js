@@ -8,18 +8,20 @@
   const overlay = document.getElementById("overlay");
   const navToggle = document.getElementById("nav-toggle");
   const cursor = document.querySelector(".chat-cursor-block");
-  const privacyLink = document.getElementById("privacy-link");
 
   const OPENER_VARIANTS = [
     {
-      id: "boring-week-v1",
-      text: "Hey there. Welcome to Chax (Chat with Axhilles).\nAsk a question or if you need a jump start, tell me about a task you dread every week? We'll see if theres a super, human way to tackle it.",
-      chips: ["Admin & emails", "Reports", "Chasing clients", "Just curious about AI"],
+      id: "chax-intro-v2",
+      text: "Hey there, I'm Chax (Chat with Axhilles). Here to get the ball rolling on redesigning your business for an AI world. Ask me about something you're struggling with or try one of the buttons to get started.",
+      chips: [
+        "Why aren't we seeing value",
+        "Will AI eat the world?",
+        "Isn't it Achilles?!",
+      ],
     },
   ];
 
   const BOOKING_LINK = "https://calendly.com/r-sharma-nz/30min";
-  const PRIVACY_URL = "{{PRIVACY_URL}}";
   const MAX_MESSAGES = 30;
   const VARIANT_KEY = "ax-opener-variant";
   const X_EGG =
@@ -47,8 +49,6 @@
   let leadShown = false;
   let leadSent = false;
   let openerVariant = pickOpener();
-
-  if (privacyLink) privacyLink.setAttribute("href", PRIVACY_URL);
 
   function pickOpener() {
     let id = null;

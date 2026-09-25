@@ -4,7 +4,7 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>Axhilles — Chat</title>
-<meta name="description" content="Ask Axhilles whether AI can help with the boring parts of the work week." />
+<meta name="description" content="Chat with Axhilles about redesigning your business for an AI world." />
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' fill='%23FBF9F6'/%3E%3Ccircle cx='50' cy='50' r='18' fill='%230020C2'/%3E%3C/svg%3E" />
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -36,16 +36,15 @@
   <div class="page-wrapper">
     <div class="chat-page">
       <div class="chat-thread" id="thread" aria-live="polite" aria-atomic="false">
-        <pre class="ascii-greeting" aria-hidden="true"> &gt;&gt; axhilles</pre>
+        <p class="chat-brand" aria-hidden="true"><span class="chat-brand-mark">&gt;&gt;</span> axhilles</p>
       </div>
       <div class="chat-input-wrapper">
         <div class="starter-prompts" id="chips"></div>
         <form class="chat-input-row" id="composer">
-          <div class="chat-cursor-block" aria-hidden="true"></div>
-          <textarea class="chat-input" id="input" rows="1" aria-label="Message input" placeholder="The boring bit from this week"></textarea>
+          <div class="chat-cursor-block is-empty" aria-hidden="true"></div>
+          <textarea class="chat-input" id="input" rows="1" aria-label="Message input" placeholder=""></textarea>
           <button class="chat-submit-btn" id="send" type="submit" disabled aria-label="Send message">→</button>
         </form>
-        <p class="privacy-line">Chats may be reviewed to improve the service, so don't share anything sensitive. <a id="privacy-link" href="{{PRIVACY_URL}}">Privacy</a></p>
       </div>
     </div>
   </div>
