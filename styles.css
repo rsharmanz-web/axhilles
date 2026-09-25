@@ -272,7 +272,26 @@ nav.topbar {
   margin-bottom: 5rem;
   position: relative;
 }
-nav.topbar .links { display: flex; gap: 2.5rem; }
+nav.topbar .links {
+  display: none;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  flex-direction: column;
+  gap: 0;
+  background: var(--color-alabaster);
+  border: 1px solid var(--color-sand);
+  border-radius: var(--radius);
+  box-shadow: 0 12px 32px rgba(51, 36, 28, 0.1);
+  padding: 0.5rem 0;
+  z-index: 50;
+}
+nav.topbar .links.open { display: flex; }
+nav.topbar .links .nav-link {
+  padding: 0.85rem 1.25rem;
+  min-height: 44px;
+}
 
 .col-span-7 { grid-column: span 7; }
 .col-span-5 { grid-column: span 5; }
