@@ -116,7 +116,8 @@ h1, .display-technical {
   margin-bottom: 2rem;
 }
 
-#why .display-technical {
+#why .display-technical,
+.hero .display-technical {
   margin-bottom: 2rem;
 }
 
@@ -130,8 +131,41 @@ h1, .display-technical {
   max-width: 42ch;
 }
 
+.editorial-lead p {
+  margin: 0;
+}
+
+.editorial-lead p + p {
+  margin-top: 1.25rem;
+}
+
+.hero-pillars {
+  font-family: var(--font-technical);
+  font-size: clamp(0.85rem, 1.5vw, 1rem);
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--color-cobalt);
+  margin: 1.75rem 0 0;
+  max-width: 42ch;
+}
+
 .hero-cta {
   margin-top: 2rem;
+}
+
+.why-dek {
+  font-family: var(--font-editorial);
+  font-style: italic;
+  font-size: clamp(1.25rem, 2.4vw, 1.6rem);
+  line-height: 1.35;
+  color: var(--color-espresso);
+  margin: 0 0 1.25rem;
+  max-width: 36ch;
+}
+
+.why-box .body-copy:first-of-type {
+  margin-top: 0;
 }
 
 h2, .index-label {
