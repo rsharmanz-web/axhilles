@@ -11,12 +11,11 @@
 
   const OPENER_VARIANTS = [
     {
-      id: "chax-intro-v4",
+      id: "chax-intro-v5",
       text: "Let's Chax. Pick one of the options below or enter your own question.",
       chips: [
         "Why aren't I seeing value?",
         "Will AI eat the world?",
-        "Isn't it Achilles?!",
         "What was your favourite part of the Odyssey?",
       ],
     },
@@ -27,9 +26,6 @@
   const VARIANT_KEY = "ax-opener-variant";
   const X_EGG =
     "Cos X gon' deliver to ya (Uh) Knock-knock, open up the door, it's real";
-  const NAME_STORY =
-    "In the myth, Thetis dipped infant Achilles in the Styx and held him by the heel. Every telling since has treated that heel as his flaw. Oddly enough, the heel isn't in the original story. Writers added it centuries later because they understood that a warrior who can't be hurt isn't much of a hero. The human part is what makes him interesting.\n\nAxhilles is built on that idea. AI transformation generally defaults to efficiency. We're more interested in the jobs to be done, and creating space for humans to thrive.\n\n" +
-    X_EGG;
   const VALUE_REPLY =
     "That will probably take some diagnosing. But a good place to start is have you thought about the workflow and where AI could, should and shouldn't be applied? We find that is usually a good place to start.";
   const EAT_WORLD_REPLY =
