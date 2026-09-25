@@ -312,6 +312,18 @@
     const bubble = addAssistantShell();
     closeSidebar();
 
+    const userTurn = messages.filter((m) => m.role === "user").length;
+    fetch("/api/chat-log", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        question: content,
+        turn: userTurn,
+        source: isNameXEgg(content) ? "name-egg" : "chat",
+      }),
+      keepalive: true,
+    }).catch(() => {});
+
     if (isNameXEgg(content)) {
       messages.push({ role: "assistant", content: NAME_STORY });
       await typeInto(bubble, NAME_STORY);
