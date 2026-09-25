@@ -116,7 +116,8 @@ h1, .display-technical {
   margin-bottom: 2rem;
 }
 
-#why .display-technical {
+#why .display-technical,
+.hero .display-technical {
   margin-bottom: 2rem;
 }
 
@@ -127,6 +128,25 @@ h1, .display-technical {
   line-height: 1.4;
   color: var(--color-espresso);
   font-style: italic;
+  max-width: 42ch;
+}
+
+.editorial-lead p {
+  margin: 0;
+}
+
+.editorial-lead p + p {
+  margin-top: 1.25rem;
+}
+
+.hero-pillars {
+  font-family: var(--font-technical);
+  font-size: clamp(0.85rem, 1.5vw, 1rem);
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--color-cobalt);
+  margin: 1.75rem 0 0;
   max-width: 42ch;
 }
 
@@ -506,7 +526,7 @@ a.logo-mark::before {
   margin: 0 0 1.5rem;
 }
 
-/* Ways in — 2×2: Discovery TL, Habit TR, Baseline BL, PoC BR */
+/* Services — 2×2: Discovery TL, Habit TR, Baseline BL, PoC BR */
 .ways-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -590,14 +610,14 @@ a.logo-mark::before {
   flex: 1;
 }
 
-#about .about-box .body-copy {
+.about-box .body-copy {
   font-size: 15px;
   line-height: 1.75;
   opacity: 0.92;
   max-width: none;
 }
 
-#about .about-box .body-copy + .body-copy {
+.about-box .body-copy + .body-copy {
   margin-top: 1.25rem;
 }
 

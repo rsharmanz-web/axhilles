@@ -52,7 +52,7 @@ const observer = new IntersectionObserver(
 revealTargets.forEach((el) => observer.observe(el));
 
 // ---------- nav scroll spy ----------
-const sectionIds = ["why", "ways-in", "about", "contact"];
+const sectionIds = ["why", "services", "about", "contact"];
 const navLinks = document.querySelectorAll("nav.topbar .links a.nav-link");
 
 function setActiveNav() {
