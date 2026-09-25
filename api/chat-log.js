@@ -1,9 +1,10 @@
-const { clientIp, makeRateLimit, readBody } = require("../lib/http");
-const { logChatQuestion } = require("../lib/log-chat-question");
+const { clientIp, makeRateLimit, readBody, cleanMessages } = require("../lib/http");
+const { logChatSession } = require("../lib/log-chat-question");
 
 const WINDOW_MS = 10 * 60 * 1000;
 const MAX_PER_WINDOW = 20;
 const MAX_CHARS = 2000;
+const MAX_HISTORY = 40;
 
 const rateLimit = makeRateLimit(WINDOW_MS, MAX_PER_WINDOW);
 
@@ -28,20 +29,25 @@ module.exports = async function handler(req, res) {
     return res.status(400).json({ ok: false, error: "Bad body." });
   }
 
-  const question = typeof body.question === "string" ? body.question.trim().slice(0, MAX_CHARS) : "";
-  if (!question) return res.status(400).json({ ok: false, error: "Question required." });
-
-  const turn = Number.isFinite(body.turn) ? body.turn : null;
+  const reason =
+    body.reason === "turn-limit" || body.reason === "session-end"
+      ? body.reason
+      : "session-end";
   const source = typeof body.source === "string" ? body.source.slice(0, 40) : "chat";
+  const transcript = cleanMessages(body.transcript, MAX_CHARS, MAX_HISTORY);
+  const userTurns = transcript.filter((m) => m.role === "user").length;
+  if (!userTurns) return res.status(204).end();
 
-  // Only the opening question is emailed; follow-ups stay out of the inbox.
-  if (turn != null && turn > 1) {
-    return res.status(204).end();
-  }
+  const question =
+    typeof body.question === "string" ? body.question.trim().slice(0, MAX_CHARS) : "";
 
-  // Fire-and-forget style: still await so Resend finishes in this invocation,
-  // but never fail the visitor experience.
-  await logChatQuestion({ question, turn, source });
+  await logChatSession({
+    question,
+    turn: userTurns,
+    transcript,
+    reason,
+    source,
+  });
   return res.status(204).end();
 };
 

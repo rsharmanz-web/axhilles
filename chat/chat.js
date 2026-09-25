@@ -52,6 +52,7 @@
   let capped = false;
   let leadShown = false;
   let leadSent = false;
+  let sessionLogged = false;
   let openerVariant = pickOpener();
 
   function pickOpener() {
@@ -218,6 +219,36 @@
       .filter((m) => !m.uiOnly);
   }
 
+  function sessionTranscript() {
+    return [{ role: "assistant", content: openerVariant.text }].concat(apiMessages());
+  }
+
+  function flushSessionLog(reason) {
+    if (sessionLogged || leadSent) return;
+    const transcript = sessionTranscript();
+    const users = transcript.filter((m) => m.role === "user");
+    if (!users.length) return;
+    sessionLogged = true;
+    const payload = JSON.stringify({
+      reason: reason === "turn-limit" ? "turn-limit" : "session-end",
+      source: "chat",
+      question: users[0].content,
+      transcript,
+    });
+    try {
+      if (navigator.sendBeacon) {
+        navigator.sendBeacon("/api/chat-log", new Blob([payload], { type: "application/json" }));
+        return;
+      }
+    } catch (_) {}
+    fetch("/api/chat-log", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: payload,
+      keepalive: true,
+    }).catch(() => {});
+  }
+
   function hitCap() {
     if (capped) return;
     capped = true;
@@ -225,6 +256,7 @@
     input.disabled = true;
     syncSend();
     addAssistantStatic("That's a decent run. If you want to keep going, book a chat with Rahul.");
+    flushSessionLog("turn-limit");
     if (!leadShown && !leadSent) {
       setChips([{ id: "book", label: "Book a chat" }]);
     }
@@ -282,6 +314,7 @@
           throw new Error(data.error || "Could not send.");
         }
         leadSent = true;
+        sessionLogged = true;
         const thanks = document.createElement("div");
         thanks.className = "assistant-message";
         thanks.innerHTML = renderMarkdown("Sweet, Rahul will be in touch, usually within a day.");
@@ -311,21 +344,6 @@
     resizeInput();
     const bubble = addAssistantShell();
     closeSidebar();
-
-    const userTurn = messages.filter((m) => m.role === "user").length;
-    // Only email the first question in a chat so the inbox stays quiet.
-    if (userTurn === 1) {
-      fetch("/api/chat-log", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          question: content,
-          turn: userTurn,
-          source: isNameXEgg(content) ? "name-egg" : "chat",
-        }),
-        keepalive: true,
-      }).catch(() => {});
-    }
 
     if (isNameXEgg(content)) {
       messages.push({ role: "assistant", content: NAME_STORY });
@@ -398,4 +416,9 @@
   addAssistantStatic(openerVariant.text);
   setChips(openerVariant.chips.map((label) => ({ id: "opener", label })));
   syncSend();
+
+  window.addEventListener("pagehide", () => flushSessionLog("session-end"));
+  document.addEventListener("visibilitychange", () => {
+    if (document.visibilityState === "hidden") flushSessionLog("session-end");
+  });
 })();

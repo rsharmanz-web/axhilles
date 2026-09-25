@@ -10,7 +10,7 @@ Static site for Axhilles, plus a mascot chat at `/chat`.
 - `script.js` — booking links, mobile nav
 - `chat/` — mascot chat UI (`axhilles.com/chat`)
 - `api/chat.js` — Vercel function; streams Claude Haiku 4.5 with `MASCOT_SYSTEM_PROMPT`
-- `api/chat-log.js` — emails the first visitor question in each chat to Rahul
+- `api/chat-log.js` — emails a Chax transcript at session end or turn limit
 - `api/lead.js` — lead form; summarises the transcript and emails Rahul
 - `lib/` — prompts (as-is), placeholders, `saveLead`, `logChatQuestion`
 - `scripts/verdict-test.mjs` — runs `VERDICT_TEST_CASES` against the mascot
@@ -46,7 +46,7 @@ Without `ANTHROPIC_API_KEY`, `/api/chat` returns “Chat is not configured yet.�
 
 Leads are emailed with [Resend](https://resend.com). If the email fails, the lead is logged server-side (`LEAD_KEEP`) and the visitor still sees the confirmation.
 
-The first Chax question in each chat is emailed to you as `Chax question: …` (same Resend setup). Follow-ups are not emailed. If email fails, it is logged server-side as `CHAT_QUESTION_KEEP` and still appears in Vercel logs as `CHAT_QUESTION`.
+When a Chax visitor hits the turn limit, or leaves the page after asking at least one question, you get one email with the transcript (`Chax session (…)`). If they already submitted the lead form, that lead email is enough and no session log is sent. If email fails, it is logged server-side as `CHAT_SESSION_KEEP` and still appears in Vercel logs as `CHAT_SESSION`.
 
 ## Placeholders
 
