@@ -154,20 +154,6 @@ h1, .display-technical {
   margin-top: 2rem;
 }
 
-.why-dek {
-  font-family: var(--font-editorial);
-  font-style: italic;
-  font-size: clamp(1.25rem, 2.4vw, 1.6rem);
-  line-height: 1.35;
-  color: var(--color-espresso);
-  margin: 0 0 1.25rem;
-  max-width: 36ch;
-}
-
-.why-box .body-copy:first-of-type {
-  margin-top: 0;
-}
-
 h2, .index-label {
   font-family: var(--font-technical);
   font-weight: 600;
@@ -624,14 +610,14 @@ a.logo-mark::before {
   flex: 1;
 }
 
-#about .about-box .body-copy {
+.about-box .body-copy {
   font-size: 15px;
   line-height: 1.75;
   opacity: 0.92;
   max-width: none;
 }
 
-#about .about-box .body-copy + .body-copy {
+.about-box .body-copy + .body-copy {
   margin-top: 1.25rem;
 }
 
