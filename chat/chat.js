@@ -53,6 +53,8 @@
   let leadShown = false;
   let leadSent = false;
   let sessionLogged = false;
+  let idleTimer = null;
+  const IDLE_MS = 5 * 60 * 1000;
   let openerVariant = pickOpener();
 
   function pickOpener() {
@@ -100,6 +102,7 @@
   input.addEventListener("input", () => {
     resizeInput();
     syncSend();
+    bumpIdle();
   });
   input.addEventListener("keydown", (e) => {
     if (e.key === "Enter" && !e.shiftKey) {
@@ -219,6 +222,21 @@
       .filter((m) => !m.uiOnly);
   }
 
+  function clearIdleTimer() {
+    if (idleTimer) {
+      clearTimeout(idleTimer);
+      idleTimer = null;
+    }
+  }
+
+  function bumpIdle() {
+    if (sessionLogged || leadSent || capped) return;
+    const users = messages.filter((m) => m.role === "user");
+    if (!users.length) return;
+    clearIdleTimer();
+    idleTimer = setTimeout(() => flushSessionLog("inactive"), IDLE_MS);
+  }
+
   function sessionTranscript() {
     return [{ role: "assistant", content: openerVariant.text }].concat(apiMessages());
   }
@@ -229,8 +247,11 @@
     const users = transcript.filter((m) => m.role === "user");
     if (!users.length) return;
     sessionLogged = true;
+    clearIdleTimer();
+    const normalized =
+      reason === "turn-limit" ? "turn-limit" : reason === "inactive" ? "inactive" : "session-end";
     const payload = JSON.stringify({
-      reason: reason === "turn-limit" ? "turn-limit" : "session-end",
+      reason: normalized,
       source: "chat",
       question: users[0].content,
       transcript,
@@ -252,6 +273,7 @@
   function hitCap() {
     if (capped) return;
     capped = true;
+    clearIdleTimer();
     composer.classList.add("is-capped");
     input.disabled = true;
     syncSend();
@@ -315,6 +337,7 @@
         }
         leadSent = true;
         sessionLogged = true;
+        clearIdleTimer();
         const thanks = document.createElement("div");
         thanks.className = "assistant-message";
         thanks.innerHTML = renderMarkdown("Sweet, Rahul will be in touch, usually within a day.");
@@ -350,6 +373,7 @@
       await typeInto(bubble, NAME_STORY);
       busy = false;
       syncSend();
+      bumpIdle();
       input.focus();
       if (apiMessages().length >= MAX_MESSAGES) hitCap();
       return;
@@ -390,6 +414,7 @@
     } finally {
       busy = false;
       syncSend();
+      bumpIdle();
       input.focus();
     }
   }

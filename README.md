@@ -10,7 +10,7 @@ Static site for Axhilles, plus a mascot chat at `/chat`.
 - `script.js` — booking links, mobile nav
 - `chat/` — mascot chat UI (`axhilles.com/chat`)
 - `api/chat.js` — Vercel function; streams Claude Haiku 4.5 with `MASCOT_SYSTEM_PROMPT`
-- `api/chat-log.js` — emails a Chax transcript at session end or turn limit
+- `api/chat-log.js` — emails a Chax transcript after 5 min inactive or at turn limit
 - `api/lead.js` — lead form; summarises the transcript and emails Rahul
 - `lib/` — prompts (as-is), placeholders, `saveLead`, `logChatQuestion`
 - `scripts/verdict-test.mjs` — runs `VERDICT_TEST_CASES` against the mascot

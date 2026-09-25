@@ -30,9 +30,9 @@ module.exports = async function handler(req, res) {
   }
 
   const reason =
-    body.reason === "turn-limit" || body.reason === "session-end"
+    body.reason === "turn-limit" || body.reason === "inactive" || body.reason === "session-end"
       ? body.reason
-      : "session-end";
+      : "inactive";
   const source = typeof body.source === "string" ? body.source.slice(0, 40) : "chat";
   const transcript = cleanMessages(body.transcript, MAX_CHARS, MAX_HISTORY);
   const userTurns = transcript.filter((m) => m.role === "user").length;
