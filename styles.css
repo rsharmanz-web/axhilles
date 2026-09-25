@@ -124,11 +124,11 @@ h1, .display-technical {
 .editorial-lead {
   font-family: var(--font-editorial);
   font-weight: 400;
-  font-size: clamp(1.35rem, 2.7vw, 2.25rem);
-  line-height: 1.4;
+  font-size: clamp(1.125rem, 1.8vw, 1.5rem);
+  line-height: 1.45;
   color: var(--color-espresso);
   font-style: italic;
-  max-width: 42ch;
+  max-width: 46ch;
   text-wrap: pretty;
 }
 
