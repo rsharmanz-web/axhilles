@@ -233,7 +233,8 @@ body.sidebar-open .page-wrapper { padding-left: var(--sidebar-width); }
   flex-direction: column;
   align-items: flex-start;
   gap: 8px;
-  padding-bottom: 12px;
+  margin: 0 0 28px;
+  padding-bottom: 0;
 }
 .starter-prompt-btn {
   font-family: var(--font-technical);

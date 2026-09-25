@@ -251,6 +251,7 @@
       return;
     }
     chipsEl.classList.remove("is-hidden");
+    thread.appendChild(chipsEl);
     items.forEach((chip) => {
       const btn = document.createElement("button");
       btn.className = "starter-prompt-btn";
@@ -263,6 +264,7 @@
       });
       chipsEl.appendChild(btn);
     });
+    thread.scrollTop = thread.scrollHeight;
   }
 
   function apiMessages() {
