@@ -434,8 +434,8 @@
 
     if (isNameXEgg(content)) {
       awaitingTottenhamThanks = false;
-      messages.push({ role: "assistant", content: NAME_STORY });
-      await typeInto(bubble, NAME_STORY);
+      messages.push({ role: "assistant", content: X_EGG });
+      await typeInto(bubble, X_EGG);
       busy = false;
       syncSend();
       bumpIdle();
