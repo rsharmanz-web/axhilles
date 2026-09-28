@@ -1,4 +1,5 @@
 const { clientIp, makeRateLimit, readBody, cleanMessages } = require("../lib/http");
+const { cleanAttribution } = require("../lib/attribution");
 const { parseLeadSummary } = require("../lib/parse-summary");
 const { saveLead } = require("../lib/save-lead");
 
@@ -98,6 +99,7 @@ module.exports = async function handler(req, res) {
     transcript,
     summary,
     summaryFailed,
+    attribution: cleanAttribution(body.attribution),
   };
 
   await saveLead(lead);

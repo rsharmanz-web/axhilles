@@ -34,6 +34,15 @@
     "It's gotta be the dog wagging his tail when Odysseus returns.";
   const TOTTENHAM_REPLY = "S#it! What do you think of s#hit?!";
 
+  // Set by /attribution.js. Absent if that script was blocked, in which case the lead still sends.
+  function visitorAttribution() {
+    try {
+      return window.axhillesAttribution ? window.axhillesAttribution.get() : null;
+    } catch (_) {
+      return null;
+    }
+  }
+
   function normalizePrompt(text) {
     return String(text || "")
       .toLowerCase()
@@ -306,6 +315,7 @@
       source: "chat",
       question: users[0].content,
       transcript,
+      attribution: visitorAttribution(),
     });
     try {
       if (navigator.sendBeacon) {
@@ -380,6 +390,7 @@
             consent,
             openerVariant: openerVariant.id,
             transcript: [{ role: "assistant", content: openerVariant.text }].concat(apiMessages()),
+            attribution: visitorAttribution(),
           }),
         });
         if (!res.ok) {

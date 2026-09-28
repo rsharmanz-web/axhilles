@@ -1,4 +1,5 @@
 const { clientIp, makeRateLimit, readBody, cleanMessages } = require("../lib/http");
+const { cleanAttribution } = require("../lib/attribution");
 const { logChatSession } = require("../lib/log-chat-question");
 
 const WINDOW_MS = 10 * 60 * 1000;
@@ -47,6 +48,7 @@ module.exports = async function handler(req, res) {
     transcript,
     reason,
     source,
+    attribution: cleanAttribution(body.attribution),
   });
   return res.status(204).end();
 };
