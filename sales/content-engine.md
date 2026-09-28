@@ -155,6 +155,24 @@ has to be worth reading on its own**, or it gets no reach and the link is irrele
   Vercel analytics can tell you which of the five did the work.
 - **Point at the article, never the homepage.** Reading intent is specific; do not make them hunt.
 
+The tag now travels further than the dashboard. The site remembers how each visitor arrived and
+attaches it to the lead, so a Chax lead email opens with the article that earned it:
+
+```
+SOURCE
+Came from: LinkedIn
+Landed on: /articles/a-premium-on-judgement.html
+Campaign: five-part-series
+Content: post-3
+```
+
+Chax session emails carry the same block, so you also see which articles started conversations that
+did not convert — usually the more interesting number. Keep `utm_campaign` identical across all five
+posts and vary only `utm_content`; that way the campaign totals aggregate and the per-post numbers
+still separate. Copy the `Landed on` path into the `source` column of
+[pipeline-tracker.csv](pipeline-tracker.csv) and the loop closes: you can total won revenue by article,
+which is the only number that settles what to write next.
+
 ### The page
 
 One page, one job. The CTA hierarchy matters more than its wording:
@@ -352,5 +370,6 @@ Still yours to do:
       becomes "The billable hour's replacement isn't a pricing model"
 - [ ] Add full source URLs to the citations — the drafts carried domains only
 - [ ] Add your LinkedIn profile URL to `articles/index.html` where the comment marks it
+- [ ] Send yourself one test lead through Chax from a tagged link and check the `SOURCE` block reads right
 - [ ] Confirm UTM parameters show up usefully in Vercel analytics before post 1
 - [ ] Write the consolidated sixth piece once the five are out

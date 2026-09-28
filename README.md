@@ -9,11 +9,12 @@ Static site for Axhilles, plus a mascot chat at `/chat`.
 - `readings/` — curated reading list (other people's work)
 - `styles.css` — alabaster / espresso / cobalt
 - `script.js` — booking links, mobile nav
+- `attribution.js` — remembers how a visitor arrived; loaded on every page
 - `chat/` — mascot chat UI (`axhilles.com/chat`)
 - `api/chat.js` — Vercel function; streams Claude Haiku 4.5 with `MASCOT_SYSTEM_PROMPT`
 - `api/chat-log.js` — emails a Chax transcript after 5 min inactive or at turn limit
 - `api/lead.js` — lead form; summarises the transcript and emails Rahul
-- `lib/` — prompts (as-is), placeholders, `saveLead`, `logChatQuestion`
+- `lib/` — prompts (as-is), placeholders, `saveLead`, `logChatQuestion`, `cleanAttribution`
 - `og/` — generated 1200×630 link-preview cards; do not edit by hand
 - `rss.xml`, `sitemap.xml` — generated; `robots.txt` — hand-edited
 - `scripts/verdict-test.mjs` — runs `VERDICT_TEST_CASES` against the mascot
@@ -52,6 +53,34 @@ Without `ANTHROPIC_API_KEY`, `/api/chat` returns “Chat is not configured yet.�
 Leads are emailed with [Resend](https://resend.com). If the email fails, the lead is logged server-side (`LEAD_KEEP`) and the visitor still sees the confirmation.
 
 When a Chax visitor is inactive for 5 minutes after asking at least one question, or hits the turn limit, you get one email with the transcript (`Chax session (…)`). If they already submitted the lead form, that lead email is enough and no session log is sent. If email fails, it is logged server-side as `CHAT_SESSION_KEEP` and still appears in Vercel logs as `CHAT_SESSION`.
+
+## Lead attribution
+
+Both the lead email and the Chax session email open with a `SOURCE` block naming the article that
+earned the conversation:
+
+```
+SOURCE
+Came from: LinkedIn
+Landed on: /articles/a-premium-on-judgement.html
+Campaign: five-part-series
+Content: post-3
+```
+
+`attribution.js` records the referrer, the landing path and any `utm_*` parameters on the first page a
+visitor lands on, keeps it in `localStorage` for 90 days under `axhilles:attribution`, and exposes it as
+`window.axhillesAttribution.get()`. Internal clicks are not treated as new arrivals, and a later direct
+visit does not overwrite the campaign that first brought someone in, so the `first` touch survives while
+`last` follows the most recent external referral.
+
+`chat/chat.js` posts that record with the lead and with the session log. The server discards anything
+malformed, collapses newlines so a crafted value cannot forge its own email section, and truncates each
+field — see `lib/attribution.js`. A lead with no attribution still sends, and prints
+`Came from: — (not captured)`.
+
+Vercel Web Analytics reports campaign tags in aggregate only, which is why this exists: it is what ties
+an individual lead back to a specific article. Tagging conventions are in
+[`sales/content-engine.md`](sales/content-engine.md).
 
 ## Placeholders
 
