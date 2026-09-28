@@ -19,6 +19,10 @@ limited hours, no SDR, and a founder whose time is the most expensive input in t
 Plus [`pipeline-tracker.csv`](pipeline-tracker.csv) — the column set to run it all in, before a CRM is
 worth paying for.
 
+And [`content-engine.md`](content-engine.md) alongside them — where articles get published, how they
+travel from LinkedIn to the site, and how post engagement becomes a lead in the tracker. Outbound
+creates conversations from a standing start; content is what makes every follow-up carry something new.
+
 ---
 
 ## The strategy in one page
@@ -194,8 +198,10 @@ The site is the sales collateral library. Know what to send and when.
 | Contact card — `/rahul-sharma.vcf` | Post-call, so the next call shows up as a name |
 
 **Known gaps to close:** no case-study one-pager with a named outcome, no two-minute showcase video
-from a Habit cohort, and the homepage still needs the Proof of Concept → Alpha Prototype rename.
-The case study is the highest-value gap — it is the asset cold follow-ups most want.
+from a Habit cohort, no single document that makes the whole argument in one place, and the homepage
+still needs the Proof of Concept → Alpha Prototype rename. The case study is the highest-value gap —
+it is the asset cold follow-ups most want. The consolidated guide in
+[`content-engine.md`](content-engine.md) closes the second one.
 
 ---
 
