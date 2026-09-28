@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<!--
+  ARTICLE TEMPLATE — copy this file, do not edit it in place.
+
+    cp articles/_template.html articles/your-slug.html
+
+  Then work top to bottom:
+
+  1. Replace every {{TOKEN}} below. There are six:
+     {{TITLE}}        Sentence case, no "— Axhilles" suffix. Keep it under ~70 characters.
+     {{DESCRIPTION}}  One sentence, 120–160 characters. This is the LinkedIn preview text.
+     {{SLUG}}         The filename without .html. Must match.
+     {{DATE}}         Publish date, YYYY-MM-DD.
+     {{SERIES_N}}     Position in the series, e.g. 2. Delete the meta tag if standalone.
+     {{READ_TIME}}    e.g. "5 min read".
+  2. Write the body inside <div class="article-body">.
+  3. Add the article to articles/index.html.
+  4. Set the prev/next links at the bottom, and add the "next" link to the previous article.
+  5. Run: node scripts/build-og.mjs && node scripts/build-feeds.mjs
+  6. Remove the robots noindex line below. It exists so this template is never indexed.
+
+  The meta tags are the single source of truth for the feed, sitemap and link-preview image,
+  so they have to be right before you run the build scripts.
+-->
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="robots" content="noindex" />
+<title>{{TITLE}} — Axhilles</title>
+<meta name="description" content="{{DESCRIPTION}}" />
+<meta name="author" content="Rahul Sharma" />
+<link rel="canonical" href="https://axhilles.com/articles/{{SLUG}}.html" />
+
+<meta property="og:type" content="article" />
+<meta property="og:site_name" content="Axhilles" />
+<meta property="og:title" content="{{TITLE}}" />
+<meta property="og:description" content="{{DESCRIPTION}}" />
+<meta property="og:url" content="https://axhilles.com/articles/{{SLUG}}.html" />
+<meta property="og:image" content="https://axhilles.com/og/{{SLUG}}.png" />
+<meta property="og:image:width" content="1200" />
+<meta property="og:image:height" content="630" />
+<meta property="article:published_time" content="{{DATE}}" />
+<meta property="article:author" content="Rahul Sharma" />
+<meta name="axhilles:series" content="{{SERIES_N}}" />
+
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="{{TITLE}}" />
+<meta name="twitter:description" content="{{DESCRIPTION}}" />
+<meta name="twitter:image" content="https://axhilles.com/og/{{SLUG}}.png" />
+
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' fill='%23FBF9F6'/%3E%3Ccircle cx='50' cy='50' r='18' fill='%230020C2'/%3E%3C/svg%3E" />
+<link rel="alternate" type="application/rss+xml" title="Axhilles articles" href="/rss.xml" />
+<link rel="stylesheet" href="/styles.css" />
+<link rel="stylesheet" href="/articles/articles.css" />
+<script>
+  window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };
+</script>
+<script defer src="/_vercel/insights/script.js"></script>
+</head>
+<body>
+
+<div class="hero-wash" aria-hidden="true"></div>
+
+<div class="wrap">
+
+  <nav class="topbar">
+    <a href="/" class="logo-mark">axhilles</a>
+    <div class="links">
+      <a class="nav-link" href="/#services">Services</a>
+      <a class="nav-link" href="/#about">About</a>
+      <a class="nav-link active" href="/articles/">Articles</a>
+      <a class="nav-link" href="/readings/">Reading list</a>
+      <a class="nav-link" href="/#contact">Contact</a>
+      <a class="nav-link" href="/chat/">Chat</a>
+    </div>
+    <button class="nav-toggle" aria-label="Toggle menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+  </nav>
+
+  <main class="article-page">
+
+    <a class="article-back" href="/articles/">&larr; All articles</a>
+
+    <p class="article-kicker">{{SERIES_N}} of 5</p>
+    <h1 class="article-title">{{TITLE}}</h1>
+    <p class="article-dek">{{DESCRIPTION}}</p>
+
+    <div class="article-meta">
+      <span>Rahul Sharma</span>
+      <span>{{DATE}}</span>
+      <span>{{READ_TIME}}</span>
+    </div>
+
+    <div class="article-body">
+
+      <p>Opening paragraph. Lead with the claim, not the context.</p>
+
+      <h2>A section heading</h2>
+
+      <p>Body copy. Footnote a source like this.<sup class="article-ref"><a href="#citation-1">1</a></sup></p>
+
+      <p class="article-stat">Pull out the one number the argument turns on.</p>
+
+      <!-- Mid-article Chax prompt. Keep it after the argument has landed, roughly two thirds down. -->
+      <div class="article-aside">
+        <p>Got a version of this problem in your own business? Ask Chax &mdash; it is a two-minute
+        conversation, and you will get a straight answer about whether AI is actually the fix.</p>
+        <a class="btn-secondary" href="/chat/">Ask Chax</a>
+      </div>
+
+      <p>Closing paragraph. Land on something the reader can do, or a question worth sitting with.</p>
+
+    </div>
+
+    <div class="article-citations">
+      <p class="article-citation" id="citation-1"><sup>1</sup> Source name, publisher, year.</p>
+    </div>
+
+    <div class="article-end">
+      <p class="cta-sub">Prefer to talk it through?</p>
+      <div class="cta-actions">
+        <a class="btn-primary" data-booking href="https://calendly.com/r-sharma-nz/30min">Book a Discovery session</a>
+      </div>
+      <p class="article-end-links">
+        Related: <a href="/offers/building-a-habit.html">Building a habit</a> &mdash; the four-week
+        programme this argument points at.
+      </p>
+    </div>
+
+    <nav class="article-nav" aria-label="More in this series">
+      <a href="/articles/PREVIOUS-SLUG.html">
+        <span class="article-nav-label">Previous</span>
+        <span class="article-nav-title">Previous article title</span>
+      </a>
+      <a class="article-nav-next" href="/articles/NEXT-SLUG.html">
+        <span class="article-nav-label">Next</span>
+        <span class="article-nav-title">Next article title</span>
+      </a>
+    </nav>
+
+  </main>
+
+  <footer class="site-footer">
+    <p class="footer-cities"><span class="city city-accent">Auckland</span> <span class="sep">|</span> Melbourne <span class="sep">|</span> Austin</p>
+    <p>&copy; <span id="year"></span> Axhilles. All rights reserved.</p>
+  </footer>
+
+</div>
+
+<script src="/script.js"></script>
+</body>
+</html>

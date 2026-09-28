@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Axhilles — Articles</title>
+    <link>https://axhilles.com/articles/</link>
+    <atom:link href="https://axhilles.com/rss.xml" rel="self" type="application/rss+xml" />
+    <description>What actually changes when a service business puts AI to work — and what doesn't.</description>
+    <language>en-nz</language>
+    <lastBuildDate>Mon, 28 Sep 2026 21:21:35 GMT</lastBuildDate>
+    <item>
+      <title>Everyone has the tools. Nothing has changed.</title>
+      <link>https://axhilles.com/articles/everyone-has-the-tools.html</link>
+      <guid isPermaLink="true">https://axhilles.com/articles/everyone-has-the-tools.html</guid>
+      <pubDate>Mon, 28 Sep 2026 20:00:00 GMT</pubDate>
+      <description>Most firms now have AI access and almost nothing to show for it. The gap isn&apos;t tools or training — it&apos;s that nobody&apos;s actual work has changed shape.</description>
+    </item>
+  </channel>
+</rss>
