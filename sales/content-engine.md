@@ -106,28 +106,26 @@ If that day comes, the move is cheap: keep the site as canonical, and mirror int
 canonical URL pointed back at `axhilles.com` where the platform allows it. Publishing site-first and
 letting it get indexed before mirroring handles the duplicate-content question either way.
 
-### Two decisions to make before publishing
+### Two decisions that are now made
 
-**1. The nav collision.** "Articles" in the nav currently points at a curated list of other people's
-writing. The moment you publish your own, that is confusing. Pick one:
+Both of these were blockers. Both are built — see the repo `README.md` for the publishing steps.
 
-- Rename the existing page **Reading list** and give **Articles** (or **Writing**) to your own work.
-  Cleanest, and it is the option I would take.
-- Or keep one **Articles** page with your work at the top and the curated list beneath it. Fewer
-  changes, but it buries your own writing under a heading that promises someone else's.
+**1. The nav collision.** "Articles" used to point at a curated list of other people's writing, which
+would be confusing the moment you published your own. Resolved by keeping the `/readings/` URL, since
+it is live and linked from the mascot prompt, and relabelling it **Reading list**. Your own writing
+now owns **Articles** at `/articles/`, and the two pages cross-link.
 
-Note that `lib/placeholders.js` sets `READING_LIST_LINK` to `axhilles.com/readings/` and Chax uses it
-in its handoff. Whichever way you go, that token should point at whichever page you most want a
-warm visitor to land on.
+`READING_LIST_LINK` in `lib/placeholders.js` deliberately still points at `/readings/`: the mascot
+uses it to recommend Ben Evans' presentation and other third-party pieces, so it should stay on the
+curated list rather than follow the nav label.
 
-**2. Link previews are missing, and this one is not optional.** There are no Open Graph or Twitter
-card tags anywhere on the site. Right now, a LinkedIn post linking to `axhilles.com` renders a bare,
-unattractive preview, and the preview image is a large part of whether anyone clicks. Add `og:title`,
-`og:description`, `og:image`, `og:url` and `twitter:card` to the article template before the first
-post goes out. Nothing else in this document works as well without it.
+**2. Link previews.** There were no Open Graph or Twitter card tags anywhere on the site, so a
+LinkedIn post linking to `axhilles.com` rendered a bare preview — and the image is a large part of
+whether anyone clicks. Now on every public page, with a generated 1200×630 card per article carrying
+the title and its number in the series, so the preview and the page a reader lands on match.
 
-Worth adding at the same time: a `canonical` tag on each article, a `sitemap.xml`, and an RSS feed.
-The feed costs little and means anyone can follow the writing without you owning a list.
+`canonical` tags, `sitemap.xml`, `robots.txt` and an RSS feed came in at the same time. The feed
+means anyone can follow the writing without you having to own a list.
 
 ---
 
@@ -285,15 +283,22 @@ Two diagnostics:
 
 ---
 
-## Build checklist, if you go site-canonical
+## Build checklist
 
-Small and contained, mostly by reusing what exists.
+Done:
 
-- [ ] Article template — adapt the `offers/one-pager.css` long-form pattern into an article layout
-- [ ] Open Graph and Twitter card tags, plus `canonical`, in the template. **Do this first**
-- [ ] Series index page with numbered posts and next/previous links between articles
-- [ ] Resolve the nav collision: rename `/readings/` to Reading list, or nest your work above it
-- [ ] Point `READING_LIST_LINK` in `lib/placeholders.js` at whichever page should receive warm traffic
-- [ ] A mid-article Chax link and an end-of-article Discovery CTA in the template
-- [ ] `sitemap.xml`, `robots.txt`, and an RSS feed
+- [x] Article template at `articles/_template.html`, with an article layout in `articles/articles.css`
+- [x] Open Graph, Twitter card and `canonical` tags on every public page
+- [x] Generated 1200×630 preview card per article, titled and numbered
+- [x] Series index at `/articles/` with numbered entries and prev/next links between articles
+- [x] Nav collision resolved: `/readings/` relabelled Reading list, `/articles/` is our own writing
+- [x] Mid-article Chax prompt and an end-of-article Discovery CTA in the template
+- [x] `rss.xml`, `sitemap.xml` and `robots.txt`
+
+Still yours to do:
+
+- [ ] Paste the five drafts in, one file each, and add them to the index
+- [ ] Add your LinkedIn profile URL to `articles/index.html` where the comment marks it
+- [ ] Decide the publishing order — strongest claim first, see above
 - [ ] Confirm UTM parameters show up usefully in Vercel analytics before post 1
+- [ ] Write the consolidated sixth piece once the five are out
