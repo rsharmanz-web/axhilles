@@ -15,6 +15,7 @@ Static site for Axhilles, plus a mascot chat at `/chat`.
 - `lib/` — prompts (as-is), placeholders, `saveLead`, `logChatQuestion`
 - `scripts/verdict-test.mjs` — runs `VERDICT_TEST_CASES` against the mascot
 - `spine/` — audit and finance workshop boards
+- `sales/` — outbound playbook: ICP and list building, cold-call scripts, lead scoring, follow-up cadences, pipeline tracker
 
 ## Running locally
 
