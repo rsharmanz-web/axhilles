@@ -5,7 +5,7 @@
 // Needs Chrome on the path. Set CHROME to override the binary.
 // Run it after adding or retitling an article.
 
-import { mkdir, mkdtemp, stat, writeFile, rm } from "node:fs/promises";
+import { mkdir, mkdtemp, readdir, stat, writeFile, rm } from "node:fs/promises";
 import { execFile, spawn } from "node:child_process";
 import { tmpdir } from "node:os";
 import { join } from "node:path";
@@ -228,6 +228,15 @@ try {
     );
     console.log(`og/${article.slug}.png`);
     index += 1;
+  }
+
+  // Drop cards for articles that have been renamed or removed, so og/ never keeps orphans.
+  const keep = new Set(["default.png", ...articles.map((a) => `${a.slug}.png`)]);
+  for (const name of await readdir(join(root, "og"))) {
+    if (name.endsWith(".png") && !keep.has(name)) {
+      await rm(join(root, "og", name));
+      console.log(`removed stale og/${name}`);
+    }
   }
 } finally {
   // A killed chrome can still be flushing its profile, so a failed cleanup of a temp dir is not

@@ -152,12 +152,15 @@
   margin-bottom: 1rem;
 }
 
+/* Sentence case, unlike the uppercase display headings elsewhere: article titles carry
+   punctuation, and this matches the link-preview cards readers see before they arrive. */
 .article-title {
   font-family: var(--font-technical);
   font-weight: 700;
   font-size: clamp(1.75rem, 4.2vw, 2.85rem);
   line-height: 1.08;
   letter-spacing: -0.03em;
+  text-transform: none;
   color: var(--color-espresso);
   margin-bottom: 1.25rem;
   max-width: 26ch;
@@ -209,13 +212,16 @@
   margin-top: 1.35rem;
 }
 
+/* The global h2 is an 11px label at half opacity, so size, case and opacity are all restated. */
 .article-body h2 {
   font-family: var(--font-technical);
   font-weight: 700;
   font-size: clamp(1.1rem, 2.2vw, 1.35rem);
   line-height: 1.2;
   letter-spacing: -0.015em;
+  text-transform: uppercase;
   color: var(--color-espresso);
+  opacity: 1;
   margin: 3rem 0 1.15rem;
 }
 
@@ -268,6 +274,12 @@
   text-underline-offset: 3px;
 }
 
+/* Buttons inside the body would otherwise inherit the prose underline above. */
+.article-body .btn-primary,
+.article-body .btn-secondary {
+  text-decoration: none;
+}
+
 .article-body blockquote {
   margin: 2rem 0;
   padding-left: 1.5rem;
@@ -285,14 +297,16 @@
   margin: 2.75rem 0;
 }
 
-/* Pull-quote style stat, for the number the article turns on */
-.article-stat {
+/* Pull-quote style stat, for the number the article turns on.
+   Scoped under .article-body so it outranks the body paragraph rule above. */
+.article-body p.article-stat {
   font-family: var(--font-technical);
   font-weight: 700;
   font-size: clamp(1.35rem, 3vw, 1.9rem);
   line-height: 1.2;
   letter-spacing: -0.025em;
   color: var(--color-cobalt);
+  opacity: 1;
   margin: 2.5rem 0;
   max-width: 30ch;
 }
