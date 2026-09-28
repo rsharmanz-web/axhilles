@@ -225,6 +225,33 @@ them as five articles. If they only make sense in sequence, they are chapters, n
 case publish them as one guide on the site and drip *excerpts* to LinkedIn, each linking to its
 section. Do not drip chapters as if they were articles; readers arriving at chapter 3 will bounce.
 
+**The four drafts pass this test.** Each carries its own claim, its own evidence and its own payoff:
+exposure is not impact; the metering is coming whether you opt in or not; the question is what to sell
+rather than how to price; and a workshop only reaches the people already building. They share a spine —
+the organisation is the bottleneck, and judgement is what stays scarce — without depending on each
+other. So: five articles, dripped. Not a guide.
+
+### They are currently post-length, not article-length
+
+Worth deciding before post 1. The drafts run 260 to 405 words. That is almost exactly the length
+recommended for the LinkedIn post itself, which means if the article and the post carry the same
+content there is no reason to click through, and the whole flow above collapses into "post on
+LinkedIn".
+
+Two ways out, and either is fine as long as it is chosen deliberately:
+
+1. **Expand the articles and tighten the posts.** The post carries the argument in 200 words; the
+   article adds what does not fit — a worked example from your own client work, the data behind the
+   claim, the obvious objection answered. Note that the placeholders left in the drafts are exactly
+   where this expansion belongs: the token-triage example, and the cricket app detail. Those are the
+   paragraphs that earn the click, because they are the parts nobody else could have written.
+2. **Treat them as posts and let the site be the archive.** Publish as-is, accept that click-through
+   will be low, and let the article pages earn their keep through search, credibility when you send a
+   link mid-cadence, and the Chax prompt — rather than through traffic from LinkedIn.
+
+Option 1 for the two commercially pointed pieces at minimum. Option 2 is a legitimate choice for the
+rest, but not by accident.
+
 ### Order them for the job, not for the logic
 
 The instinct is to open with context and save the sharpest piece for last. Invert it. **Post 1 has to
@@ -232,11 +259,30 @@ earn the audience for 2 through 5**, so lead with the strongest, most contrarian
 you have. The scene-setting piece, if you need one at all, goes third where a committed reader will
 forgive it.
 
-Beyond that, sequence toward the offer ladder. Lead with the pieces that map to the adoption problem —
-everyone has the tools, nothing has changed — because that is what
-[Building a habit](../offers/building-a-habit.html) sells against, and it is the beachhead offer.
-Save the mapping and sequencing arguments, which point at Baseline to Roadmap, for pieces 4 and 5 when
-readers are more invested.
+Beyond that, sequence toward the offer ladder. Lead with the pieces that map to the adoption problem,
+because that is what [Building a habit](../offers/building-a-habit.html) sells against and it is the
+beachhead offer. Save the business-model arguments, which point at Baseline to Roadmap, for later
+pieces when readers are more invested.
+
+**Applied to the four drafts.** The order as numbered is 1) exposure is not impact, 2) the token
+economy, 3) a premium on judgement, 4) from chatting to building. Built as numbered, but one change is
+worth considering:
+
+- **Keep *AI exposure isn't the same thing as AI impact* as post 1.** It is the right opener by every
+  test — contrarian, densely evidenced, and it closes by posing the question the rest of the series
+  answers. Do not move it.
+- **Move *From chatting to building* up to 2.** It is the most actionable of the four, the
+  four-audiences framework is the most shareable thing in the set, and it maps almost line-for-line to
+  Building a habit — the set-up session, the weekly check-ins, the week-four show-and-tell. Getting
+  the beachhead offer in front of readers while attention is highest is worth more than saving the
+  practical piece for last.
+- **Then *A premium on judgement*** at 3, which is the Baker Tilly partner piece: it is about the firm's
+  business model, so it points at Baseline to Roadmap and board advisory, and it wants a reader who is
+  already invested.
+- **Then the token economy** at 4. It is the most enjoyable and the least commercially pointed, which
+  makes it a good post for an audience that already follows you.
+
+Reordering costs two edits per file: the `axhilles:series` meta tag and the kicker above the title.
 
 Name the series and number the posts, "(2 of 5)". It costs nothing and it makes people look for the
 next one.
@@ -295,10 +341,16 @@ Done:
 - [x] Mid-article Chax prompt and an end-of-article Discovery CTA in the template
 - [x] `rss.xml`, `sitemap.xml` and `robots.txt`
 
+- [x] Four drafts built as article pages — article 1 publish-ready, 2 to 4 held as `noindex` drafts
+
 Still yours to do:
 
-- [ ] Paste the five drafts in, one file each, and add them to the index
+- [ ] Article 5
+- [ ] Resolve the two placeholders: the token-triage example, and the cricket app detail
+- [ ] Decide on post-length versus article-length, per above
+- [ ] Settle two titles: whether "(The price of judgement)" is a series name, and whether article 3
+      becomes "The billable hour's replacement isn't a pricing model"
+- [ ] Add full source URLs to the citations — the drafts carried domains only
 - [ ] Add your LinkedIn profile URL to `articles/index.html` where the comment marks it
-- [ ] Decide the publishing order — strongest claim first, see above
 - [ ] Confirm UTM parameters show up usefully in Vercel analytics before post 1
 - [ ] Write the consolidated sixth piece once the five are out
