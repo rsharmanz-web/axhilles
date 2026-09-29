@@ -7,6 +7,7 @@ Static site for Axhilles, plus a mascot chat at `/chat`.
 - `index.html` — marketing page
 - `articles/` — original writing: `index.html` series index, one file per article, `_template.html` to copy
 - `readings/` — curated reading list (other people's work)
+- `privacy/` — privacy policy; **unreviewed draft**, see below
 - `styles.css` — alabaster / espresso / cobalt
 - `script.js` — booking links, mobile nav
 - `attribution.js` — remembers how a visitor arrived; loaded on every page
@@ -56,6 +57,26 @@ When a Chax visitor is inactive for 5 minutes after asking at least one question
 closes the tab, you get one email with the transcript (`Chax session (…)`). If email fails, it is logged
 server-side as `CHAT_SESSION_KEEP` and still appears in Vercel logs as `CHAT_SESSION`.
 
+## Privacy policy
+
+`privacy/index.html` is an **unreviewed draft** and is `noindex` until two things happen: the
+`{{LEGAL_ENTITY}}` and `{{POSTAL_ADDRESS}}` tokens are filled, and a lawyer has read it. The file header
+lists the full publishing checklist, including adding `/privacy/` to `STATIC_PAGES` in
+`scripts/build-feeds.mjs` so it enters the sitemap.
+
+What it says was written against the code rather than from a template, which is the part a lawyer can't
+check for you. In particular it discloses that the chat transcript is emailed to a human even when the
+visitor stays anonymous, that the chat requires a name and email to continue and what the alternative is,
+and that the transcript is sent back to the model to generate an assessment of the visitor. It names all
+four processors — Anthropic, Resend, Vercel, Calendly — and describes the real browser storage keys and
+retention rather than generic cookie language.
+
+**It goes stale the moment the data flows change.** If a processor is added, or the chat starts doing
+something else with a transcript, this file is the thing that is wrong first and most expensively.
+
+The policy is linked from the footer of every page that has one, from the chat sidebar, from the
+persistent notice under the chat composer, and from the consent block in the lead form.
+
 ## The chat gate
 
 Chax answers one real question, then asks for a name and email before it will answer another. The
@@ -66,6 +87,12 @@ many questions come first.
 Easter eggs and the Odyssey answer do not count towards it. The locked replies carry an `offerBook` flag
 that marks the ones engaging with the business question, and only those increment the counter, so nobody
 gets walled straight after a joke.
+
+The form asks for two separate ticks. The required one consents to a reply about this conversation; the
+optional one consents to marketing and is reported in the lead email as `Marketing opt-in`. They are kept
+apart so the nurture cadence in `sales/4-follow-up.md` rests on consent somebody actually gave. Below them
+sits a notice carrying the 18+ statement, the fact that the transcript is emailed either way, and a link
+to the policy.
 
 Leads carry a `reason` so the subject line separates the two kinds:
 
@@ -120,9 +147,9 @@ Edit `lib/placeholders.js` (and the matching constants at the top of `chat/chat.
 - `{{MASCOT_NAME}}`
 - `{{BOOKING_LINK}}`
 - `{{READING_LIST_LINK}}` — filled with `https://axhilles.com/readings/`
-- `{{PRIVACY_URL}}` — also in `chat/index.html`
+- `{{PRIVACY_URL}}` — filled with `https://axhilles.com/privacy/`
 
-`BOOKING_LINK` and `READING_LIST_LINK` are live URLs so the mascot handoff can point at them. `PRIVACY_URL` is still a token.
+All three are live URLs so the mascot handoff can point at them, and `fillMascotPrompt` substitutes all three.
 
 ## Publishing an article
 
