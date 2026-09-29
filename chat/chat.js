@@ -23,6 +23,9 @@
 
   const BOOKING_LINK = "https://calendly.com/r-sharma-nz/30min";
   const MAX_MESSAGES = 30;
+  // Answer this many real questions before asking who we are talking to. One buys enough goodwill to
+  // be worth a name; two and most cold readers have already got what they came for and left.
+  const FREE_EXCHANGES = 1;
   const VARIANT_KEY = "ax-opener-variant";
   const X_EGG =
     "Cos X gon' deliver to ya (Uh) Knock-knock, open up the door, it's real";
@@ -109,6 +112,11 @@
   let leadShown = false;
   let leadSent = false;
   let sessionLogged = false;
+  let gateOpen = false;
+  // Easter eggs and the Odyssey answer do not count. Being walled after a joke reads as a bait.
+  let realExchanges = 0;
+  let visitor = null;
+  let userTurnsAtCapture = 0;
   let awaitingTottenhamThanks = false;
   let idleTimer = null;
   const IDLE_MS = 5 * 60 * 1000;
@@ -153,7 +161,7 @@
   }
   function syncSend() {
     const empty = !input.value.trim();
-    send.disabled = empty || busy || capped;
+    send.disabled = empty || busy || capped || gateOpen;
     cursor.classList.toggle("is-empty", empty);
   }
   input.addEventListener("input", () => {
@@ -268,8 +276,9 @@
       btn.textContent = chip.label;
       btn.addEventListener("click", () => {
         setChips([]);
-        if (chip.id === "book") showLeadForm();
-        else sendPrompt(chip.label);
+        if (chip.id !== "book") sendPrompt(chip.label);
+        else if (leadSent) window.open(BOOKING_LINK, "_blank", "noopener");
+        else showLeadForm("booking");
       });
       chipsEl.appendChild(btn);
     });
@@ -290,7 +299,7 @@
   }
 
   function bumpIdle() {
-    if (sessionLogged || leadSent || capped) return;
+    if (sessionLogged || capped) return;
     const users = messages.filter((m) => m.role === "user");
     if (!users.length) return;
     clearIdleTimer();
@@ -302,10 +311,13 @@
   }
 
   function flushSessionLog(reason) {
-    if (sessionLogged || leadSent) return;
+    if (sessionLogged) return;
     const transcript = sessionTranscript();
     const users = transcript.filter((m) => m.role === "user");
     if (!users.length) return;
+    // Details captured mid-chat already emailed the transcript so far. Only send the rest if the
+    // conversation actually carried on, otherwise the same exchange arrives twice.
+    if (visitor && users.length <= userTurnsAtCapture) return;
     sessionLogged = true;
     clearIdleTimer();
     const normalized =
@@ -315,6 +327,7 @@
       source: "chat",
       question: users[0].content,
       transcript,
+      visitor,
       attribution: visitorAttribution(),
     });
     try {
@@ -340,28 +353,72 @@
     syncSend();
     addAssistantStatic("That's a decent run. If you want to keep going, book a chat with Rahul.");
     flushSessionLog("turn-limit");
-    if (!leadShown && !leadSent) {
-      setChips([{ id: "book", label: "Book a chat" }]);
-    }
+    setChips([{ id: "book", label: "Book a Discovery session" }]);
   }
 
-  function showLeadForm() {
+  function offerBooking() {
+    setChips([{ id: "book", label: leadSent ? "Book a Discovery session" : "Book a chat" }]);
+  }
+
+  function lockComposer() {
+    gateOpen = true;
+    composer.classList.add("is-locked");
+    input.disabled = true;
+    syncSend();
+  }
+
+  function unlockComposer() {
+    gateOpen = false;
+    composer.classList.remove("is-locked");
+    if (!capped) {
+      input.disabled = false;
+      input.focus();
+    }
+    syncSend();
+  }
+
+  function gateDue() {
+    return !leadShown && !leadSent && realExchanges >= FREE_EXCHANGES;
+  }
+
+  function firstName(name) {
+    const first = String(name || "").trim().split(/\s+/)[0] || "";
+    return first.slice(0, 40);
+  }
+
+  // reason is "gate" when we stopped them to ask, "booking" when they asked for a call. It decides the
+  // copy here and the subject line of the email, so Rahul can tell a hand-raise from a curious reader.
+  function showLeadForm(reason) {
     if (leadShown || leadSent) return;
     leadShown = true;
     setChips([]);
 
+    const gating = reason === "gate" || reason === "booking-gate";
+    const wantsCall = reason === "booking" || reason === "booking-gate";
+    if (gating) lockComposer();
+
+    const intro = gating
+      ? "Happy to keep going. First though, who am I talking to?"
+      : "Leave your details and Rahul will get back to you. No slides, no hype.";
+    const note = gating
+      ? '<p class="lead-form-note">Rahul reads every one of these himself. Without a name and an email he can&rsquo;t pick up where I leave off.</p>'
+      : "";
+
     const wrap = document.createElement("form");
     wrap.className = "lead-form";
     wrap.innerHTML =
-      '<p class="lead-form-intro">Leave your details and Rahul will get back to you. No slides, no hype.</p>' +
+      '<p class="lead-form-intro">' + intro + "</p>" +
+      note +
       '<label>Name<input name="name" type="text" autocomplete="name" required></label>' +
       '<label>Email<input name="email" type="email" autocomplete="email" required></label>' +
       '<label>Business name <span class="optional">(optional)</span><input name="business" type="text" autocomplete="organization"></label>' +
       '<label class="lead-consent"><input name="consent" type="checkbox" required> I\'m happy for Axhilles to contact me about this chat.</label>' +
-      '<button class="lead-submit" type="submit">Send</button>' +
+      '<button class="lead-submit" type="submit">' + (gating ? "Continue" : "Send") + "</button>" +
       '<p class="lead-error" hidden></p>';
     thread.appendChild(wrap);
     thread.scrollTop = thread.scrollHeight;
+    const firstField = wrap.querySelector('input[name="name"]');
+    if (firstField) firstField.focus();
 
     wrap.addEventListener("submit", async (e) => {
       e.preventDefault();
@@ -388,6 +445,7 @@
             email,
             business,
             consent,
+            reason: wantsCall ? "booking" : "gate",
             openerVariant: openerVariant.id,
             transcript: [{ role: "assistant", content: openerVariant.text }].concat(apiMessages()),
             attribution: visitorAttribution(),
@@ -398,12 +456,29 @@
           throw new Error(data.error || "Could not send.");
         }
         leadSent = true;
-        sessionLogged = true;
-        clearIdleTimer();
+        visitor = { name, email };
+        userTurnsAtCapture = apiMessages().filter((m) => m.role === "user").length;
         const thanks = document.createElement("div");
         thanks.className = "assistant-message";
-        thanks.innerHTML = renderMarkdown("Sweet, Rahul will be in touch, usually within a day.");
-        wrap.replaceWith(thanks);
+        if (gating) {
+          // The transcript so far went out with the lead. Leave session logging armed so whatever they
+          // say next arrives too, otherwise the useful half of the conversation is never seen.
+          thanks.innerHTML = renderMarkdown(
+            "Thanks " +
+              firstName(name) +
+              (wantsCall
+                ? ". Rahul will sort a time with you. Keep going in the meantime if you like."
+                : ". Ask away.")
+          );
+          wrap.replaceWith(thanks);
+          unlockComposer();
+          bumpIdle();
+        } else {
+          sessionLogged = true;
+          clearIdleTimer();
+          thanks.innerHTML = renderMarkdown("Sweet, Rahul will be in touch, usually within a day.");
+          wrap.replaceWith(thanks);
+        }
         thread.scrollTop = thread.scrollHeight;
       } catch (err) {
         btn.disabled = false;
@@ -415,7 +490,9 @@
 
   async function sendPrompt(text) {
     const content = text.trim();
-    if (!content || busy || capped) return;
+    // gateOpen is checked here as well as on the disabled textarea: the lock has to hold in logic, not
+    // just in CSS, so nothing that reaches sendPrompt can slip a message past it.
+    if (!content || busy || capped || gateOpen) return;
     if (apiMessages().length >= MAX_MESSAGES) {
       hitCap();
       return;
@@ -438,10 +515,12 @@
       syncSend();
       bumpIdle();
       input.focus();
-      if (locked.offerBook && !leadSent) {
-        setChips([{ id: "book", label: "Book a chat" }]);
-      }
+      // offerBook marks the answers that engage with the business question. The Odyssey and Tottenham
+      // replies do not, so they never trip the gate.
+      if (locked.offerBook) realExchanges += 1;
       if (apiMessages().length >= MAX_MESSAGES) hitCap();
+      else if (gateDue()) showLeadForm("gate");
+      else if (locked.offerBook) offerBooking();
       return;
     }
 
@@ -480,12 +559,12 @@
       if (!assembled.trim()) throw new Error("Empty reply.");
       messages.push({ role: "assistant", content: assembled });
       await typeInto(bubble, assembled);
-      if (looksLikeBooking(assembled) && !leadSent) {
-        showLeadForm();
-      } else if (!leadSent) {
-        setChips([{ id: "book", label: "Book a chat" }]);
-      }
+      realExchanges += 1;
+      const offeredCall = looksLikeBooking(assembled);
       if (apiMessages().length >= MAX_MESSAGES) hitCap();
+      else if (gateDue()) showLeadForm(offeredCall ? "booking-gate" : "gate");
+      else if (offeredCall && !leadSent) showLeadForm("booking");
+      else offerBooking();
     } catch (err) {
       const msg =
         err instanceof Error ? err.message : "Something went wrong. Please try again.";
@@ -505,7 +584,9 @@
     const href = a.getAttribute("href") || "";
     if (looksLikeBooking(href) || looksLikeBooking(a.textContent)) {
       e.preventDefault();
-      showLeadForm();
+      // Once we know who they are the form has nothing left to ask, so send them to the calendar.
+      if (leadSent) window.open(BOOKING_LINK, "_blank", "noopener");
+      else showLeadForm("booking");
     }
   });
 
@@ -513,6 +594,10 @@
     e.preventDefault();
     sendPrompt(input.value);
   });
+
+  // Someone who closes the tab rather than fill in the gate used to be lost entirely: the idle log only
+  // fires after five minutes. pagehide covers tab close and navigation away, so the question still lands.
+  window.addEventListener("pagehide", () => flushSessionLog("session-end"));
   document.querySelector('[data-action="home"]').addEventListener("click", () => {
     thread.scrollTop = 0;
     closeSidebar();

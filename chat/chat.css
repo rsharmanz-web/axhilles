@@ -322,7 +322,8 @@ body.sidebar-open .page-wrapper { padding-left: var(--sidebar-width); }
   50% { opacity: 0; }
 }
 
-.chat-input-row.is-capped {
+.chat-input-row.is-capped,
+.chat-input-row.is-locked {
   opacity: 0.4;
   pointer-events: none;
 }
@@ -396,6 +397,13 @@ body.sidebar-open .page-wrapper { padding-left: var(--sidebar-width); }
   font-family: var(--font-editorial);
   font-size: 20px;
   line-height: 1.45;
+}
+.lead-form-note {
+  margin: -6px 0 0;
+  font-family: var(--font-technical);
+  font-size: 13px;
+  line-height: 1.5;
+  color: var(--ink-2);
 }
 .lead-form label {
   display: flex;

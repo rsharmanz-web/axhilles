@@ -9,6 +9,17 @@ const MAX_HISTORY = 40;
 
 const rateLimit = makeRateLimit(WINDOW_MS, MAX_PER_WINDOW);
 
+// Set once the visitor has given their details mid-chat, so the follow-up transcript is not anonymous.
+// Newlines are stripped because these land in an email body.
+function cleanVisitor(raw) {
+  if (!raw || typeof raw !== "object") return null;
+  const field = (v) => (typeof v === "string" ? v.replace(/\s+/g, " ").trim().slice(0, 200) : "");
+  const name = field(raw.name);
+  const email = field(raw.email);
+  if (!name && !email) return null;
+  return { name, email };
+}
+
 module.exports = async function handler(req, res) {
   if (req.method === "OPTIONS") {
     res.setHeader("Allow", "POST, OPTIONS");
@@ -34,6 +45,7 @@ module.exports = async function handler(req, res) {
     body.reason === "turn-limit" || body.reason === "inactive" || body.reason === "session-end"
       ? body.reason
       : "inactive";
+  const visitor = cleanVisitor(body.visitor);
   const source = typeof body.source === "string" ? body.source.slice(0, 40) : "chat";
   const transcript = cleanMessages(body.transcript, MAX_CHARS, MAX_HISTORY);
   const userTurns = transcript.filter((m) => m.role === "user").length;
@@ -48,6 +60,7 @@ module.exports = async function handler(req, res) {
     transcript,
     reason,
     source,
+    visitor,
     attribution: cleanAttribution(body.attribution),
   });
   return res.status(204).end();

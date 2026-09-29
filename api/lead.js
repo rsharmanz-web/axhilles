@@ -41,6 +41,7 @@ module.exports = async function handler(req, res) {
   const email = typeof body.email === "string" ? body.email.trim() : "";
   const business = typeof body.business === "string" ? body.business.trim() : "";
   const openerVariant = typeof body.openerVariant === "string" ? body.openerVariant.trim() : "";
+  const reason = body.reason === "booking" || body.reason === "gate" ? body.reason : "";
   if (!name) return bad(res, 400, "Name is required.");
   if (!EMAIL_RE.test(email)) return bad(res, 400, "A valid email is required.");
   if (!body.consent) return bad(res, 400, "Consent is required.");
@@ -95,6 +96,7 @@ module.exports = async function handler(req, res) {
     business,
     consent: true,
     openerVariant,
+    reason,
     timestamp,
     transcript,
     summary,
