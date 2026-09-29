@@ -412,7 +412,11 @@
       '<label>Name<input name="name" type="text" autocomplete="name" required></label>' +
       '<label>Email<input name="email" type="email" autocomplete="email" required></label>' +
       '<label>Business name <span class="optional">(optional)</span><input name="business" type="text" autocomplete="organization"></label>' +
-      '<label class="lead-consent"><input name="consent" type="checkbox" required> I\'m happy for Axhilles to contact me about this chat.</label>' +
+      // Two ticks, deliberately. The required one is a reply to this conversation; the optional one is
+      // marketing. Bundling them would leave the nurture cadence resting on consent nobody gave.
+      '<label class="lead-consent"><input name="consent" type="checkbox" required> I\'m happy for Axhilles to email me about this chat.</label>' +
+      '<label class="lead-consent"><input name="marketing" type="checkbox"> Also send me the occasional article. Unsubscribe any time.</label>' +
+      '<p class="lead-form-legal">For business users aged 18 or over. Your conversation is emailed to Rahul whether or not you fill this in. <a href="/privacy/" target="_blank" rel="noopener noreferrer">How we handle your information</a></p>' +
       '<button class="lead-submit" type="submit">' + (gating ? "Continue" : "Send") + "</button>" +
       '<p class="lead-error" hidden></p>';
     thread.appendChild(wrap);
@@ -429,6 +433,7 @@
       const email = String(fd.get("email") || "").trim();
       const business = String(fd.get("business") || "").trim();
       const consent = fd.get("consent") === "on";
+      const marketing = fd.get("marketing") === "on";
       errorEl.hidden = true;
       if (!name || !email || !consent) {
         errorEl.textContent = "Name, email, and consent are required.";
@@ -445,6 +450,7 @@
             email,
             business,
             consent,
+            marketing,
             reason: wantsCall ? "booking" : "gate",
             openerVariant: openerVariant.id,
             transcript: [{ role: "assistant", content: openerVariant.text }].concat(apiMessages()),

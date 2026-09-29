@@ -45,6 +45,7 @@ module.exports = async function handler(req, res) {
   if (!name) return bad(res, 400, "Name is required.");
   if (!EMAIL_RE.test(email)) return bad(res, 400, "A valid email is required.");
   if (!body.consent) return bad(res, 400, "Consent is required.");
+  const marketing = body.marketing === true;
 
   const transcript = cleanMessages(body.transcript, MAX_CHARS, MAX_HISTORY);
   const timestamp = new Date().toISOString();
@@ -95,6 +96,7 @@ module.exports = async function handler(req, res) {
     email,
     business,
     consent: true,
+    marketing,
     openerVariant,
     reason,
     timestamp,
