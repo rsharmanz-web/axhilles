@@ -59,10 +59,10 @@ server-side as `CHAT_SESSION_KEEP` and still appears in Vercel logs as `CHAT_SES
 
 ## Privacy policy
 
-`privacy/index.html` is an **unreviewed draft** and is `noindex` until two things happen: the
-`{{LEGAL_ENTITY}}` and `{{POSTAL_ADDRESS}}` tokens are filled, and a lawyer has read it. The file header
-lists the full publishing checklist, including adding `/privacy/` to `STATIC_PAGES` in
-`scripts/build-feeds.mjs` so it enters the sitemap.
+`privacy/index.html` is an **unreviewed draft** and stays `noindex` until a lawyer has read it. The file
+header lists the full publishing checklist, including adding `/privacy/` to `STATIC_PAGES` in
+`scripts/build-feeds.mjs` so it enters the sitemap. The operating entity and address are now filled in —
+Axhilles Ltd, New Lynn, Auckland — but the address is suburb-level, so post cannot be delivered to it.
 
 What it says was written against the code rather than from a template, which is the part a lawyer can't
 check for you. In particular it discloses that the chat transcript is emailed to a human even when the

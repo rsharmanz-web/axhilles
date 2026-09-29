@@ -10,13 +10,15 @@
   AI summary fields are the fields in lib/lead-summary-prompt.js.
 
   Before publishing:
-  1. Fill {{LEGAL_ENTITY}} and {{POSTAL_ADDRESS}}. The Privacy Act expects the agency collecting and
-     holding the information to be identifiable, and an email address alone is not that.
-  2. Have it reviewed. The facts are right; whether the framing is sufficient is a legal question.
-  3. Remove the robots noindex line below.
-  4. Add { path: "/privacy/", priority: "0.3", changefreq: "yearly" } to STATIC_PAGES in
+  1. Have it reviewed. The facts are right; whether the framing is sufficient is a legal question.
+  2. Remove the robots noindex line below.
+  3. Add { path: "/privacy/", priority: "0.3", changefreq: "yearly" } to STATIC_PAGES in
      scripts/build-feeds.mjs and re-run it, so the page enters the sitemap.
-  5. Update the "Last updated" date.
+  4. Update the "Last updated" date.
+
+  The address under "Who we are" is a suburb and city, which identifies where Axhilles Ltd is but is
+  not somewhere post can be delivered. Add a street address or a PO Box if a written request ever
+  needs to reach us by any route other than email.
 
   Keep this page honest as the site changes. If a new processor is added, or the chat starts doing
   something else with a transcript, this file is the thing that goes stale first and most expensively.
@@ -82,7 +84,7 @@
 
     <section class="one-pager-section">
       <h2>Who we are</h2>
-      <p>This website is operated by {{LEGAL_ENTITY}} (&ldquo;Axhilles&rdquo;, &ldquo;we&rdquo;, &ldquo;us&rdquo;), {{POSTAL_ADDRESS}}. We are based in New Zealand and this policy is written to reflect the Privacy Act 2020.</p>
+      <p>This website is operated by Axhilles Ltd (&ldquo;Axhilles&rdquo;, &ldquo;we&rdquo;, &ldquo;us&rdquo;), of New Lynn, Auckland, New Zealand. This policy is written to reflect the Privacy Act 2020.</p>
       <p>If you have a question about this policy, or want to see or correct what we hold about you, email <a href="mailto:hello@axhilles.com">hello@axhilles.com</a>.</p>
     </section>
 
