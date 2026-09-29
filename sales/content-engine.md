@@ -179,13 +179,33 @@ One page, one job. The CTA hierarchy matters more than its wording:
 
 | Position | Ask | Why there |
 |---|---|---|
-| Mid-article, once | **Chax** — "ask the question this raised" | The best conversion target for cold article traffic. Zero commitment, and it emails you a transcript with a summary and a fit verdict. That is a qualified lead from an anonymous reader |
+| Mid-article, once | **Chax** — "ask the question this raised" | The best conversion target for cold article traffic. One question is free, then it asks for a name and email before answering the next, so an anonymous reader becomes a contactable one. You get the transcript, a summary and a fit verdict either way |
 | End of article | **Discovery booking** | For the reader who is already convinced |
 | End of article | The matching **offer one-pager** | For the reader who wants to know what it costs before talking to anyone |
 | Footer | Next and previous in the series | Keeps a good reader reading, which is how one article becomes five |
 
 Resist putting a Discovery button at the top. Someone who has read forty words is not booking a call,
 and asking makes the page feel like a brochure.
+
+### What to do with a Chax lead
+
+Two kinds now arrive, and the subject line tells you which before you open it. Treat them differently or
+the good ones get buried:
+
+| Subject says | What happened | Lane | Do this |
+|---|---|---|---|
+| **(wants a call)** | They asked for a call | `inbound` | Reply same day. They have already qualified themselves further than any cold dial will |
+| **(chatting)** | We stopped them and they gave their details to keep going | `inbound` | Read the transcript first. Score it, then treat it as a warm lead, not a hand-raise |
+| **Chax session**, no lead | They asked something and stayed anonymous | — | Not a lead. But the question is free research, and the `Landed on` line tells you which article provoked it |
+
+A "(chatting)" lead has given you a name to keep talking, not permission to pitch. Score it on
+[the usual model](3-rank.md) using the transcript as your evidence for Pain, and open on what they
+actually asked rather than on the fact they filled in a form. The transcript is the personal hook, which
+is the one thing cold outbound never has.
+
+Log both kinds in [`pipeline-tracker.csv`](pipeline-tracker.csv) with `lane` as `inbound` and the
+`Landed on` path in `source`. Anonymous sessions do not go in the tracker — they go on the list of things
+to write about next.
 
 ### The part everyone misses
 

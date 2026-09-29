@@ -52,7 +52,38 @@ Without `ANTHROPIC_API_KEY`, `/api/chat` returns “Chat is not configured yet.�
 
 Leads are emailed with [Resend](https://resend.com). If the email fails, the lead is logged server-side (`LEAD_KEEP`) and the visitor still sees the confirmation.
 
-When a Chax visitor is inactive for 5 minutes after asking at least one question, or hits the turn limit, you get one email with the transcript (`Chax session (…)`). If they already submitted the lead form, that lead email is enough and no session log is sent. If email fails, it is logged server-side as `CHAT_SESSION_KEEP` and still appears in Vercel logs as `CHAT_SESSION`.
+When a Chax visitor is inactive for 5 minutes after asking at least one question, hits the turn limit, or
+closes the tab, you get one email with the transcript (`Chax session (…)`). If email fails, it is logged
+server-side as `CHAT_SESSION_KEEP` and still appears in Vercel logs as `CHAT_SESSION`.
+
+## The chat gate
+
+Chax answers one real question, then asks for a name and email before it will answer another. The
+composer is disabled until the form is submitted — `gateOpen` blocks `sendPrompt` as well as the
+textarea, so the lock holds in logic and not only in CSS. `FREE_EXCHANGES` in `chat/chat.js` sets how
+many questions come first.
+
+Easter eggs and the Odyssey answer do not count towards it. The locked replies carry an `offerBook` flag
+that marks the ones engaging with the business question, and only those increment the counter, so nobody
+gets walled straight after a joke.
+
+Leads carry a `reason` so the subject line separates the two kinds:
+
+| `reason` | Subject | Means |
+| --- | --- | --- |
+| `gate` | `New Axhilles lead (chatting): …` | We stopped them to ask. Interested, has not asked for anything |
+| `booking` | `New Axhilles lead (wants a call): …` | They asked for a call. Treat as a hand-raise |
+
+Two consequences worth knowing:
+
+- **A gate lead is not the end of the conversation**, so session logging stays armed and the rest of the
+  transcript arrives later as `Chax session — <name> (…)`. It is suppressed if they never said anything
+  more, so the same exchange does not arrive twice.
+- **Once details are captured the form has nothing left to ask**, so booking links and the booking chip
+  go straight to `BOOKING_LINK` instead of reopening it.
+
+Walking away from the gate still tells you something: `pagehide` flushes the session log, so the question
+and the article it came from arrive even though the visitor stayed anonymous.
 
 ## Lead attribution
 
