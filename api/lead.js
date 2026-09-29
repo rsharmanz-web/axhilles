@@ -1,4 +1,5 @@
 const { clientIp, makeRateLimit, readBody, cleanMessages } = require("../lib/http");
+const { cleanAttribution } = require("../lib/attribution");
 const { parseLeadSummary } = require("../lib/parse-summary");
 const { saveLead } = require("../lib/save-lead");
 
@@ -40,9 +41,11 @@ module.exports = async function handler(req, res) {
   const email = typeof body.email === "string" ? body.email.trim() : "";
   const business = typeof body.business === "string" ? body.business.trim() : "";
   const openerVariant = typeof body.openerVariant === "string" ? body.openerVariant.trim() : "";
+  const reason = body.reason === "booking" || body.reason === "gate" ? body.reason : "";
   if (!name) return bad(res, 400, "Name is required.");
   if (!EMAIL_RE.test(email)) return bad(res, 400, "A valid email is required.");
   if (!body.consent) return bad(res, 400, "Consent is required.");
+  const marketing = body.marketing === true;
 
   const transcript = cleanMessages(body.transcript, MAX_CHARS, MAX_HISTORY);
   const timestamp = new Date().toISOString();
@@ -93,11 +96,14 @@ module.exports = async function handler(req, res) {
     email,
     business,
     consent: true,
+    marketing,
     openerVariant,
+    reason,
     timestamp,
     transcript,
     summary,
     summaryFailed,
+    attribution: cleanAttribution(body.attribution),
   };
 
   await saveLead(lead);

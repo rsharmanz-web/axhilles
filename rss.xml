@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Axhilles — Articles</title>
+    <link>https://axhilles.com/articles/</link>
+    <atom:link href="https://axhilles.com/rss.xml" rel="self" type="application/rss+xml" />
+    <description>What actually changes when a service business puts AI to work — and what doesn't.</description>
+    <language>en-nz</language>
+    <lastBuildDate>Tue, 29 Sep 2026 21:51:31 GMT</lastBuildDate>
+    <item>
+      <title>AI exposure isn&apos;t the same thing as AI impact</title>
+      <link>https://axhilles.com/articles/ai-exposure-is-not-ai-impact.html</link>
+      <guid isPermaLink="true">https://axhilles.com/articles/ai-exposure-is-not-ai-impact.html</guid>
+      <pubDate>Mon, 28 Sep 2026 20:00:00 GMT</pubDate>
+      <description>Exposure is a poor proxy for extinction. Technology changes the composition of a job before it eliminates it.</description>
+    </item>
+  </channel>
+</rss>

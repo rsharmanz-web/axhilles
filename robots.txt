@@ -1,0 +1,8 @@
+User-agent: *
+Allow: /
+
+# Partner pitch deck is noindex; the article template is a scaffold, not a page.
+Disallow: /pitch/
+Disallow: /articles/_template.html
+
+Sitemap: https://axhilles.com/sitemap.xml

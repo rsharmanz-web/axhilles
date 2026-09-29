@@ -3,13 +3,27 @@
     { "source": "/spine/audit", "destination": "/spine/audit/", "permanent": false },
     { "source": "/spine/finance", "destination": "/spine/finance/", "permanent": false },
     { "source": "/chat", "destination": "/chat/", "permanent": false },
-    { "source": "/readings", "destination": "/readings/", "permanent": false }
+    { "source": "/readings", "destination": "/readings/", "permanent": false },
+    { "source": "/articles", "destination": "/articles/", "permanent": false },
+    { "source": "/privacy", "destination": "/privacy/", "permanent": false }
   ],
   "headers": [
     {
       "source": "/(.*)\\.vcf",
       "headers": [
         { "key": "Content-Type", "value": "text/vcard; charset=utf-8" }
+      ]
+    },
+    {
+      "source": "/rss.xml",
+      "headers": [
+        { "key": "Content-Type", "value": "application/rss+xml; charset=utf-8" }
+      ]
+    },
+    {
+      "source": "/og/(.*)",
+      "headers": [
+        { "key": "Cache-Control", "value": "public, max-age=604800, immutable" }
       ]
     }
   ],
