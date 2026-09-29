@@ -451,6 +451,20 @@ body.sidebar-open .page-wrapper { padding-left: var(--sidebar-width); }
   margin-top: 3px;
   accent-color: var(--color-cobalt);
 }
+.lead-form-legal {
+  /* Sits slightly clear of the two ticks above it: it is notice about the whole form, not a note on
+     the marketing checkbox it would otherwise appear glued to. */
+  margin: 4px 0 0;
+  font-family: var(--font-technical);
+  font-size: 11px;
+  line-height: 1.55;
+  color: var(--ink-2);
+}
+.lead-form-legal a {
+  color: var(--color-cobalt);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
 .lead-submit {
   align-self: flex-start;
   font-family: var(--font-technical);
