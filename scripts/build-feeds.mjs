@@ -18,6 +18,8 @@ const STATIC_PAGES = [
   { path: "/offers/alpha-prototype.html", priority: "0.8", changefreq: "monthly" },
   { path: "/offers/baseline-to-roadmap.html", priority: "0.8", changefreq: "monthly" },
   { path: "/chat/", priority: "0.5", changefreq: "monthly" },
+  // /privacy/ is noindex until the legal entity tokens are filled and it has been reviewed. Add
+  // { path: "/privacy/", priority: "0.3", changefreq: "yearly" } here at the same time.
 ];
 
 function rfc822(date) {

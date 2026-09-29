@@ -372,6 +372,22 @@ body.sidebar-open .page-wrapper { padding-left: var(--sidebar-width); }
   color: var(--color-alabaster);
   text-decoration: none;
 }
+/* Persistent notice under the composer: the transcript reaching a human inbox is the thing a visitor
+   is least likely to assume, so it is stated before they type rather than only in the policy. */
+.chat-disclaimer {
+  margin: 0.75rem 0 0;
+  font-family: var(--font-technical);
+  font-size: 11px;
+  line-height: 1.5;
+  /* ink-2 rather than the fainter ink-3 used for hints: a notice nobody can read is not a notice. */
+  color: var(--ink-2);
+  max-width: 62ch;
+}
+.chat-disclaimer a {
+  color: var(--color-cobalt);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
 .chat-footer-email {
   font-family: var(--font-technical);
   font-size: 14px;
@@ -441,6 +457,20 @@ body.sidebar-open .page-wrapper { padding-left: var(--sidebar-width); }
 .lead-consent input {
   margin-top: 3px;
   accent-color: var(--color-cobalt);
+}
+.lead-form-legal {
+  /* Sits slightly clear of the two ticks above it: it is notice about the whole form, not a note on
+     the marketing checkbox it would otherwise appear glued to. */
+  margin: 4px 0 0;
+  font-family: var(--font-technical);
+  font-size: 11px;
+  line-height: 1.55;
+  color: var(--ink-2);
+}
+.lead-form-legal a {
+  color: var(--color-cobalt);
+  text-decoration: underline;
+  text-underline-offset: 2px;
 }
 .lead-submit {
   align-self: flex-start;

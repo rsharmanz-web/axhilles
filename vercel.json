@@ -4,7 +4,8 @@
     { "source": "/spine/finance", "destination": "/spine/finance/", "permanent": false },
     { "source": "/chat", "destination": "/chat/", "permanent": false },
     { "source": "/readings", "destination": "/readings/", "permanent": false },
-    { "source": "/articles", "destination": "/articles/", "permanent": false }
+    { "source": "/articles", "destination": "/articles/", "permanent": false },
+    { "source": "/privacy", "destination": "/privacy/", "permanent": false }
   ],
   "headers": [
     {
