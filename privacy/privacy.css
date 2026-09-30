@@ -1,0 +1,78 @@
+/* Privacy page. Everything else here comes from styles.css and offers/one-pager.css; the only thing
+   needing its own rules is the collapsible part of the Chax disclosure. */
+
+/* A <details> element rather than a scripted panel, so the text stays in the DOM whether it is open or
+   shut: findable with the browser's find-in-page, readable by search engines, and expandable with no
+   JavaScript. A disclosure nobody can reach is not a disclosure. */
+/* Spacing comes from the summary's own padding rather than a margin here, because that padding is also
+   what makes the row a usable tap target. */
+.policy-disclosure {
+  margin: 0;
+}
+
+/* The one-pager styles only space paragraph-after-paragraph, and this is the first page to put a
+   paragraph after a list. Without this the closing line of a section sits flush against the last item. */
+.one-pager-section ul + p,
+.one-pager-section ol + p {
+  margin-top: 1rem;
+}
+
+/* Collapsed, the summary's padding is already the gap. Open, the paragraph is following a list and needs
+   the same separation any other paragraph after a list gets. */
+.policy-disclosure + p {
+  margin-top: 0.35rem;
+}
+
+.policy-disclosure[open] + p {
+  margin-top: 1rem;
+}
+
+.policy-disclosure > summary {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 0.5rem;
+  cursor: pointer;
+  font-family: var(--font-technical);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--color-cobalt);
+  /* 11px text sits in a 22px line box, which is half the size a thumb needs. Vertical padding brings
+     the row to a 44px tap target without changing how the label reads. */
+  padding: 0.8rem 0;
+  /* Both are needed: Safari uses the -webkit marker, everyone else uses list-style. */
+  list-style: none;
+}
+
+.policy-disclosure > summary::-webkit-details-marker {
+  display: none;
+}
+
+.policy-disclosure > summary::before {
+  content: "+";
+  /* Fixed width so the label does not shift sideways when + becomes −. */
+  width: 1ch;
+  flex: none;
+  font-weight: 700;
+}
+
+.policy-disclosure[open] > summary::before {
+  /* A real minus sign rather than a hyphen, which is too short to read as the opposite of a plus. */
+  content: "\2212";
+}
+
+.policy-disclosure > summary:hover {
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.policy-disclosure > summary:focus-visible {
+  outline: 2px solid var(--color-cobalt);
+  outline-offset: 4px;
+}
+
+.policy-disclosure-body {
+  /* Small, because the summary's padding-bottom already separates it. */
+  margin-top: 0.15rem;
+}
