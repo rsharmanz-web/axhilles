@@ -4,19 +4,20 @@
 <!--
   PRIVACY POLICY — LIVE, BUT NOT YET CHECKED BY A LAWYER.
 
-  It is accurate to what the code does as at 29 September 2026, which is the part a lawyer cannot
-  check for you. Everything here was verified against the source: the processors named are the only
-  four the site talks to, the browser storage key and its lifetime are the real ones, and the AI
-  summary fields are the fields in lib/lead-summary-prompt.js.
+  It is accurate to what the code does as at 30 September 2026, which is the part a lawyer cannot
+  check for you. The processors named are the only four the site talks to, the browser storage key and
+  its lifetime are the real ones, the three triggers that email a transcript are the three in
+  chat/chat.js, and the automated assessment named in the Chax section is the "verdict" field in
+  lib/lead-summary-prompt.js.
 
   Published ahead of review on purpose: the chat asks for consent and links here, so an unreviewed
   policy is better than none. Two things are still outstanding.
 
   1. Have it reviewed, then apply whatever comes back and change the "Last updated" date. The facts
      are right; whether the framing is sufficient is a legal question.
-  2. The address under "Who we are" is a suburb and city, which identifies where Axhilles Ltd is but
-     is not somewhere post can be delivered. Add a street address or a PO Box if a written request
-     ever needs to reach us by any route other than email.
+  2. The address under "Who we are" is a city, which identifies where Axhilles Ltd is but is not
+     somewhere post can be delivered. Add a street address or a PO Box if a written request ever
+     needs to reach us by any route other than email.
 
   This file goes stale the moment a data flow changes. Anything that adds a processor, stores
   something new in the browser, or changes what the chat does with a transcript has to be reflected
@@ -24,6 +25,8 @@
   first-touch attribution, and a gate that asks for a name after the first answer — and both need
   disclosing here when they land.
 -->
+<!-- Layout note: this page reuses the offer one-pager prose styles, so the only page-specific CSS is
+     privacy.css, which holds the collapsible disclosure and nothing else. -->
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>Privacy Policy - Axhilles</title>
@@ -46,6 +49,7 @@
 <link rel="stylesheet" href="/styles.css" />
 <!-- Reuses the one-pager prose styles rather than duplicating 130 lines of them for one page. -->
 <link rel="stylesheet" href="/offers/one-pager.css" />
+<link rel="stylesheet" href="/privacy/privacy.css" />
 <script>
   window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };
 </script>
@@ -73,15 +77,15 @@
   <main class="one-pager">
 
     <h1 class="one-pager-title">Privacy Policy</h1>
-    <p class="one-pager-dek">What we collect, why, who else sees it, and what you can ask us to do about it.</p>
+    <p class="one-pager-dek">At Axhilles we want to protect what&rsquo;s human. That means you should be able to trust the products and services we build, and the way we handle your information.</p>
     <div class="one-pager-meta">
-      <span>Last updated 29 September 2026</span>
+      <span>Last updated 30 September 2026</span>
     </div>
 
     <section class="one-pager-section">
       <h2>Who we are</h2>
-      <p>This website is operated by Axhilles Ltd (&ldquo;Axhilles&rdquo;, &ldquo;we&rdquo;, &ldquo;us&rdquo;), of New Lynn, Auckland, New Zealand. This policy is written to reflect the Privacy Act 2020.</p>
-      <p>If you have a question about this policy, or want to see or correct what we hold about you, email <a href="mailto:hello@axhilles.com">hello@axhilles.com</a>.</p>
+      <p>This website is operated by Axhilles Ltd (&ldquo;Axhilles&rdquo;, &ldquo;we&rdquo;, &ldquo;us&rdquo;), of Auckland, New Zealand. We are committed to privacy and we comply with the Privacy Act 2020.</p>
+      <p>If you have a question about this policy, or want to clarify how we treat your information, please email <a href="mailto:hello@axhilles.com">hello@axhilles.com</a>.</p>
     </section>
 
     <section class="one-pager-section">
@@ -93,10 +97,21 @@
 
     <section class="one-pager-section">
       <h2>The Chax chat, in full</h2>
-      <p>Chax is an AI assistant. Three things happen when you use it, and we would rather you knew all three up front.</p>
-      <p><strong>Your messages are sent to Anthropic</strong>, who run the AI model that generates the replies. Anthropic processes that information under its own terms and privacy policy, and outside New Zealand.</p>
-      <p><strong>A copy of the conversation is emailed to us, and a person reads it.</strong> This happens whether or not you give us your name &mdash; after five minutes of inactivity, or when a conversation reaches its length limit. If you have used the chat, assume we have read what you wrote.</p>
-      <p><strong>We use AI to summarise the conversation for us.</strong> If you leave your details, the transcript is sent to the AI model again to produce notes to prepare for a call: the problem you described, how much time you said it takes, whether it affects you or a wider team, what kind of business you run, any concerns you raised, an impression of the tone of the conversation, and an assessment of whether what you described looks like a good fit for our services. That assessment is an automated impression, not a decision about you, and a person reads the actual transcript alongside it. The model is instructed not to copy contact details or sensitive information into those notes.</p>
+      <!-- The collapsed state still has to carry the substance, so this sentence names all three things
+           rather than teasing them. The accordion holds the detail, not the disclosure itself. -->
+      <p>Chax is an AI assistant. Three things happen when you use it: your messages are sent to a third-party AI service, a copy of the conversation is emailed to us, and AI is used to summarise it for us.</p>
+      <details class="policy-disclosure">
+        <summary>Read what happens to your conversation</summary>
+        <div class="policy-disclosure-body">
+          <ol>
+            <li><strong>Your messages are sent to Anthropic</strong>, who run the AI model that generates the replies. Anthropic processes that information under its own terms and privacy policy, and outside New Zealand.</li>
+            <li><strong>A copy of the conversation is emailed to us, and it may be reviewed by someone on our team.</strong> This happens whether or not you give us your name &mdash; after five minutes of inactivity, when a conversation reaches its length limit, or as soon as you leave your details.</li>
+            <li><strong>We use AI to summarise the conversation for us.</strong> If you leave your details, the transcript is sent to the AI model again to produce notes to prepare for a call, including an assessment of whether what you described looks like a good fit for our services. That assessment is an automated impression rather than a decision about you, and a person reads the transcript alongside it. The model is instructed not to copy contact details or sensitive information into the notes.</li>
+          </ol>
+        </div>
+      </details>
+      <!-- Outside the accordion on purpose: this is the sentence that protects the visitor, so it is
+           never behind a click. -->
       <p>Because the conversation reaches us and a third-party AI service, please do not paste passwords, payment details, confidential business information, personal information about other people, or anything else you would not want handled this way. If your question needs that context, email us or book a session instead and we will find a suitable channel.</p>
     </section>
 
@@ -115,12 +130,17 @@
 
     <section class="one-pager-section">
       <h2>Marketing emails</h2>
-      <p>If you agreed to be contacted, we may send you occasional emails with our own writing or news about our services. Every one of them includes a way to unsubscribe, and you can tell us to stop at any time by replying or emailing <a href="mailto:hello@axhilles.com">hello@axhilles.com</a>. Asking us to stop marketing does not affect our ability to reply to you about something you asked us.</p>
+      <!-- The in-message unsubscribe promise is kept deliberately: the Unsolicited Electronic Messages
+           Act 2007 requires a functional unsubscribe facility in each commercial message, not merely a
+           standing offer to ask. Whatever gets sent has to actually carry one. -->
+      <p>If you agreed to be contacted, we may send you occasional emails with our own writing or news about our services. Every one of them includes a way to unsubscribe, and you can also unsubscribe at any time by replying or emailing <a href="mailto:hello@axhilles.com">hello@axhilles.com</a>. Asking us to stop marketing does not affect our ability to reply to you about something you asked us.</p>
     </section>
 
     <section class="one-pager-section">
       <h2>Who else handles your information</h2>
-      <p>We keep the list of service providers deliberately short. These are all of them:</p>
+      <!-- "All of them" rather than "includes": the list is genuinely exhaustive, and the overseas
+           section below counts four. An open-ended "includes" would contradict it. -->
+      <p>We keep the list of service providers as short as possible. These are all of them:</p>
       <ul>
         <li><strong>Anthropic</strong> &mdash; runs the AI model behind Chax and produces the conversation summary described above. United States.</li>
         <li><strong>Resend</strong> &mdash; delivers the emails that bring your enquiry and chat transcript to us. United States.</li>
