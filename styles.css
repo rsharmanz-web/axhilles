@@ -153,6 +153,26 @@ h1, .display-technical {
 
 .hero-cta {
   margin-top: 2rem;
+  align-items: flex-end;
+}
+
+.hero-chat-cta {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.4rem;
+}
+
+.experiment-tag {
+  display: inline-block;
+  font-family: var(--font-technical);
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--color-cobalt);
+  border: 1px dashed var(--color-cobalt);
+  padding: 0.2rem 0.5rem;
 }
 
 h2, .index-label {
